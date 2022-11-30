@@ -1,0 +1,58 @@
+{
+  "name": "modulemaker",
+  "version": "0.0.0",
+  "description": "An npm module making template",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": true,
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    "require": "./dist/index.js",
+    "default": "./dist/index.modern.mjs"
+  },
+  "scripts": {
+    "dev": "vite docs",
+    "size": "size-limit",
+    "clean": "rimraf dist && rimraf bundled",
+    "build": "npm run clean && npm run build:light && npm run build:bundle",
+    "build:light": "microbundle",
+    "build:bundle": "microbundle --external none --output './bundled'",
+    "build:docs": "vite build",
+    "prebuild": "npm run clean",
+    "preversion": "npm run build",
+    "postversion": "git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fomolol/modulemaker.git"
+  },
+  "keywords": [],
+  "author": "@studio-freight",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fomolol/modulemaker/issues"
+  },
+  "homepage": "https://github.com/fomolol/modulemaker#readme",
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.0.1",
+    "path": "^0.12.7",
+    "rimraf": "^3.0.2",
+    "size-limit": "^8.0.1",
+    "microbundle": "^0.15.1",
+    "vite": "^3.0.9"
+  },
+  "size-limit": [
+    {
+      "limit": "3 kB",
+      "path": "dist/index.js"
+    },
+    {
+      "limit": "2 kB",
+      "path": "dist/index.mjs"
+    }
+  ]
+}

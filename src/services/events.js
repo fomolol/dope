@@ -1,25 +1,25 @@
 // events.js
 
-function on(eventType, listener) {
-  document.addEventListener(eventType, listener);
+export function on(eventType, listener) {
+  document.addEventListener(eventType, listener)
 }
 
-function off(eventType, listener) {
-  document.removeEventListener(eventType, listener);
+export function off(eventType, listener) {
+  document.removeEventListener(eventType, listener)
 }
 
-function once(eventType, listener) {
-  on(eventType, handleEventOnce);
+export function once(eventType, listener) {
+  on(eventType, handleEventOnce)
 
   function handleEventOnce(event) {
-    listener(event);
-    off(eventType, handleEventOnce);
+    listener(event)
+    off(eventType, handleEventOnce)
   }
 }
 
-function trigger(eventType, data) {
-  const event = new CustomEvent(eventType, { detail: data });
-  document.dispatchEvent(event);
+export function trigger(eventType, data) {
+  const event = new CustomEvent(eventType, { detail: data })
+  document.dispatchEvent(event)
 }
 
-export { on, once, off, trigger };
+export default { on, once, off, trigger }

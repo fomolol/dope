@@ -1,18 +1,25 @@
 /**
  * @file CalendlyEmbed.js
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import Script from 'next/script';
-import Head from 'next/head';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Script from 'next/script'
+import Head from 'next/head'
 
-import s from './CalendlyEmbed.module.css';
+import s from './CalendlyEmbed.module.css'
+
+const WIDGET_CSS = 'https://assets.calendly.com/assets/external/widget.css'
 
 const CalendlyEmbed = ({
   tagName: Tag = 'div',
   className = '',
   variant = 'default',
   children = '',
+  url = 'https://calendly.com/fomolol',
+  text = 'Schedule time with me',
+  color = '#0069ff',
+  textColor = '#ffffff',
+  branding = true,
 }) => {
   return (
     <Tag
@@ -31,20 +38,17 @@ const CalendlyEmbed = ({
         dangerouslySetInnerHTML={{
           __html: `window.onload = function() { 
           Calendly.initBadgeWidget({ 
-            url: 'https://calendly.com/fomolol', 
-            text: 'Schedule time with me', 
-            color: '#0069ff', 
-            textColor: '#ffffff', 
-            branding: true 
+            url: ${url}, 
+            text: ${text}, 
+            color: ${color}, 
+            textColor: ${textColor}, 
+            branding: ${branding} 
           }); 
         }`,
         }}
       />
       <Head>
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="sheet"
-        />
+        <link href={WIDGET_CSS} rel="sheet" />
       </Head>
       {/* Calendly badge widget end */}
       <style jsx global>{`
@@ -63,14 +67,14 @@ const CalendlyEmbed = ({
         }
       `}</style>
     </Tag>
-  );
-};
+  )
+}
 
 CalendlyEmbed.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default CalendlyEmbed;
+export default CalendlyEmbed

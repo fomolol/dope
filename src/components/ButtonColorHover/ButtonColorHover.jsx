@@ -31,7 +31,7 @@ const ButtonColorHover = ({
         ></canvas>
         <div data-ui="icon" style="opacity: 1;">
           <svg data-ui="grid" class="btnCircle__icon">
-            <use xlink:href="#grid"></use>
+            <use xlinkHref="#grid"></use>
           </svg>
         </div>
         <div

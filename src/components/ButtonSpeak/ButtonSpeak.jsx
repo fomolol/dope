@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 import s from './ButtonSpeak.module.css'
 
-import Edit from './Icons/Edit'
+import Edit from '../Icons/Edit'
 
 const ButtonSpeak = (
   {

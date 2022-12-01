@@ -5,11 +5,11 @@ import React from 'react'
 import cn from 'clsx'
 import { motion, useTransform, useScroll } from 'framer-motion'
 import PropTypes from 'prop-types'
-import { useWindowSize } from '@/fomolol/tacklebox'
+import { useWindowSize } from '@fomolol/tacklebox'
 
 import s from './ScrollProgressLine.module.css'
 
-import { easeInOutSine } from '../services/easing'
+import { easeInOutSine } from '../../services/easing'
 
 const LINE_VARIANTS = {
   visible: { height: '15vh', transition: { duration: 2, ease: easeInOutSine } },

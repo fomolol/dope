@@ -72,10 +72,10 @@ const rootReducer = (state, action) => {
 }
 
 // Create the context
-const CursorContext = createContext()
+export const CursorContext = createContext()
 
 // Create the provider
-const CursorProvider = ({ children }) => {
+export const CursorProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE)
   const store = useMemo(() => ({ state, dispatch }), [state])
   return (
@@ -87,4 +87,4 @@ CursorProvider.propTypes = {
   children: PropTypes.node,
 }
 
-export { CursorContext, CursorProvider }
+export default { CursorContext, CursorProvider }

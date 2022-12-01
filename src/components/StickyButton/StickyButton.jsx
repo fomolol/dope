@@ -4,7 +4,8 @@
 import { memo, forwardRef, useCallback } from 'react'
 import { useCursorStyle } from '@fomolol/tacklebox'
 
-import { useMenu } from '../contexts/MenuContext/useMenuContext'
+import { useMenu } from '../../contexts/MenuContext/useMenuContext'
+
 import StickyCursor from '../StickyCursor'
 
 import s from './StickyButton.module.css'

@@ -5,10 +5,9 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import enableInlineVideo from 'iphone-inline-video'
+import { useLayoutEffect } from '@fomolol/tacklebox'
 
 import styles from './VideoBackground.module.css'
-
-import { useLayoutEffect } from '@/hooks/useIsoLayoutEffect'
 
 const VideoBackground = ({
   className = 'absolute inset-0 z-0 object-cover w-screen h-screen min-h-screen overflow-hidden min-w-screen mix-blend-normal brightness-125',

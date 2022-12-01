@@ -22,10 +22,10 @@ const rootReducer = (state, action) => {
   }
 }
 
-const MenuContext = createContext()
+export const MenuContext = createContext()
 
 // Create the provider
-const MenuProvider = ({ children }) => {
+export const MenuProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE)
   const store = useMemo(() => ({ state, dispatch }), [state])
   return <MenuContext.Provider value={store}>{children}</MenuContext.Provider>
@@ -35,4 +35,4 @@ MenuProvider.propTypes = {
   children: PropTypes.node,
 }
 
-export { MenuContext, MenuProvider }
+export default { MenuContext, MenuProvider }

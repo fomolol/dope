@@ -1,2 +1,2 @@
-import ASCIIMorph from '../../../lib/AsciiMorph.js';
-export default ASCIIMorph;
+import ASCIIMorph from '../../lib/AsciiMorph.js'
+export default ASCIIMorph

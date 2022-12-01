@@ -1,2 +1,2 @@
-import { CursorContext, CursorProvider } from './CursorContext.jsx';
-export { CursorContext, CursorProvider }
+import { CursorContext, CursorProvider } from './CursorContext.jsx'
+export default { CursorContext, CursorProvider }

@@ -5,12 +5,9 @@
  */
 import { useEffect, useCallback, useRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import useMouse from '@react-hook/mouse-position'
+import { useCanvas, useEventListener, useMouse } from '@fomolol/tacklebox'
 
 import styles from './SpinningLoader.module.css'
-
-import { useCanvas } from '../../hooks/useCanvas'
-import { useEventListener } from '../../hooks/useEventListener'
 
 let SCREEN_WIDTH, SCREEN_HEIGHT
 const RADIUS = 70
@@ -29,7 +26,7 @@ const QUANTITY = 25
 const createParticles = (mouse) => {
   const particles = []
 
-  const { x, y } = mouse
+  const { x, y } = useMouse()
 
   for (var i = 0; i < QUANTITY; i++) {
     var particle = {

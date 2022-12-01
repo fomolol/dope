@@ -5,8 +5,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
-import s from './Logo.module.css'
-
 export const Logo = ({
   tagName: Tag = motion.div,
   className = 'text-black',
@@ -15,7 +13,7 @@ export const Logo = ({
 }) => {
   return (
     <Tag
-      className={`${s.logo} ${s[`logo__${variant}`]} ${className}`}
+      className={`${className}`}
       initial={{
         opacity: 0,
       }}

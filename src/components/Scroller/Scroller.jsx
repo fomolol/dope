@@ -1,14 +1,12 @@
 /**
  * @file Scroller.js
  */
-import { useState, forwardRef, useCallback, useRef, useEffect } from 'react'
+import { useState, createRef, useCallback, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useMotionValue, useSpring, motion } from 'framer-motion'
 import { useLayoutEffect } from '@fomolol/tacklebox'
 
 import s from './Scroller.module.css'
-
-import { useStore } from '@/store'
 
 const Scroller = ({
   tagName: Tag = motion.div,
@@ -20,9 +18,9 @@ const Scroller = ({
   stiffness = 25,
   disable = false,
   debug = true,
+  scrollRef = createRef(),
   ...rest
 }) => {
-  const { scrollerEnabled, scrollRef } = useStore()
   const [contentHeight, setContentHeight] = useState()
   const scrollY = useMotionValue(-window.pageYOffset || -window.scrollY)
 
@@ -78,11 +76,7 @@ const Scroller = ({
       {scrollRef.current && contentHeight ? (
         <div
           className="pointer-events-none"
-          style={
-            disable || !scrollerEnabled
-              ? { height: '0px' }
-              : { height: `${contentHeight}px` }
-          }
+          style={disable ? { height: '0px' } : { height: `${contentHeight}px` }}
         />
       ) : null}
     </>

@@ -1,2 +1,2 @@
-import { MenuContext, MenuProvider } from './MenuContext.jsx';
-export { MenuContext, MenuProvider }
+import { MenuContext, MenuProvider } from './MenuContext.jsx'
+export default { MenuContext, MenuProvider }

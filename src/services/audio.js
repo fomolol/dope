@@ -50,3 +50,5 @@ export async function createAudio(url) {
     },
   }
 }
+
+export default { createAudio }

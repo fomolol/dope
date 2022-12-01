@@ -8,12 +8,14 @@
 /**
  * @file Scroller.js
  */
-import { useState, forwardRef, useEffect } from 'react'
+import { useState, createRef, forwardRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { useWindowSize } from '@fomolol/tacklebox'
 
-import ScrollProgressLine from './components/ScrollProgressLine'
+import ScrollProgressLine from '../ScrollProgressLine'
+
+// local
 import Debugger from './Debugger'
 
 import s from './ScrollerSnapper.module.css'
@@ -46,9 +48,9 @@ const ScrollerSnapper = ({
   stiffness = 25,
   disable = false,
   debug = true,
+  scrollRef = createRef(),
   ...rest
 }) => {
-  const { scrollerEnabled, scrollRef } = useStore()
   const { height } = useWindowSize()
   const [scrollYValue, setScrollYValue] = useState(0)
   const [scrollYProgressValue, setScrollYProgressValue] = useState(0)
@@ -95,11 +97,7 @@ const ScrollerSnapper = ({
       {scrollRef.current && height ? (
         <div
           className="pointer-events-none"
-          style={
-            disable || !scrollerEnabled
-              ? { height: '0px' }
-              : { height: `${height}px` }
-          }
+          style={disable ? { height: '0px' } : { height: `${height}px` }}
         />
       ) : null}
     </>

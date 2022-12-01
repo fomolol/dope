@@ -9,7 +9,7 @@ import { useHoverImage } from '@fomolol/tacklebox'
 
 import s from './MenuImageHover.module.css'
 
-import { easeInOutSine, easeInOutCirc } from '../services/easing'
+import { easeInOutSine, easeInOutCirc } from '../../services/easing'
 
 const HoverImageContainer = ({ children }) => {
   return (

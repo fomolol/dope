@@ -9,10 +9,10 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
 import { useControls, folder } from 'leva'
 
-import { Fonts } from './fonts'
+import { Fonts } from './Fonts'
 import { Shaders } from './shaders'
 
-import styles from './KineticType.module.css'
+import s from './KineticType.module.css'
 
 function Font({ fontRef, text = 'Lorem ipsum' }) {
   const { fontSize, fontWidth, fontHeight, fontDepth, font, color } =

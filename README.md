@@ -20,14 +20,105 @@ or use whatever package manager you like the most
 
 The toolkit is composed of the following components:
 
-`Scroller` – `framer-motion`-based smooth scroll system that works
-
 `ArrowScroll` – one of those down arrows to let you know that the page scrolls
+
+`ASCIIGalaxy` –
+
+`ASCIIMorph` –
+
+`AudioToggle` –
+
+`BackgroundCanvas` –
+
+`BlasterImage` –
+
+`BlasterText` –
+
+`ButtonHoverColor` –
+
+`ButtonFancy` –
 
 `ButtonSpeak` – button that you press to speak
 
 `CalendlyEmbed` – simple way to embed your [Calendly](https://calendly.com/)
 
+`CanvasEraser` – reveals an underlying element using the mouse as an eraser.
+
+`CanvasEraser` – reveals an underlying element using the mouse as an eraser.
+
+`CookieBanner` –
+
+`Cursor` –
+
+`CurtainWipe` –
+
+`Debug Screen` –
+
+`DotGrid` –
+
+`Eye` –
+
+`Eyeballs` –
+
+`Icons` –
+
+`KineticType` –
+
+`LoaderBar` –
+
+`Menu` –
+
+`MenuImageHover` –
+
+`NoiseGrain` –
+
+`NoSignal` –
+
+`Particles` –
+
+`RadialRainbows` –
+
+`RandomGrid` –
+
+`ScenePaperJS` –
+
+`Scroller` – `framer-motion`-based smooth scroll system that works
+
+`ScrollerSnapper` –
+
+`ScrollerProgressLine` –
+
+`ScrollSnapSection` –
+
+`ShuffleText` –
+
+`SineWave` –
+
+`SpeechPanel` –
+
+`SpinningLoader` –
+
+`Static` –
+
+`StickyButton` –
+
+`StickyCursor` –
+
+`StickyDrawer` –
+
+`StickyImageExplode` –
+
+`TagManager` –
+
+`Text` –
+
+`UnsupportedBrowser` – duh
+
+`UnsupportedOrientation` – duh
+
+`VideoBackground` – duh
+
+`YinYang` –
 
 ## Authors
 

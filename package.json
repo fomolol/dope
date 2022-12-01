@@ -1,5 +1,5 @@
 {
-  "name": "dope",
+  "name": "@fomolol/dope",
   "version": "0.0.1",
   "description": "A collection of dope React components that we like to use.",
   "files": [
@@ -96,5 +96,8 @@
     "three-custom-shader-material": "^5.0.0",
     "use-fit-text": "^2.4.0",
     "use-sound": "^4.0.1"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

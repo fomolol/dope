@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fomolol/modulemaker.git"
+    "url": "git+https://github.com/fomolol/dope.git"
   },
   "keywords": [],
   "author": "@studio-freight",
@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/fomolol/modulemaker/issues"
   },
-  "homepage": "https://github.com/fomolol/modulemaker#readme",
+  "homepage": "https://github.com/fomolol/dope#readme",
   "devDependencies": {
     "@fomolol/tacklebox": "^0.1.1",
     "@react-three/drei": "^9.46.0",

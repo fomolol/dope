@@ -25,7 +25,7 @@
     "prebuild": "npm run clean",
     "preversion": "npm run build",
     "postversion": "git push --follow-tags",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook --no-manager-cache",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider STORYBOOK_BASE_HREF=/storybook/ build-storybook -o ./storybook",
     "serve-storybook": "serve storybook"
   },

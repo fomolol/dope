@@ -1,12 +1,15 @@
 /**
  * @file Scroller.js
  */
-import { useState, createRef, useCallback, useRef, useEffect } from 'react'
+import { createRef, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useMotionValue, useSpring, motion } from 'framer-motion'
+import ResizeObserver from 'resize-observer-polyfill'
+import { useTransform, useSpring, motion, useScroll } from 'framer-motion'
 import { useLayoutEffect } from '@fomolol/tacklebox'
 
 import s from './Scroller.module.css'
+
+import { useStore } from '@/store'
 
 const Scroller = ({
   tagName: Tag = motion.div,
@@ -21,62 +24,56 @@ const Scroller = ({
   scrollRef = createRef(),
   ...rest
 }) => {
-  const [contentHeight, setContentHeight] = useState()
-  const scrollY = useMotionValue(-window.pageYOffset || -window.scrollY)
+  // page scrollable height based on content length
+  const [pageHeight, setPageHeight] = useState(0)
 
-  const physics = {
-    damping,
-    mass,
-    stiffness,
-  } // easing of smooth scroll
-  const y = useSpring(scrollY, physics) // apply easing to the negative scroll value
-
-  const getContentHeight = useCallback((entries) => {
+  // update scrollable height when browser is resizing
+  const resizePageHeight = useCallback((entries) => {
     for (let entry of entries) {
-      const entryHeight = entry.contentRect.height
-      setContentHeight(entryHeight)
+      setPageHeight(entry.contentRect.height)
     }
   }, [])
 
+  // observe when browser is resizing
   useLayoutEffect(() => {
-    const scrollContainer = scrollRef.current
-    let resizeObserver = new ResizeObserver((entries) =>
-      getContentHeight(entries)
+    const resizeObserver = new ResizeObserver((entries) =>
+      resizePageHeight(entries)
     )
-    resizeObserver.observe(scrollContainer)
+    scrollRef && resizeObserver.observe(scrollRef.current)
     return () => resizeObserver.disconnect()
-  }, [getContentHeight])
+  }, [scrollRef, resizePageHeight])
 
-  useEffect(() => {
-    const trackScroll = () => {
-      if (window.scrollY || window.pageYOffset < contentHeight) {
-        scrollY.set(-window.pageYOffset || -window.scrollY)
-      }
-    }
-    window.addEventListener('scroll', trackScroll)
-    return () => window.removeEventListener('scroll', trackScroll)
-  }, [scrollY])
+  const { scrollY } = useScroll() // measures how many pixels user has scrolled vertically
+  // as scrollY changes between 0px and the scrollable height, create a negative scroll value...
+  // ... based on current scroll position to translateY the document in a natural way
+  const transform = useTransform(scrollY, [0, pageHeight], [0, -pageHeight])
+  const physics = { damping, mass, stiffness } // easing of smooth scroll
+  const spring = useSpring(transform, physics) // apply easing to the negative scroll value
 
   return (
     <>
       <Tag
+        ref={scrollRef}
         id="scroll-container"
         className={`${s.scroller} ${
           s[`scroller__${variant}`]
-        } ${className} pointer-events-auto fixed left-0 right-0 z-0 will-change-transform`}
+        } ${className} scroll-container pointer-events-auto fixed left-0 right-0 z-0 will-change-transform`}
         {...rest}
-        style={disable ? null : { y }} // translateY of scroll container using negative scroll value
-        ref={scrollRef}
+        style={disable ? null : { y: spring }} // translateY of scroll container using negative scroll value
       >
         {children}
       </Tag>
       {/* blank div that has a dynamic height based on the content's inherent height */}
       {/* this is neccessary to allow the scroll container to scroll... */}
       {/* ... using the browser's native scroll bar */}
-      {scrollRef.current && contentHeight ? (
+      {scrollRef.current && pageHeight ? (
         <div
           className="pointer-events-none"
-          style={disable ? { height: '0px' } : { height: `${contentHeight}px` }}
+          style={
+            disable || !scrollerEnabled
+              ? { height: '0px' }
+              : { height: `${pageHeight}px` }
+          }
         />
       ) : null}
     </>

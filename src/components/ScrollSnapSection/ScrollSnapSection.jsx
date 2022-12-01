@@ -1,5 +1,28 @@
 /**
  * @file ScrollSnapSection.js
+ *
+ * This is to be used in coordination with the <ScrollerSnapper /> component
+ */
+/**
+ * Example implementation
+ *  <ScrollerSnapper>
+ *   <ScrollSnapSection>
+ *     <div
+ *       className="flex flex-col w-full h-screen p-12 overflow-x-hidden"
+ *       sound="...."
+ *     >
+ *       ...
+ *     </div>
+ *   </ScrollSnapSection>
+ *   <ScrollSnapSection>
+ *     <div
+ *       className="flex flex-col w-full h-screen p-12 overflow-x-hidden"
+ *       sound="...."
+ *     >
+ *       ...
+ *     </div>
+ *   </ScrollSnapSection>
+ *  </ScrollerSnapper>
  */
 
 import { useEffect } from 'react'
@@ -22,8 +45,8 @@ const CHILD_VARIANTS_LEFT = {
 
 const ScrollSnapSection = ({
   tagName: Tag = 'section',
-  className = 'flex flex-col items-center justify-center flex-none w-full z-content',
-  innerClassName = 'flex justify-center items-center w-full',
+  className = 'relative flex-none w-full h-auto min-h-screen text-white bg-white',
+  innerClassName = 'flex justify-center items-center w-full relative h-full',
   variant = 'default',
   children = '',
   full = false,

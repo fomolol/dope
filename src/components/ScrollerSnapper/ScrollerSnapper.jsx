@@ -1,17 +1,35 @@
 /**
  * @file ScrollerSnapper.js
- * This component has a bug related to scroll. Whenever smooth
- * scroll is active, I'm pretty sure this doesn't work.
+ * This component is used in coordination with the <ScrollSnapSection /> component.
  *
  * WARNING: Beta version, use with caution
  */
+
 /**
- * @file Scroller.js
+ * Example implementation
+ *  <ScrollerSnapper>
+ *   <ScrollSnapSection>
+ *     <div
+ *       className="flex flex-col w-full h-screen p-12 overflow-x-hidden"
+ *       sound="...."
+ *     >
+ *       ...
+ *     </div>
+ *   </ScrollSnapSection>
+ *   <ScrollSnapSection>
+ *     <div
+ *       className="flex flex-col w-full h-screen p-12 overflow-x-hidden"
+ *       sound="...."
+ *     >
+ *       ...
+ *     </div>
+ *   </ScrollSnapSection>
+ *  </ScrollerSnapper>
  */
-import { useState, createRef, forwardRef, useEffect } from 'react'
+import { useState, createRef, useCallback, forwardRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { useWindowSize } from '@fomolol/tacklebox'
+import { useLayoutEffect } from '@fomolol/tacklebox'
 
 import ScrollProgressLine from '../ScrollProgressLine'
 
@@ -40,7 +58,7 @@ const SnapParent = forwardRef(({ ...props }, ref) => (
 
 const ScrollerSnapper = ({
   tagName: Tag = motion.div,
-  className = 'relative z-0 h-screen min-w-full pointer-events-auto',
+  className = 'pointer-events-auto',
   variant = 'default',
   children = '',
   damping = 15,
@@ -49,20 +67,31 @@ const ScrollerSnapper = ({
   disable = false,
   debug = true,
   scrollRef = createRef(),
+  pageRange = [0.1, 0.25, 0.5, 1],
+  lengthRange = ['15vh', '25vh', '50vh', '100vh'],
   ...rest
 }) => {
-  const { height } = useWindowSize()
-  const [scrollYValue, setScrollYValue] = useState(0)
-  const [scrollYProgressValue, setScrollYProgressValue] = useState(0)
+  const [pageHeight, setPageHeight] = useState(0)
 
-  // TODO: Need to look into fixing when proper values .current is passed.
+  // update scrollable height when browser is resizing
+  const resizePageHeight = useCallback((entries) => {
+    for (let entry of entries) {
+      setPageHeight(entry.contentRect.height)
+    }
+  }, [])
+
+  // observe when browser is resizing
+  useLayoutEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) =>
+      resizePageHeight(entries)
+    )
+    scrollRef && resizeObserver.observe(scrollRef.current)
+    return () => resizeObserver.disconnect()
+  }, [scrollRef, resizePageHeight])
+
   const { scrollY, scrollYProgress } = useScroll({
-    container: scrollRef,
+    target: scrollRef.current,
   }) // measures how many pixels user has scrolled vertically
-
-  const pageRange = [0.1, 0.25, 0.5, 1]
-  const lengthRange = ['15vh', '25vh', '50vh', '100vh']
-  const calcHeight = useTransform(scrollYProgress, pageRange, lengthRange)
 
   useEffect(() => {
     scrollY.onChange((v) => setScrollYValue(v))
@@ -71,17 +100,10 @@ const ScrollerSnapper = ({
 
   return (
     <>
-      {debug && (
-        <Debugger
-          calcHeight={calcHeight}
-          scrollY={scrollYValue}
-          scrollYProgress={scrollYProgressValue}
-        />
-      )}
       <Tag
         className={`${s.scroller_snapper} ${
           s[`scroller_snapper__${variant}`]
-        } ${className}`}
+        } ${className} scroll-container pointer-events-auto fixed left-0 right-0 z-0 will-change-transform`}
         id="scroll-container"
         {...rest}
       >
@@ -94,10 +116,14 @@ const ScrollerSnapper = ({
       {/* blank div that has a dynamic height based on the content's inherent height */}
       {/* this is neccessary to allow the scroll container to scroll... */}
       {/* ... using the browser's native scroll bar */}
-      {scrollRef.current && height ? (
+      {scrollRef.current && pageHeight ? (
         <div
           className="pointer-events-none"
-          style={disable ? { height: '0px' } : { height: `${height}px` }}
+          style={
+            disable || !scrollerEnabled
+              ? { height: '0px' }
+              : { height: `${pageHeight}px` }
+          }
         />
       ) : null}
     </>

@@ -24,7 +24,6 @@ const BlasterImage = ({
   items = [
     '/img/blaster/0.jpeg',
     '/img/blaster/1.jpeg',
-    '/img/blaster/2.jpeg',
     '/img/blaster/0.jpeg',
     '/img/blaster/1.jpeg',
     '/img/blaster/2.jpeg',

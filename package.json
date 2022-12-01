@@ -1,6 +1,6 @@
 {
   "name": "@fomolol/dope",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of dope React components that we like to use.",
   "files": [
     "dist"

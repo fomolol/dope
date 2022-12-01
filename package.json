@@ -1,7 +1,7 @@
 {
-  "name": "modulemaker",
-  "version": "0.0.0",
-  "description": "An npm module making template",
+  "name": "dope",
+  "version": "0.0.1",
+  "description": "A collection of dope React components that we like to use.",
   "files": [
     "dist"
   ],
@@ -39,10 +39,10 @@
   "homepage": "https://github.com/fomolol/modulemaker#readme",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.0.1",
+    "microbundle": "^0.15.1",
     "path": "^0.12.7",
     "rimraf": "^3.0.2",
     "size-limit": "^8.0.1",
-    "microbundle": "^0.15.1",
     "vite": "^3.0.9"
   },
   "size-limit": [
@@ -54,5 +54,11 @@
       "limit": "2 kB",
       "path": "dist/index.mjs"
     }
-  ]
+  ],
+  "dependencies": {
+    "@fomolol/tacklebox": "^0.0.5",
+    "framer-motion": "^7.6.15",
+    "react-intersection-observer": "^9.4.1",
+    "use-sound": "^4.0.1"
+  }
 }

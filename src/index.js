@@ -1,3 +1,1 @@
-export function hello(name) {
-  return `Hello ${name}!`
-}
+export { default as Scroller } from './components/Scroller'

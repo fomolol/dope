@@ -1,35 +1,21 @@
 // Use next/image in Storybook
 // @see https://xenox.dev/next-image-with-storybookjs/
 
-// Next Image integration
-// @see https://dev.to/jonasmerlin/how-to-use-the-next-js-image-component-in-storybook-1415
-import * as NextImage from 'next/image'
-const OriginalNextImage = NextImage.default
-Object.defineProperty(NextImage, 'default', {
-  configurable: true,
-  value: (props) => (
-    <OriginalNextImage
-      {...props}
-      unoptimized
-      blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAADAAQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAbEAADAAMBAQAAAAAAAAAAAAABAgMABAURUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECEf/aAAwDAQACEQMRAD8Anz9voy1dCI2mectSE5ioFCqia+KCwJ8HzGMZPqJb1oPEf//Z"
-    />
-  ),
-})
-// End Next Image integration
-
-import '@/styles/variables.css'
+// import '/styles/variables.css'
 
 // Import Font Styles
 // You can find fonts at https://fonts.adobe.com/
 // @import url('https://use.typekit.net/tyl1imq.scss');
-import '@/styles/fonts.css'
+import '../src/styles/fonts.css'
 
 // Import Tailwind Styles
-import '@/styles/tailwind.css'
+import '../src/styles/tailwind.css'
 
-import '@/styles/globals.css'
+import '../src/styles/globals.css'
 
 import '@storybook/addon-console' // @see https://github.com/storybookjs/storybook-addon-console/issues/41
+
+console.log('')
 
 // @see https://www.npmjs.com/package/@storybook/addon-viewport
 // import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
@@ -80,7 +66,7 @@ const customViewports = {
 // @see https://www.npmjs.com/package/@storybook/addon-console
 // import { setConsoleOptions } from '@storybook/addon-console'
 
-export const decorators = [(Story) => <Story />]
+// export const decorators = [(Story) => <Story />]
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

@@ -3,6 +3,10 @@ const { defineConfig } = require('vite')
 
 module.exports = defineConfig({
   root: resolve(__dirname, 'docs/'),
+  base: '/storybook',
+  // rollupOptions: {
+  //   external: [/^node:.*/],
+  // },
   // build: {
   //   ssr: true,
   //   lib: {

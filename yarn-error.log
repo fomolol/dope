@@ -1,0 +1,180 @@
+Arguments: 
+  /opt/homebrew/Cellar/node/19.0.1/bin/node /opt/homebrew/Cellar/yarn/1.22.18/libexec/bin/yarn.js install
+
+PATH: 
+  /Users/robksawyer/Library/pnpm:/opt/homebrew/sbin:/Users/robksawyer/miniconda3/bin:/Users/robksawyer/miniconda3/condabin:/Users/robksawyer/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/usr/local/Cellar/node/15.2.0/bin:/usr/local/share/npm/bin:/Users/robksawyer/.npm-packages/bin:/Users/robksawyer/.yarn/bin:/opt/homebrew/bin:/Applications/Blender.app/Contents/MacOS:/Users/robksawyer/.nvm/versions/node/v16.13.2/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  19.0.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: EEXIST: file already exists, mkdir '/Users/robksawyer/Sites/FOMOLOL/05_Repos/dope/node_modules/microbundle/node_modules/@babel'
+
+npm manifest: 
+  {
+    "name": "@fomolol/dope",
+    "version": "0.0.2",
+    "description": "A collection of dope React components that we like to use.",
+    "files": [
+      "dist"
+    ],
+    "sideEffects": true,
+    "source": "src/index.js",
+    "main": "dist/index.js",
+    "umd:main": "dist/index.umd.js",
+    "module": "dist/index.mjs",
+    "exports": {
+      "require": "./dist/index.js",
+      "default": "./dist/index.modern.mjs"
+    },
+    "scripts": {
+      "dev": "vite docs",
+      "size": "size-limit",
+      "clean": "rimraf dist && rimraf bundled",
+      "build": "npm run clean && npm run build:light && npm run build:bundle",
+      "build:light": "microbundle",
+      "build:bundle": "microbundle --external none --output './bundled'",
+      "build:docs": "vite build",
+      "prebuild": "npm run clean",
+      "preversion": "npm run build",
+      "postversion": "git push --follow-tags",
+      "storybook": "start-storybook -p 6006",
+      "build-storybook": "STORYBOOK_BASE_HREF=/storybook/ build-storybook -o ./storybook",
+      "serve-storybook": "serve storybook"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fomolol/dope.git"
+    },
+    "keywords": [],
+    "author": "@studio-freight",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/fomolol/modulemaker/issues"
+    },
+    "homepage": "https://github.com/fomolol/dope#readme",
+    "devDependencies": {
+      "@fomolol/tacklebox": "^0.1.1",
+      "@mdx-js/react": "^2.1.5",
+      "@react-three/drei": "^9.46.0",
+      "@react-three/fiber": "^8.9.1",
+      "@size-limit/preset-small-lib": "^8.0.1",
+      "@storybook/addon-a11y": "^6.5.13",
+      "@storybook/addon-actions": "^6.5.13",
+      "@storybook/addon-backgrounds": "^6.5.13",
+      "@storybook/addon-console": "^1.2.3",
+      "@storybook/addon-docs": "^6.5.13",
+      "@storybook/addon-essentials": "^6.5.13",
+      "@storybook/addon-interactions": "^6.5.13",
+      "@storybook/addon-links": "^6.5.13",
+      "@storybook/addon-measure": "^6.5.13",
+      "@storybook/addon-outline": "^6.5.13",
+      "@storybook/addon-postcss": "^2.0.0",
+      "@storybook/addon-storysource": "^6.5.13",
+      "@storybook/addons": "^6.5.13",
+      "@storybook/builder-vite": "^0.2.5",
+      "@storybook/channel-postmessage": "^6.5.13",
+      "@storybook/channel-websocket": "^6.5.13",
+      "@storybook/client-api": "^6.5.13",
+      "@storybook/design-system": "^7.9.2",
+      "@storybook/preview-web": "^6.5.13",
+      "@storybook/react": "^6.5.13",
+      "@storybook/react-vite": "7.0.0-alpha.25",
+      "@storybook/storybook-deployer": "^2.8.16",
+      "@storybook/testing-library": "^0.0.13",
+      "@storybook/theming": "^6.5.13",
+      "@svgr/webpack": "^6.5.1",
+      "classnames": "^2.3.2",
+      "clsx": "^1.2.1",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-plugin-storybook": "^0.6.7",
+      "framer-motion": "^7.6.15",
+      "gl-noise": "^1.6.1",
+      "glslify": "^7.1.1",
+      "ignore-loader": "^0.1.2",
+      "iphone-inline-video": "^2.2.2",
+      "leva": "^0.9.34",
+      "lodash": "^4.17.21",
+      "matter-js": "^0.18.0",
+      "microbundle": "^0.15.1",
+      "next": "^13.0.5",
+      "nice-color-palettes": "^3.0.0",
+      "node-sass": "^8.0.0",
+      "paper": "^0.12.17",
+      "path": "^0.12.7",
+      "prettier": "^2.7.1",
+      "prettier-plugin-tailwindcss": "^0.1.13",
+      "preview.js": "link:@storybook/addon-docs/preview.js",
+      "prop-types": "^15.8.1",
+      "react": "^18.2.0",
+      "react-device-detect": "^2.2.2",
+      "react-dom": "^18.2.0",
+      "react-howler": "^5.2.0",
+      "react-intersection-observer": "^9.4.1",
+      "react-locomotive-scroll": "^0.2.2",
+      "rimraf": "^3.0.2",
+      "sass": "^1.56.1",
+      "scaffolding-nextjs": "^2.1.14",
+      "size-limit": "^8.0.1",
+      "storybook-addon-designs": "^6.3.1",
+      "storybook-css-modules-preset": "^1.1.1",
+      "storybook-dark-mode": "^1.1.2",
+      "three": "^0.147.0",
+      "three-custom-shader-material": "^5.0.0",
+      "use-fit-text": "^2.4.0",
+      "use-sound": "^4.0.1",
+      "vite": "^3.0.9"
+    },
+    "size-limit": [
+      {
+        "limit": "3 kB",
+        "path": "dist/index.js"
+      },
+      {
+        "limit": "2 kB",
+        "path": "dist/index.mjs"
+      }
+    ],
+    "peerDependencies": {
+      "@fomolol/tacklebox": "^0.1.1",
+      "@react-three/drei": "^9.46.0",
+      "@react-three/fiber": "^8.9.1",
+      "classnames": "^2.3.2",
+      "clsx": "^1.2.1",
+      "framer-motion": "^7.6.15",
+      "gl-noise": "^1.6.1",
+      "glslify": "^7.1.1",
+      "iphone-inline-video": "^2.2.2",
+      "leva": "^0.9.34",
+      "lodash": "^4.17.21",
+      "matter-js": "^0.18.0",
+      "next": "^13.0.5",
+      "nice-color-palettes": "^3.0.0",
+      "node-sass": "^8.0.0",
+      "paper": "^0.12.17",
+      "react-device-detect": "^2.2.2",
+      "react-howler": "^5.2.0",
+      "react-intersection-observer": "^9.4.1",
+      "react-locomotive-scroll": "^0.2.2",
+      "sass": "^1.56.1",
+      "three": "^0.147.0",
+      "three-custom-shader-material": "^5.0.0",
+      "use-fit-text": "^2.4.0",
+      "use-sound": "^4.0.1"
+    },
+    "directories": {
+      "doc": "docs"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

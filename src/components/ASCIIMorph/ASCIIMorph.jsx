@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import s from './ASCIIMorph.module.css'
 
-import { AsciiMorph } from '../lib/AsciiMorph'
+import AsciiMorph from '../../lib/AsciiMorph'
 
 const ASCIIMorph = ({
   tagName: Tag = 'div',

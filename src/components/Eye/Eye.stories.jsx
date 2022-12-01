@@ -1,37 +1,20 @@
 /**
  * Eye.jsx
  */
-import React from 'react';
-// import generateProps from 'react-generate-props'
-
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-
-// Mocks/Utils
-// import { StorybookRouter } from '../../mocks/next/router'
+import React from 'react'
 
 // Component(s)
-import Eye from './Eye';
+import Eye from './Eye'
 
-// Generate some stub properties
-// generateProps.init()
-// const props = generateProps(Eye);
+export default {
+  title: 'Eye',
+  component: Eye,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+}
 
-// Decorators
-const CenterDecorator = storyFn => (
-  <div className="flex h-screen justify-center items-center">
-    { storyFn() }
-  </div>
-);
+export const Default = () => <Eye />
 
-// const RouterDecorator = (storyFn) => (
-//   <StorybookRouter>{storyFn()}</StorybookRouter>
-// )
-
-storiesOf('Eye', module)
-  // .addDecorator(RouterDecorator)
-  .addDecorator(CenterDecorator)
-  .add('with required props', () => (
-    <Eye />
-  ));
+Default.storyName = 'default'

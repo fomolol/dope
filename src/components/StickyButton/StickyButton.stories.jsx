@@ -1,20 +1,20 @@
 /**
  * StickyButton.jsx
  */
- import * as React from 'react';
+import * as React from 'react'
 
- // Component(s)
- import StickyButton from './StickyButton';
+// Component(s)
+import StickyButton from './StickyButton'
 
- export default {
-   title: 'StickyButton',
-   component: StickyButton,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'StickyButton',
+  component: StickyButton,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+}
 
- export const Default = () => <StickyButton />;
+export const Default = () => <StickyButton />
 
- Default.storyName = 'default';
+Default.storyName = 'default'

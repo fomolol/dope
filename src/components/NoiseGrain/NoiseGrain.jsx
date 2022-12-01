@@ -10,8 +10,8 @@ const NoiseGrain = ({
   tagName: Tag = 'div',
   className = 'fixed inset-0 w-full h-full pointer-events-none',
   variant = 'grain', // noise, both
-  noiseSrc = '../assets/noise.png',
-  scratchesSrc = '../assets/scratches.webp',
+  noiseSrc = '../../public/noise.png',
+  scratchesSrc = '../../public/scratches.webp',
 }) => {
   return (
     <Tag

@@ -1,10 +1,10 @@
 /**
  * @file Debugger.jsx
  */
-import { useWindowSize } from '@/hooks/useWindowSize';
+import { useWindowSize } from '@fomolol/tacklebox'
 
 const Debugger = ({ calcHeight, scrollY, scrollYProgress }) => {
-  const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize()
 
   return (
     <section className="fixed flex items-center justify-center w-full text-center top-4 z-infinity ">
@@ -31,7 +31,7 @@ const Debugger = ({ calcHeight, scrollY, scrollYProgress }) => {
         </p>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Debugger;
+export default Debugger

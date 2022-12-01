@@ -1,9 +1,9 @@
 /**
  * @file SplitFade
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { motion } from 'framer-motion'
 
 const SplitFade = ({
   children,
@@ -12,7 +12,7 @@ const SplitFade = ({
   roundLetterClassname = 'inline-block h-full left-0 absolute top-0 origin-right w-full',
   spaceLetterClassname = 'inline-block font-stolzl h-full left-0 absolute top-0 origin-left w-full',
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false)
 
   const rounded = {
     initial: {
@@ -31,7 +31,7 @@ const SplitFade = ({
       ease: 'easeOut',
       duration: 1,
     },
-  };
+  }
 
   const square = {
     initial: {
@@ -50,7 +50,7 @@ const SplitFade = ({
       ease: 'easeOut',
       duration: 0.8,
     },
-  };
+  }
 
   return (
     <span className={letterWrapperClassname}>
@@ -80,7 +80,7 @@ const SplitFade = ({
         {children}
       </motion.span>
     </span>
-  );
-};
+  )
+}
 
-export default SplitFade;
+export default SplitFade

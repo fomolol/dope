@@ -1,5 +1,10 @@
-import * as React from 'react'
+/**
+ * @file CanvasEraser
+ * A neat little component that unhides something underneath using the mouse.
+ */
+import { useState, useRef, useMemo } from 'react'
 import { useForkRef } from '@fomolol/tacklebox'
+
 import canvasEraserFactory from './CanvasEraserFactory'
 
 const CanvasEraser = (
@@ -16,11 +21,11 @@ const CanvasEraser = (
   },
   ref
 ) => {
-  const [canvasEraser, setCanvasEraser] = React.useState(null)
-  const canvasRef = React.useRef(null)
+  const [canvasEraser, setCanvasEraser] = useState(null)
+  const canvasRef = useRef(null)
   const componentRef = useForkRef(canvasRef, ref)
 
-  const options = React.useMemo(
+  const options = useMemo(
     () => ({
       background,
       completeRatio,
@@ -43,12 +48,12 @@ const CanvasEraser = (
     ]
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     const canvas = canvasEraserFactory()
     setCanvasEraser(canvas)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (canvasEraser) {
       canvasEraser.init(canvasRef.current, options)
     }
@@ -71,4 +76,4 @@ const CanvasEraser = (
   )
 }
 
-export default React.forwardRef(CanvasEraser)
+export default forwardRef(CanvasEraser)

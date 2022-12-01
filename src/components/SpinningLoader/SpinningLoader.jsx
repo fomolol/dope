@@ -3,7 +3,7 @@
  * @see https://codepen.io/hakimel/pen/KanIi?editors=0010
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
  */
-import React, { useEffect, useCallback, useRef, useMemo } from 'react'
+import { useEffect, useCallback, useRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import useMouse from '@react-hook/mouse-position'
 
@@ -56,87 +56,89 @@ const createParticles = (mouse) => {
  * @param {object} ctx
  * @return void
  */
-const loop = (particles, mouse, transparent = false) => (ctx) => {
-  let { x, y, clientX, clientY, screenX, screenY, isDown } = mouse
-  if (!clientX || !clientY) {
-    x = window.innerWidth - SCREEN_WIDTH * 0.5
-    y = window.innerHeight - SCREEN_HEIGHT * 0.5
-  } else {
-    x = clientX - (window.innerWidth - SCREEN_WIDTH) * 0.5
-    y = clientY - (window.innerHeight - SCREEN_HEIGHT) * 0.5
-  }
-
-  if (isDown) {
-    RADIUS_SCALE += (RADIUS_SCALE_MAX - RADIUS_SCALE) * 0.02
-  } else {
-    RADIUS_SCALE -= (RADIUS_SCALE - RADIUS_SCALE_MIN) * 0.02
-  }
-
-  RADIUS_SCALE = Math.min(RADIUS_SCALE, RADIUS_SCALE_MAX)
-  if (!transparent) {
-    // ctx.globalCompositeOperation = 'exclusion'
-    ctx.fillStyle = 'rgba(0,0,0,0.05)'
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    // ctx.globalCompositeOperation = 'overlay'
-  } else {
-    // ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
-  }
-
-  for (let i = 0, len = particles.length; i < len; i++) {
-    var particle = particles[i]
-
-    var lp = { x: particle.position.x, y: particle.position.y }
-
-    // Rotation
-    particle.offset.x += particle.speed
-    particle.offset.y += particle.speed
-
-    // Follow mouse with some lag
-    particle.shift.x += (x - particle.shift.x) * particle.speed
-    particle.shift.y += (y - particle.shift.y) * particle.speed
-
-    // Apply position
-    particle.position.x =
-      particle.shift.x +
-      Math.cos(i + particle.offset.x) * (particle.orbit * RADIUS_SCALE)
-    particle.position.y =
-      particle.shift.y +
-      Math.sin(i + particle.offset.y) * (particle.orbit * RADIUS_SCALE)
-
-    // Limit to screen bounds
-    particle.position.x = Math.max(
-      Math.min(particle.position.x, SCREEN_WIDTH),
-      0
-    )
-    particle.position.y = Math.max(
-      Math.min(particle.position.y, SCREEN_HEIGHT),
-      0
-    )
-
-    particle.size += (particle.targetSize - particle.size) * 0.05
-
-    if (Math.round(particle.size) == Math.round(particle.targetSize)) {
-      particle.targetSize = 1 + Math.random() * 7
+const loop =
+  (particles, mouse, transparent = false) =>
+  (ctx) => {
+    let { x, y, clientX, clientY, screenX, screenY, isDown } = mouse
+    if (!clientX || !clientY) {
+      x = window.innerWidth - SCREEN_WIDTH * 0.5
+      y = window.innerHeight - SCREEN_HEIGHT * 0.5
+    } else {
+      x = clientX - (window.innerWidth - SCREEN_WIDTH) * 0.5
+      y = clientY - (window.innerHeight - SCREEN_HEIGHT) * 0.5
     }
 
-    ctx.beginPath()
-    ctx.fillStyle = particle.fillColor
-    ctx.strokeStyle = particle.fillColor
-    ctx.lineWidth = particle.size
-    ctx.moveTo(lp.x, lp.y)
-    ctx.lineTo(particle.position.x, particle.position.y)
-    ctx.stroke()
-    ctx.arc(
-      particle.position.x,
-      particle.position.y,
-      particle.size / 2,
-      0,
-      Math.PI * 2,
-      true
-    )
-    ctx.fill()
+    if (isDown) {
+      RADIUS_SCALE += (RADIUS_SCALE_MAX - RADIUS_SCALE) * 0.02
+    } else {
+      RADIUS_SCALE -= (RADIUS_SCALE - RADIUS_SCALE_MIN) * 0.02
+    }
+
+    RADIUS_SCALE = Math.min(RADIUS_SCALE, RADIUS_SCALE_MAX)
+    if (!transparent) {
+      // ctx.globalCompositeOperation = 'exclusion'
+      ctx.fillStyle = 'rgba(0,0,0,0.05)'
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+      // ctx.globalCompositeOperation = 'overlay'
+    } else {
+      // ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
+    }
+
+    for (let i = 0, len = particles.length; i < len; i++) {
+      var particle = particles[i]
+
+      var lp = { x: particle.position.x, y: particle.position.y }
+
+      // Rotation
+      particle.offset.x += particle.speed
+      particle.offset.y += particle.speed
+
+      // Follow mouse with some lag
+      particle.shift.x += (x - particle.shift.x) * particle.speed
+      particle.shift.y += (y - particle.shift.y) * particle.speed
+
+      // Apply position
+      particle.position.x =
+        particle.shift.x +
+        Math.cos(i + particle.offset.x) * (particle.orbit * RADIUS_SCALE)
+      particle.position.y =
+        particle.shift.y +
+        Math.sin(i + particle.offset.y) * (particle.orbit * RADIUS_SCALE)
+
+      // Limit to screen bounds
+      particle.position.x = Math.max(
+        Math.min(particle.position.x, SCREEN_WIDTH),
+        0
+      )
+      particle.position.y = Math.max(
+        Math.min(particle.position.y, SCREEN_HEIGHT),
+        0
+      )
+
+      particle.size += (particle.targetSize - particle.size) * 0.05
+
+      if (Math.round(particle.size) == Math.round(particle.targetSize)) {
+        particle.targetSize = 1 + Math.random() * 7
+      }
+
+      ctx.beginPath()
+      ctx.fillStyle = particle.fillColor
+      ctx.strokeStyle = particle.fillColor
+      ctx.lineWidth = particle.size
+      ctx.moveTo(lp.x, lp.y)
+      ctx.lineTo(particle.position.x, particle.position.y)
+      ctx.stroke()
+      ctx.arc(
+        particle.position.x,
+        particle.position.y,
+        particle.size / 2,
+        0,
+        Math.PI * 2,
+        true
+      )
+      ctx.fill()
+    }
   }
-}
 
 const SpinningLoader = ({
   tagName: Tag,

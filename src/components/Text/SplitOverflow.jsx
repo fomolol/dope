@@ -1,9 +1,9 @@
 /**
  * @file SplitOverflow
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { motion } from 'framer-motion'
 
 const SplitOverflow = ({
   children,
@@ -12,7 +12,7 @@ const SplitOverflow = ({
   letterWrapperClassname = 'cursor-pointer relative white-space-pre',
   hiddenLetterClassname = 'opacity-0 invisible',
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false)
 
   const rounded = {
     initial: {
@@ -30,7 +30,7 @@ const SplitOverflow = ({
       ease: 'easeOut',
       duration: 1,
     },
-  };
+  }
 
   const square = {
     initial: {
@@ -48,7 +48,7 @@ const SplitOverflow = ({
       ease: 'easeOut',
       duration: 0.8,
     },
-  };
+  }
 
   return (
     <span className={letterWrapperClassname}>
@@ -88,7 +88,7 @@ const SplitOverflow = ({
         </motion.span>
       </span>
     </span>
-  );
-};
+  )
+}
 
-export default SplitOverflow;
+export default SplitOverflow

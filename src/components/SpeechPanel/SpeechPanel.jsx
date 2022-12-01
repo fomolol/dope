@@ -1,11 +1,11 @@
 /**
  * @file SpeechPanel.js
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
+import { motion, AnimatePresence } from 'framer-motion'
 
-import styles from './SpeechPanel.module.css';
+import s from './SpeechPanel.module.css'
 
 const ButtonSpeakBackground = ({ onAnimationComplete }) => {
   return (
@@ -30,8 +30,8 @@ const ButtonSpeakBackground = ({ onAnimationComplete }) => {
         className={`absolute bottom-0 right-0 w-full h-full transition ease-out bg-red-ff dark:bg-blue-500 rounded-full duration-500`}
       />
     </motion.div>
-  );
-};
+  )
+}
 
 const SpeechPanel = ({
   tagName: Tag = 'div',
@@ -45,16 +45,16 @@ const SpeechPanel = ({
     'What do you think of NFTs?',
   ],
 }) => {
-  const [isReady, setIsReady] = React.useState(false);
-  const onAnimationComplete = React.useCallback(() => {
+  const [isReady, setIsReady] = useState(false)
+  const onAnimationComplete = useCallback(() => {
     if (!isReady) {
-      console.log('Animation Start Complete');
-      setIsReady(true);
+      console.log('Animation Start Complete')
+      setIsReady(true)
     } else {
-      console.log('Animation End Complete');
-      setIsReady(false);
+      console.log('Animation End Complete')
+      setIsReady(false)
     }
-  }, [isReady]);
+  }, [isReady])
 
   const variants = {
     hide: { opacity: 0 },
@@ -64,7 +64,7 @@ const SpeechPanel = ({
       ease: 'easeOut',
       staggerChildren: 1.5,
     },
-  };
+  }
 
   var listVariants = {
     hide: { opacity: 0 },
@@ -73,14 +73,14 @@ const SpeechPanel = ({
       duration: 1,
       ease: 'easeOut',
     },
-  };
+  }
 
   return (
     <AnimatePresence exitBeforeEnter>
       {active && (
         <Tag
-          className={`${styles.speech_panel} ${
-            styles[`speech_panel__${variant}`]
+          className={`${s.speech_panel} ${
+            s[`speech_panel__${variant}`]
           } ${className}`}
           key="speech-panel"
         >
@@ -114,14 +114,14 @@ const SpeechPanel = ({
         </Tag>
       )}
     </AnimatePresence>
-  );
-};
+  )
+}
 
 SpeechPanel.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default SpeechPanel;
+export default SpeechPanel

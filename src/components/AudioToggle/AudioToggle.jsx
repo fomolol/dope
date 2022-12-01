@@ -1,11 +1,11 @@
 /**
  * @file AudioToggle.js
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import ReactHowler from 'react-howler';
+import { useCallback, useState } from 'react'
+import PropTypes from 'prop-types'
+import ReactHowler from 'react-howler'
 
-import styles from './AudioToggle.module.css';
+import s from './AudioToggle.module.css'
 
 const AudioToggle = ({
   tagName: Tag = 'div',
@@ -17,39 +17,39 @@ const AudioToggle = ({
   loop = true,
   preload = true,
 }) => {
-  const [audioState, setAudioState] = React.useState({
+  const [audioState, setAudioState] = useState({
     wasPlaying: !_muted,
     isPlaying: !_muted,
-  });
-  const totalBars = 10;
+  })
+  const totalBars = 10
 
-  const onFocus = React.useCallback(() => {
-    setAudioState({ wasPlaying: true, isPlaying: audioState.wasPlaying });
-  }, [audioState.wasPlaying]);
+  const onFocus = useCallback(() => {
+    setAudioState({ wasPlaying: true, isPlaying: audioState.wasPlaying })
+  }, [audioState.wasPlaying])
 
-  const onBlur = React.useCallback(() => {
+  const onBlur = useCallback(() => {
     setAudioState({
       wasPlaying: audioState.isPlaying,
       isPlaying: false,
-    });
-  }, [audioState.isPlaying]);
+    })
+  }, [audioState.isPlaying])
 
-  React.useEffect(() => {
-    window.addEventListener('focus', onFocus);
-    window.addEventListener('blur', onBlur);
+  useEffect(() => {
+    window.addEventListener('focus', onFocus)
+    window.addEventListener('blur', onBlur)
     // Specify how to clean up after this effect:
     return () => {
-      window.removeEventListener('focus', onFocus);
-      window.removeEventListener('blur', onBlur);
-    };
-  }, [onBlur, onFocus]);
+      window.removeEventListener('focus', onFocus)
+      window.removeEventListener('blur', onBlur)
+    }
+  }, [onBlur, onFocus])
 
-  const muted = audioState.isPlaying ? false : true;
+  const muted = audioState.isPlaying ? false : true
 
   return (
     <Tag
-      className={`${styles.audio_toggle} ${
-        styles[`audio_toggle__${variant}`]
+      className={`${s.audio_toggle} ${
+        s[`audio_toggle__${variant}`]
       } ${className}`}
     >
       <button
@@ -57,8 +57,8 @@ const AudioToggle = ({
           muted ? 'has-sound-muted' : null
         }`}
         onClick={() =>
-          setAudioState(state =>
-            Object.assign({}, { isPlaying: !state.isPlaying }),
+          setAudioState((state) =>
+            Object.assign({}, { isPlaying: !state.isPlaying })
           )
         }
       >
@@ -133,14 +133,14 @@ const AudioToggle = ({
         }
       `}</style>
     </Tag>
-  );
-};
+  )
+}
 
 AudioToggle.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default AudioToggle;
+export default AudioToggle

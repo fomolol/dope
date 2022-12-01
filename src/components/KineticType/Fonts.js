@@ -29,4 +29,4 @@ export const Fonts = {
     'https://fonts.gstatic.com/s/wallpoet/v9/f0X10em2_8RnXVVdUObp58I.woff',
   'Sirin Stencil':
     'https://fonts.gstatic.com/s/sirinstencil/v6/mem4YaWwznmLx-lzGfN7MdRyRc9MAQ.woff',
-};
+}

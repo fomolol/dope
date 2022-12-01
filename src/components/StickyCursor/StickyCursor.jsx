@@ -1,66 +1,66 @@
 /**
  * @file StickyCursor.js
  */
-import * as React from 'react';
-import { useCursorStyle } from '@/hooks/useCursorStyle';
+import { memo, Children, useRef, isValidElement } from 'react'
+import { useCursorStyle } from '@fomolol/tacklebox'
 
-const StickyCursor = ({ children: childrenProp, sticky = true }) => {
-  const childRef = React.useRef(null);
-  const { lockCursorPosition } = useCursorStyle();
+export const StickyCursor = ({ children: childrenProp, sticky = true }) => {
+  const childRef = useRef(null)
+  const { lockCursorPosition } = useCursorStyle()
 
-  const children = React.Children.map(childrenProp, child => {
-    if (!React.isValidElement(child)) {
-      return null;
+  const children = Children.map(childrenProp, (child) => {
+    if (!isValidElement(child)) {
+      return null
     }
 
-    const { onMouseEnter, onMouseLeave } = child.props;
+    const { onMouseEnter, onMouseLeave } = child.props
 
-    const handleMouseEnter = event => {
-      if (!childRef.current) return;
+    const handleMouseEnter = (event) => {
+      if (!childRef.current) return
 
-      const position = childRef.current.getBoundingClientRect();
+      const position = childRef.current.getBoundingClientRect()
 
-      const x = position.width / 2 + position.left;
-      const y = position.height / 2 + position.top;
-      lockCursorPosition({ x, y });
+      const x = position.width / 2 + position.left
+      const y = position.height / 2 + position.top
+      lockCursorPosition({ x, y })
 
       if (onMouseEnter) {
-        onMouseEnter(event);
+        onMouseEnter(event)
       }
-    };
+    }
 
-    const handleMouseLeave = event => {
-      if (!childRef.current) return;
+    const handleMouseLeave = (event) => {
+      if (!childRef.current) return
 
-      lockCursorPosition(null);
+      lockCursorPosition(null)
 
       if (onMouseLeave) {
-        onMouseLeave(event);
+        onMouseLeave(event)
       }
-    };
+    }
 
-    const handleRef = node => {
+    const handleRef = (node) => {
       // Keep your own reference
-      childRef.current = node;
+      childRef.current = node
 
       // Call the original ref, if any
-      const { ref } = child;
+      const { ref } = child
 
       if (typeof ref === 'function') {
-        ref(node);
+        ref(node)
       } else if (ref !== null) {
-        ref.current = node;
+        ref.current = node
       }
-    };
+    }
 
-    return React.cloneElement(child, {
+    return cloneElement(child, {
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       ref: handleRef,
-    });
-  });
+    })
+  })
 
-  return sticky ? children : childrenProp;
-};
+  return sticky ? children : childrenProp
+}
 
-export default React.memo(StickyCursor);
+export default memo(StickyCursor)

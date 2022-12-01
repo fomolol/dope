@@ -1,10 +1,10 @@
 /**
  * @file DebugScreen.js
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import styles from './DebugScreen.module.css';
+import styles from './DebugScreen.module.css'
 
 const DebugScreen = ({
   tagName: Tag = 'div',
@@ -22,14 +22,14 @@ const DebugScreen = ({
       <p className="hidden lg:block">lg</p>
       <p className="hidden xl:block">xl</p>
     </Tag>
-  );
-};
+  )
+}
 
 DebugScreen.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default DebugScreen;
+export default DebugScreen

@@ -1,14 +1,14 @@
 /**
  * @file Scroller.js
  */
-import { useState, forwardRef, useCallback, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useMotionValue, useSpring, motion } from 'framer-motion';
-import { useLayoutEffect } from '@fomolol/tacklebox';
+import { useState, forwardRef, useCallback, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { useMotionValue, useSpring, motion } from 'framer-motion'
+import { useLayoutEffect } from '@fomolol/tacklebox'
 
-import s from './Scroller.module.css';
+import s from './Scroller.module.css'
 
-import { useStore } from '@/store';
+import { useStore } from '@/store'
 
 const Scroller = ({
   tagName: Tag = motion.div,
@@ -22,42 +22,42 @@ const Scroller = ({
   debug = true,
   ...rest
 }) => {
-  const { scrollerEnabled, scrollRef } = useStore();
-  const [contentHeight, setContentHeight] = useState();
-  const scrollY = useMotionValue(-window.pageYOffset || -window.scrollY);
+  const { scrollerEnabled, scrollRef } = useStore()
+  const [contentHeight, setContentHeight] = useState()
+  const scrollY = useMotionValue(-window.pageYOffset || -window.scrollY)
 
   const physics = {
     damping,
     mass,
     stiffness,
-  }; // easing of smooth scroll
-  const y = useSpring(scrollY, physics); // apply easing to the negative scroll value
+  } // easing of smooth scroll
+  const y = useSpring(scrollY, physics) // apply easing to the negative scroll value
 
-  const getContentHeight = useCallback(entries => {
+  const getContentHeight = useCallback((entries) => {
     for (let entry of entries) {
-      const entryHeight = entry.contentRect.height;
-      setContentHeight(entryHeight);
+      const entryHeight = entry.contentRect.height
+      setContentHeight(entryHeight)
     }
-  }, []);
+  }, [])
 
   useLayoutEffect(() => {
-    const scrollContainer = scrollRef.current;
-    let resizeObserver = new ResizeObserver(entries =>
-      getContentHeight(entries),
-    );
-    resizeObserver.observe(scrollContainer);
-    return () => resizeObserver.disconnect();
-  }, [getContentHeight]);
+    const scrollContainer = scrollRef.current
+    let resizeObserver = new ResizeObserver((entries) =>
+      getContentHeight(entries)
+    )
+    resizeObserver.observe(scrollContainer)
+    return () => resizeObserver.disconnect()
+  }, [getContentHeight])
 
   useEffect(() => {
     const trackScroll = () => {
       if (window.scrollY || window.pageYOffset < contentHeight) {
-        scrollY.set(-window.pageYOffset || -window.scrollY);
+        scrollY.set(-window.pageYOffset || -window.scrollY)
       }
-    };
-    window.addEventListener('scroll', trackScroll);
-    return () => window.removeEventListener('scroll', trackScroll);
-  }, [scrollY]);
+    }
+    window.addEventListener('scroll', trackScroll)
+    return () => window.removeEventListener('scroll', trackScroll)
+  }, [scrollY])
 
   return (
     <>
@@ -86,14 +86,14 @@ const Scroller = ({
         />
       ) : null}
     </>
-  );
-};
+  )
+}
 
 Scroller.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default Scroller;
+export default Scroller

@@ -1,11 +1,12 @@
 /**
  * @file /contexts/MenuContext.js
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import { useMemo, useReducer, createContext } from 'react'
+import PropTypes from 'prop-types'
+
 export const INITIAL_STATE = {
   isMenuOpen: false,
-};
+}
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -13,25 +14,25 @@ const rootReducer = (state, action) => {
       return {
         ...state,
         isMenuOpen: !state.isMenuOpen,
-      };
+      }
     }
     default: {
-      return state;
+      return state
     }
   }
-};
+}
 
-const MenuContext = React.createContext();
+const MenuContext = createContext()
 
 // Create the provider
 const MenuProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(rootReducer, INITIAL_STATE);
-  const store = React.useMemo(() => ({ state, dispatch }), [state]);
-  return <MenuContext.Provider value={store}>{children}</MenuContext.Provider>;
-};
+  const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE)
+  const store = useMemo(() => ({ state, dispatch }), [state])
+  return <MenuContext.Provider value={store}>{children}</MenuContext.Provider>
+}
 
 MenuProvider.propTypes = {
   children: PropTypes.node,
-};
+}
 
-export { MenuContext, MenuProvider };
+export { MenuContext, MenuProvider }

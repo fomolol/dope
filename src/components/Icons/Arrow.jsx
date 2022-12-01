@@ -1,11 +1,7 @@
-import * as React from 'react';
-import { motion } from 'framer-motion';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../../../tailwind.config';
+import React from 'react'
+import { motion } from 'framer-motion'
 
-const { theme } = resolveConfig(tailwindConfig);
-
-const Arrow = ({ fillColor = theme.colors.white, ...props }) => (
+const Arrow = ({ fillColor = '#fff', ...props }) => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 101 57"
@@ -18,6 +14,6 @@ const Arrow = ({ fillColor = theme.colors.white, ...props }) => (
       className="dark:fill-white fill-black"
     ></path>
   </motion.svg>
-);
+)
 
-export default Arrow;
+export default Arrow

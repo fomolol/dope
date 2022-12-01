@@ -1,20 +1,22 @@
 /**
  * @file ScrollerSnapper.js
+ * This component has a bug related to scroll. Whenever smooth
+ * scroll is active, I'm pretty sure this doesn't work.
+ *
+ * WARNING: Beta version, use with caution
  */
 /**
  * @file Scroller.js
  */
-import { useState, forwardRef, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
+import { useState, forwardRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { useScroll, useTransform, motion } from 'framer-motion'
+import { useWindowSize } from '@fomolol/tacklebox'
 
-import { useStore } from '@/store';
-import { useWindowSize } from '@/hooks/useWindowSize';
+import ScrollProgressLine from './components/ScrollProgressLine'
+import Debugger from './Debugger'
 
-import ScrollProgressLine from '@/components/ScrollProgressLine';
-import Debugger from './Debugger';
-
-import s from './ScrollerSnapper.module.css';
+import s from './ScrollerSnapper.module.css'
 
 /**
  * SnapParent
@@ -32,7 +34,7 @@ const SnapParent = forwardRef(({ ...props }, ref) => (
       }
     `}</style>
   </div>
-));
+))
 
 const ScrollerSnapper = ({
   tagName: Tag = motion.div,
@@ -46,23 +48,24 @@ const ScrollerSnapper = ({
   debug = true,
   ...rest
 }) => {
-  const { scrollerEnabled, scrollRef } = useStore();
-  const { height } = useWindowSize();
-  const [scrollYValue, setScrollYValue] = useState(0);
-  const [scrollYProgressValue, setScrollYProgressValue] = useState(0);
+  const { scrollerEnabled, scrollRef } = useStore()
+  const { height } = useWindowSize()
+  const [scrollYValue, setScrollYValue] = useState(0)
+  const [scrollYProgressValue, setScrollYProgressValue] = useState(0)
 
+  // TODO: Need to look into fixing when proper values .current is passed.
   const { scrollY, scrollYProgress } = useScroll({
     container: scrollRef,
-  }); // measures how many pixels user has scrolled vertically
+  }) // measures how many pixels user has scrolled vertically
 
-  const pageRange = [0.1, 0.25, 0.5, 1];
-  const lengthRange = ['15vh', '25vh', '50vh', '100vh'];
-  const calcHeight = useTransform(scrollYProgress, pageRange, lengthRange);
+  const pageRange = [0.1, 0.25, 0.5, 1]
+  const lengthRange = ['15vh', '25vh', '50vh', '100vh']
+  const calcHeight = useTransform(scrollYProgress, pageRange, lengthRange)
 
   useEffect(() => {
-    scrollY.onChange(v => setScrollYValue(v));
-    scrollYProgress.onChange(v => setScrollYProgressValue(v));
-  }, [scrollY, scrollYProgress]);
+    scrollY.onChange((v) => setScrollYValue(v))
+    scrollYProgress.onChange((v) => setScrollYProgressValue(v))
+  }, [scrollY, scrollYProgress])
 
   return (
     <>
@@ -100,14 +103,14 @@ const ScrollerSnapper = ({
         />
       ) : null}
     </>
-  );
-};
+  )
+}
 
 ScrollerSnapper.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default ScrollerSnapper;
+export default ScrollerSnapper

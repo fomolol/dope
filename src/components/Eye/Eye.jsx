@@ -3,13 +3,13 @@
  *
  * @see https://evacremers.com/the-lab/
  */
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './Eye.module.css'
+import s from './Eye.module.css'
 
 const Eye = (props) => {
-  const { tagName: Tag, className, variant, children } = props
+  const { tagName: Tag, className, variant } = props
 
   let outerContainer = useRef()
   let eye1 = useRef()
@@ -39,8 +39,8 @@ const Eye = (props) => {
   return (
     <Tag
       ref={outerContainer}
-      className={`${styles.eye} ${
-        styles[`eye__${variant}`]
+      className={`${s.eye} ${
+        s[`eye__${variant}`]
       } ${className} outer-container`}
     >
       <div className="mx-auto pointer-events-none select-none eye-container cur">

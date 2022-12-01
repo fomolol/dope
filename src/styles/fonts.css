@@ -1,0 +1,32 @@
+/**
+* @file fonts.css
+*/
+
+/* Examples */
+@font-face {
+  font-family: "BLOKKNeue";
+  src: url("/fonts/BLOKKNeue-Regular.woff2") format("woff2"),
+    url("/fonts/BLOKKNeue-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Remboy';
+  src: url('/fonts/Remboy-Regular.woff2') format('woff2'),
+      url('/fonts/Remboy-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Neue Pixel Grotesk';
+  src: url('/fonts/NeuePixelGrotesk.woff2') format('woff2'),
+      url('/fonts/NeuePixelGrotesk.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

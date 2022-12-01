@@ -1,16 +1,14 @@
 /**
  * @file Text.js
  */
-import * as React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { useLayoutEffect } from '@fomolol/tacklebox'
 
-import styles from './Text.module.css';
+import styles from './Text.module.css'
 
-import { useLayoutEffect } from '@/hooks/useIsoLayoutEffect';
-
-import SplitFade from './SplitFade';
-import SplitOverflow from './SplitOverflow';
+import SplitFade from './SplitFade'
+import SplitOverflow from './SplitOverflow'
 
 const Text = ({
   tagName: Tag = 'h2',
@@ -19,17 +17,17 @@ const Text = ({
   children = '',
   type,
 }) => {
-  const text = React.useRef();
-  const [newText, setNewText] = React.useState(null);
-  const hasTextSpans = React.useRef(false);
+  const text = React.useRef()
+  const [newText, setNewText] = React.useState(null)
+  const hasTextSpans = React.useRef(false)
 
-  const innerHtml = React.useRef();
+  const innerHtml = React.useRef()
 
   useLayoutEffect(() => {
     if (text.current) {
-      innerHtml.current = text.current?.innerHTML.replaceAll('<br>', ' _ ');
+      innerHtml.current = text.current?.innerHTML.replaceAll('<br>', ' _ ')
     }
-  }, [text]);
+  }, [text])
 
   useLayoutEffect(() => {
     if (
@@ -39,19 +37,19 @@ const Text = ({
       !hasTextSpans.current
     ) {
       if (type === 'fade-letter') {
-        const letters = innerHtml.current.split('');
-        setNewText(letters);
+        const letters = innerHtml.current.split('')
+        setNewText(letters)
       } else if (type === 'fade-word') {
-        const words = innerHtml.current.split(' ');
-        setNewText(words);
+        const words = innerHtml.current.split(' ')
+        setNewText(words)
       } else if (type === 'fade-block') {
-        setNewText('hide children');
+        setNewText('hide children')
       } else if (type === 'overflow-word') {
-        const words = innerHtml.current.split(' ');
-        setNewText(words);
+        const words = innerHtml.current.split(' ')
+        setNewText(words)
       }
     }
-  }, [text, innerHtml, type]);
+  }, [text, innerHtml, type])
 
   const renderText = React.useMemo(
     () =>
@@ -90,8 +88,8 @@ const Text = ({
           </React.Fragment>
         ))
       ) : null,
-    [newText, type, children],
-  );
+    [newText, type, children]
+  )
 
   return (
     <Tag
@@ -100,14 +98,14 @@ const Text = ({
     >
       {!renderText ? children : renderText}
     </Tag>
-  );
-};
+  )
+}
 
 Text.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default Text;
+export default Text

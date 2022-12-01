@@ -1,10 +1,10 @@
 /**
  * @file RefractorBox.js
  */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import useErrorBoundary from 'use-error-boundary';
-import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import useErrorBoundary from 'use-error-boundary'
+import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber'
 import {
   RoundedBox,
   PerspectiveCamera,
@@ -12,97 +12,56 @@ import {
   useTexture,
   Loader,
   useFBO,
-} from '@react-three/drei';
-import styles from './RefractorBox.module.css';
-import * as THREE from 'three';
-import BackfaceMaterial from './shaders/backfaceShaderMaterial';
-import RefractionMaterial from './shaders/refractionShaderMaterial';
-import { useLayoutEffect } from 'hooks/useIsoLayoutEffect';
+} from '@react-three/drei'
 
-// const RoundedBox = ({}) => {
-//   width, height, depth, radius0, smoothness;
-
-//   let shape = new THREE.Shape();
-//   let eps = 0.00001;
-//   let radius = radius0 - eps;
-//   shape.absarc(eps, eps, eps, -Math.PI / 2, -Math.PI, true);
-//   shape.absarc(eps, height - radius * 2, eps, Math.PI, Math.PI / 2, true);
-//   shape.absarc(
-//     width - radius * 2,
-//     height - radius * 2,
-//     eps,
-//     Math.PI / 2,
-//     0,
-//     true,
-//   );
-//   shape.absarc(width - radius * 2, eps, eps, 0, -Math.PI / 2, true);
-//   let geometry = new THREE.ExtrudeBufferGeometry(shape, {
-//     amount: depth - radius0 * 2,
-//     bevelEnabled: true,
-//     bevelSegments: smoothness * 2,
-//     steps: 3,
-//     bevelSize: radius,
-//     bevelThickness: radius0,
-//     curveSegments: smoothness,
-//   });
-
-//   geometry.center();
-
-//   return geometry;
-// };
+import * as THREE from 'three'
+import RefractionMaterial from './shaders/refractionShaderMaterial'
+import { useLayoutEffect } from 'hooks/useIsoLayoutEffect'
 
 const Background = () => {
-  const ref = React.useRef();
-  const { viewport } = useThree();
-  const tex = useTexture('/3d/textures/gradient.jpg');
+  const ref = React.useRef()
+  const { viewport } = useThree()
+  const tex = useTexture('/3d/textures/gradient.jpg')
   useLayoutEffect(() => {
-    ref.current.layers.set(1);
-  }, []);
+    ref.current.layers.set(1)
+  }, [])
 
   useFrame(() => {
-    ref.current.position.setY(-3000);
-  });
+    ref.current.position.setY(-3000)
+  })
 
   return (
     <mesh ref={ref} scale={[viewport.width, viewport.height, 1]}>
       <planeBufferGeometry args={[1, 1]} />
       <meshBasicMaterial map={tex} />
     </mesh>
-  );
-};
+  )
+}
 
 const Lights = () => {
-  const { viewport } = useThree();
-  const l1 = React.useRef();
-  const l2 = React.useRef();
-
-  // useFrame(({ scene }) => {
-  //   scene.add(l1.current);
-  //   scene.add(l2.current);
-  // });
-
+  const { viewport } = useThree()
   return (
     <>
       <pointLight color={0xffffff} position={[0, 0, -200]} />
       <pointLight color={0xffffff} position={[0, 0, viewport.height * -1]} />
     </>
-  );
-};
+  )
+}
 
 const CameraRig = () => {
-  const { viewport } = useThree();
-  const camera = React.useRef();
-  const orthoCamera = React.useRef();
+  const { viewport } = useThree()
+  const camera = React.useRef()
+  const orthoCamera = React.useRef()
 
-  const camera2 = React.useRef();
-  const orthoCamera2 = React.useRef();
+  const camera2 = React.useRef()
+  const orthoCamera2 = React.useRef()
 
   useLayoutEffect(() => {
     if (orthoCamera.current && orthoCamera2.current) {
-      orthoCamera.current.layers.set(1);
-      orthoCamera2.current.layers.set(1);
+      orthoCamera.current.layers.set(1)
+      orthoCamera2.current.layers.set(1)
     }
-  }, []);
+  }, [])
 
   useFrame(({ gl, scene }) => {
     // TODO: See if this is needed
@@ -110,25 +69,25 @@ const CameraRig = () => {
 
     // camera.current.update(gl, scene);
 
-    orthoCamera2.current.position.setY(-3000);
+    orthoCamera2.current.position.setY(-3000)
     // camera2.current.position.setY(-3000);
 
     // this.velocity *= 0.78;
 
     // render env to fbo
-    gl.render(scene, orthoCamera2.current);
+    gl.render(scene, orthoCamera2.current)
 
     // render cube backfaces to fbo
-    gl.render(scene, camera);
+    gl.render(scene, camera)
 
     // render env to screen
-    gl.setRenderTarget(null);
-    gl.render(scene, orthoCamera);
-    gl.clearDepth();
+    gl.setRenderTarget(null)
+    gl.render(scene, orthoCamera)
+    gl.clearDepth()
 
     // render cube with refraction material to screen
-    gl.render(scene, camera);
-  });
+    gl.render(scene, camera)
+  })
   return (
     <>
       <PerspectiveCamera
@@ -165,73 +124,73 @@ const CameraRig = () => {
         ]}
       />
     </>
-  );
-};
+  )
+}
 
 const Scene = () => {
-  const { viewport } = useThree();
-  const boxRef = React.useRef();
+  const { viewport } = useThree()
+  const boxRef = React.useRef()
 
-  console.log('boxRef', boxRef);
+  console.log('boxRef', boxRef)
 
-  console.log('viewport', viewport);
+  console.log('viewport', viewport)
 
   const envFbo = new THREE.WebGLRenderTarget(
     viewport.width * viewport.dpr,
-    viewport.height * viewport.dpr,
-  );
+    viewport.height * viewport.dpr
+  )
   const backfaceFbo = new THREE.WebGLRenderTarget(
     viewport.width * viewport.dpr,
-    viewport.height * viewport.dpr,
-  );
+    viewport.height * viewport.dpr
+  )
 
-  console.log('envFbo', envFbo);
-  console.log('backfaceFbo', backfaceFbo);
+  console.log('envFbo', envFbo)
+  console.log('backfaceFbo', backfaceFbo)
 
-  const cubeAlpha = useTexture('/3d/textures/gradient.jpg');
-  console.log('cubeAlpha', cubeAlpha);
+  const cubeAlpha = useTexture('/3d/textures/gradient.jpg')
+  console.log('cubeAlpha', cubeAlpha)
 
-  console.log('RoundedBox', RoundedBox);
-  let velocity = 0.5;
+  console.log('RoundedBox', RoundedBox)
+  let velocity = 0.5
 
   useFrame(({ gl, scene, viewport }) => {
-    gl.clear();
+    gl.clear()
 
-    ref.current.position.setY(-3000);
+    ref.current.position.setY(-3000)
 
-    velocity *= 0.78;
+    velocity *= 0.78
     boxRef.current.rotation.y +=
       this.velocity +
-      Math.sign(this.velocity) * 0.005 * (1 - Number(this.pointerDown));
+      Math.sign(this.velocity) * 0.005 * (1 - Number(this.pointerDown))
 
     // Set x rotation.
     if (viewport.width > viewport.height) {
-      boxRef.current.rotation.z = 0;
+      boxRef.current.rotation.z = 0
     } else {
-      boxRef.current.rotation.z = 1;
-      boxRef.current.scale.y = 0.5;
-      boxRef.current.scale.z = 0.5;
+      boxRef.current.rotation.z = 1
+      boxRef.current.scale.y = 0.5
+      boxRef.current.scale.z = 0.5
     }
 
     // render env to fbo
-    gl.setRenderTarget(envFbo);
-    gl.render(scene, orthoCamera2);
+    gl.setRenderTarget(envFbo)
+    gl.render(scene, orthoCamera2)
 
     // render cube backfaces to fbo
-    boxRef.current.material = backfaceMaterial;
-    gl.setRenderTarget(backfaceFbo);
-    gl.clearDepth();
-    gl.render(scene, camera);
+    boxRef.current.material = backfaceMaterial
+    gl.setRenderTarget(backfaceFbo)
+    gl.clearDepth()
+    gl.render(scene, camera)
 
     // render env to screen
-    gl.setRenderTarget(null);
-    gl.render(scene, orthoCamera);
-    gl.clearDepth();
+    gl.setRenderTarget(null)
+    gl.render(scene, orthoCamera)
+    gl.clearDepth()
 
     // render cube with refraction material to screen
-    boxRef.current.material = refractionMaterial;
-    gl.render(scene, camera);
-  });
+    boxRef.current.material = refractionMaterial
+    gl.render(scene, camera)
+  })
 
   return (
     <group>
@@ -249,11 +208,11 @@ const Scene = () => {
         />
       </RoundedBox>
     </group>
-  );
-};
+  )
+}
 
 const RefractorBox = ({}) => {
-  const { ErrorBoundary, didCatch, error } = useErrorBoundary();
+  const { ErrorBoundary, didCatch, error } = useErrorBoundary()
 
   return (
     <main className="absolute top-0 left-0 w-screen h-screen pointer-events-none">
@@ -268,14 +227,14 @@ const RefractorBox = ({}) => {
         </Canvas>
       </ErrorBoundary>
     </main>
-  );
-};
+  )
+}
 
 RefractorBox.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default RefractorBox;
+export default RefractorBox

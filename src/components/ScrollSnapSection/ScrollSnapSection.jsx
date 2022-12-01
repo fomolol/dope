@@ -2,23 +2,23 @@
  * @file ScrollSnapSection.js
  */
 
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
-import useSound from 'use-sound';
+import { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { useInView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
+import useSound from 'use-sound'
 
-import s from './ScrollSnapSection.module.css';
+import s from './ScrollSnapSection.module.css'
 
 const CHILD_VARIANTS_SCALE = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
   hidden: { opacity: 0, scale: 0.8 },
-};
+}
 
 const CHILD_VARIANTS_LEFT = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   hidden: { opacity: 0, x: -500 },
-};
+}
 
 const ScrollSnapSection = ({
   tagName: Tag = 'section',
@@ -37,12 +37,12 @@ const ScrollSnapSection = ({
   skipAnimation = true,
   sound = '/sounds/100472__iluppai__piano-chord-explosion.mp3',
 }) => {
-  const [play, { stop }] = useSound(sound);
+  const [play, { stop }] = useSound(sound)
 
   const { ref, inView, entry } = useInView({
     threshold: content ? 0.15 : 0.75,
     triggerOnce: triggerOnce,
-  });
+  })
 
   let _variants = variants
     ? variants
@@ -51,15 +51,15 @@ const ScrollSnapSection = ({
     ? CHILD_VARIANTS_LEFT
     : transScale
     ? CHILD_VARIANTS_SCALE
-    : CHILD_VARIANTS_SCALE;
+    : CHILD_VARIANTS_SCALE
 
   useEffect(() => {
     if (inView) {
-      play();
+      play()
     } else {
-      stop();
+      stop()
     }
-  }, [inView]);
+  }, [inView])
 
   return (
     <Tag
@@ -99,14 +99,14 @@ const ScrollSnapSection = ({
         </motion.div>
       )}
     </Tag>
-  );
-};
+  )
+}
 
 ScrollSnapSection.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-};
+}
 
-export default ScrollSnapSection;
+export default ScrollSnapSection

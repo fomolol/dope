@@ -19,7 +19,7 @@ const LoaderBar = ({
   infinite = false,
   time = 25,
 }) => {
-  // const [reverseAnimation, setReverseAnimation] = React.useState(0);
+  // const [reverseAnimation, setReverseAnimation] = useState(0);
   const startingPercentage = loadingPercentage
   const [percentage, setPercentage] = useState(startingPercentage)
 

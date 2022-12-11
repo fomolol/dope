@@ -1,7 +1,7 @@
 /**
  * @file Static.js
  */
-import * as React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import { useLayoutEffect } from '@fomolol/tacklebox'
@@ -118,7 +118,7 @@ const Static = ({
   children = '',
   loop = true,
 }) => {
-  const cRef = React.useRef()
+  const cRef = useRef()
 
   function init() {
     const context = cRef.current.getContext('2d')

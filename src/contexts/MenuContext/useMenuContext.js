@@ -1,10 +1,10 @@
 /**
  * @file contexts/MenuContext/useMenu.js
  */
-import * as React from 'react';
+import {useContext} from 'react';
 import { MenuContext } from './MenuContext';
 
 export const useMenu = () => {
-  const { state, dispatch } = React.useContext(MenuContext);
+  const { state, dispatch } = useContext(MenuContext);
   return [state, dispatch];
 };

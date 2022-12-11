@@ -1,7 +1,7 @@
 /**
  * @file ArrowScroll.js
  */
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
 

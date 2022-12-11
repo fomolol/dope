@@ -1,7 +1,7 @@
 /**
  * @file ButtonSpeak.js
  */
-import * as React from 'react'
+import React, { memo , forwardRef } from 'react'
 import { motion } from 'framer-motion'
 
 import s from './ButtonSpeak.module.css'
@@ -58,4 +58,4 @@ const ButtonSpeak = (
   )
 }
 
-export default React.memo(React.forwardRef(ButtonSpeak))
+export default memo(forwardRef(ButtonSpeak))

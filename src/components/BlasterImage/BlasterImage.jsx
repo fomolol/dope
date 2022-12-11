@@ -2,7 +2,7 @@
  * @file BlasterImage.js
  * Handles flashing multiple images based on a time interval
  */
-import * as React from 'react'
+import React, { useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import s from './BlasterImage.module.css'
@@ -34,9 +34,9 @@ const BlasterImage = ({
   seconds = 0.44,
 }) => {
   const millis = seconds * 1000
-  const [counter, setCounter] = React.useState(0)
+  const [counter, setCounter] = useState(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const update = async () => {
       await sleep(millis)
       let tCounter = counter + 1

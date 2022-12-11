@@ -1,7 +1,7 @@
 /**
  * @file ScenePaperJS.js
  */
-import * as React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import s from './ScenePaperJS.module.css'
@@ -13,7 +13,7 @@ const ScenePaperJS = ({
   className = 'absolute top-0 left-0 w-screen h-screen bg-black opacity-100',
   variant = 'default',
 }) => {
-  const ref = React.useRef()
+  const ref = useRef()
   const project = usePaperJS({ ref })
 
   // Setup PaperJS

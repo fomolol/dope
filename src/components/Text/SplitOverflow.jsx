@@ -1,7 +1,7 @@
 /**
  * @file SplitOverflow
  */
-import * as React from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
@@ -12,7 +12,7 @@ const SplitOverflow = ({
   letterWrapperClassname = 'cursor-pointer relative white-space-pre',
   hiddenLetterClassname = 'opacity-0 invisible',
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   const rounded = {
     initial: {

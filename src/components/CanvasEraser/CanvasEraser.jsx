@@ -2,10 +2,10 @@
  * @file CanvasEraser
  * A neat little component that unhides something underneath using the mouse.
  */
-import { useState, useRef, useMemo } from 'react'
-import { useForkRef } from '@fomolol/tacklebox'
+import { useState, useRef, useMemo } from 'react';
+import { useForkRef } from '@fomolol/tacklebox';
 
-import canvasEraserFactory from './CanvasEraserFactory'
+import canvasEraserFactory from './CanvasEraserFactory';
 
 const CanvasEraser = (
   {
@@ -19,11 +19,11 @@ const CanvasEraser = (
     height,
     ...other
   },
-  ref
+  ref,
 ) => {
-  const [canvasEraser, setCanvasEraser] = useState(null)
-  const canvasRef = useRef(null)
-  const componentRef = useForkRef(canvasRef, ref)
+  const [canvasEraser, setCanvasEraser] = useState(null);
+  const canvasRef = useRef(null);
+  const componentRef = useForkRef(canvasRef, ref);
 
   const options = useMemo(
     () => ({
@@ -45,19 +45,19 @@ const CanvasEraser = (
       size,
       width,
       height,
-    ]
-  )
+    ],
+  );
 
   useEffect(() => {
-    const canvas = canvasEraserFactory()
-    setCanvasEraser(canvas)
-  }, [])
+    const canvas = canvasEraserFactory();
+    setCanvasEraser(canvas);
+  }, []);
 
   useEffect(() => {
     if (canvasEraser) {
-      canvasEraser.init(canvasRef.current, options)
+      canvasEraser.init(canvasRef.current, options);
     }
-  }, [canvasEraser, options])
+  }, [canvasEraser, options]);
 
   return (
     <>
@@ -73,7 +73,7 @@ const CanvasEraser = (
         }
       `}</style>
     </>
-  )
-}
+  );
+};
 
-export default forwardRef(CanvasEraser)
+export default forwardRef(CanvasEraser);

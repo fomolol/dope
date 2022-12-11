@@ -1,7 +1,7 @@
 /**
  * @file SplitFade
  */
-import * as React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
@@ -12,7 +12,7 @@ const SplitFade = ({
   roundLetterClassname = 'inline-block h-full left-0 absolute top-0 origin-right w-full',
   spaceLetterClassname = 'inline-block font-stolzl h-full left-0 absolute top-0 origin-left w-full',
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   const rounded = {
     initial: {

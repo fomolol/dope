@@ -1,7 +1,7 @@
 /**
  * @file Text.js
  */
-import * as React from 'react'
+import React, { useState, useRef} from 'react'
 import PropTypes from 'prop-types'
 import { useLayoutEffect } from '@fomolol/tacklebox'
 
@@ -17,11 +17,11 @@ const Text = ({
   children = '',
   type,
 }) => {
-  const text = React.useRef()
-  const [newText, setNewText] = React.useState(null)
-  const hasTextSpans = React.useRef(false)
+  const text = useRef()
+  const [newText, setNewText] = useState(null)
+  const hasTextSpans = useRef(false)
 
-  const innerHtml = React.useRef()
+  const innerHtml = useRef()
 
   useLayoutEffect(() => {
     if (text.current) {
@@ -51,17 +51,15 @@ const Text = ({
     }
   }, [text, innerHtml, type])
 
-  const renderText = React.useMemo(
+  const renderText = useMemo(
     () =>
       newText && type === 'fade-letter' ? (
         newText?.map((letter, index) => (
-          <React.Fragment key={`fade-letter-${index}`}>
-            {letter === '_' ? <br /> : <SplitFade>{letter || ' '}</SplitFade>}
-          </React.Fragment>
+          letter === '_' ? <br /> : <SplitFade key={`fade-letter-${index}`}>{letter || ' '}</SplitFade>
         ))
       ) : type === 'fade-word' ? (
         newText?.map((word, index) => (
-          <React.Fragment key={`fade-word-${index}`}>
+          <>
             {word === '_' ? (
               <br />
             ) : (
@@ -70,22 +68,20 @@ const Text = ({
                 <SplitFade> </SplitFade>
               </>
             )}
-          </React.Fragment>
+          </>
         ))
       ) : type === 'fade-block' ? (
         <SplitFade>{children}</SplitFade>
       ) : type === 'overflow-word' ? (
         newText?.map((word, index) => (
-          <React.Fragment key={`overflow-word-${index}`}>
-            {word === '_' ? (
+         word === '_' ? (
               <br />
             ) : (
-              <span>
+              <span key={`overflow-word-${index}`}>
                 <SplitOverflow>{word}</SplitOverflow>
                 <SplitOverflow> </SplitOverflow>
               </span>
-            )}
-          </React.Fragment>
+            )
         ))
       ) : null,
     [newText, type, children]

@@ -7,7 +7,7 @@
 // import UnsupportedBrowser from './UnsupportedBrowser.jsx'
 
 describe('components', () => {
-  describe('UnsupportedBrowser', () => {
+  describe('unsupportedBrowser', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<UnsupportedBrowser>Hello World</UnsupportedBrowser>)
     //   const expectedProps = {

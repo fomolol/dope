@@ -1,12 +1,12 @@
 /**
  * @file CookieBanner.js
  */
-import { useState, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useLayoutEffect, useCookieBanner } from '@fomolol/tacklebox'
+import { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useLayoutEffect, useCookieBanner } from '@fomolol/tacklebox';
 
-import s from './CookieBanner.module.css'
+import s from './CookieBanner.module.css';
 
 const CookieBanner = ({
   tagName: Tag = motion.div,
@@ -24,12 +24,12 @@ const CookieBanner = ({
     cookieAcceptKey,
     onDeclined,
     onAccepted,
-  }
-  const accepted = useCookieBanner(cookieConfig)
+  };
+  const accepted = useCookieBanner(cookieConfig);
   // const prevThemeColor = useRef(themeColor)
 
   const baseClassName =
-    'fixed flex items-center justify-center w-full transition duration-500 ease-in-out z-hud bottom-12 hover:drop-shadow-md'
+    'fixed flex items-center justify-center w-full transition duration-500 ease-in-out z-hud bottom-12 hover:drop-shadow-md';
 
   return (
     <AnimatePresence>
@@ -68,7 +68,7 @@ const CookieBanner = ({
               // onPointerOut={() => {
               //   setCursorColor(prevThemeColor.current)
               // }}
-              className="ml-auto h-[50px] rounded-full bg-purple-brand-light px-8 text-[12px] uppercase text-white transition duration-500 ease-in-out hover:bg-purple-brand-dark hover:text-white"
+              className="bg-purple-brand-light hover:bg-purple-brand-dark ml-auto h-[50px] rounded-full px-8 text-[12px] uppercase text-white transition duration-500 ease-in-out hover:text-white"
             >
               Ok
             </button>
@@ -76,14 +76,14 @@ const CookieBanner = ({
         </Tag>
       ) : null}
     </AnimatePresence>
-  )
-}
+  );
+};
 
 CookieBanner.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default CookieBanner
+export default CookieBanner;

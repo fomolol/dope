@@ -12,13 +12,20 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
+    es2021: true,
   },
   rules: {
     'no-unused-vars': 2,
     'no-undef': 2,
   },
   plugins: ['unused-imports'],
-  extends: ['prettier'],
+  extends: [
+    'prettier',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:testing-library/react',
+    'plugin:jest/all',
+  ],
   ignorePatterns: ['**/public/*.js'],
   rules: {
     'no-unused-vars': 'off',

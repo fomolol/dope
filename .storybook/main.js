@@ -1,6 +1,6 @@
 // .storybook/main.js|cjs|ts
-const path = require('path')
-const { mergeConfig } = require('vite')
+const path = require('path');
+const { mergeConfig } = require('vite');
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -33,13 +33,14 @@ module.exports = {
       optimizeDeps: {
         include: ['storybook-dark-mode'],
       },
-    })
+    });
   },
   framework: '@storybook/react-vite',
   features: {
     storyStoreV7: true,
+    // babelModeV7: true,
   },
   docs: {
     docsPage: 'automatic',
   },
-}
+};

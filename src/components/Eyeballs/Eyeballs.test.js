@@ -6,7 +6,7 @@
 // import { shallow, mount, render } from 'enzyme'
 
 describe('components', () => {
-  describe('Eyeballs', () => {
+  describe('eyeballs', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<Eyeballs>Hello World</Eyeballs>)
     //   const expectedProps = {

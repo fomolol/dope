@@ -7,7 +7,7 @@
 // import CursorContext from './CursorContext.jsx'
 
 describe('components', () => {
-  describe('Cursor', () => {
+  describe('cursor', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<CursorContext>Hello World</CursorContext>)
     //   const expectedProps = {

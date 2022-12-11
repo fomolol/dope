@@ -6,7 +6,7 @@
 // import { shallow, mount, render } from 'enzyme'
 
 describe('components', () => {
-  describe('SineWave', () => {
+  describe('sineWave', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<SineWave>Hello World</SineWave>)
     //   const expectedProps = {

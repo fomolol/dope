@@ -5,7 +5,7 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './ButtonFancy.module.scss';
+import styles from './ButtonFancy.module.css';
 
 const ButtonFancy = ({
   tagName: Tag = 'div',

@@ -1,12 +1,15 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
-import eslint from 'vite-plugin-eslint';
+// import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
   root: resolve(__dirname, 'src/'),
   base: '/storybook',
-  plugins: [react(), eslint()],
+  plugins: [
+    react(),
+    //eslint() // WARNING: This breaks storybook at the moment
+  ],
   // rollupOptions: {
   //   external: [/^node:.*/],
   // },

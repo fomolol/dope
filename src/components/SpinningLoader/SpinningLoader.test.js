@@ -7,7 +7,7 @@
 // import SpinningLoader from './SpinningLoader.jsx'
 
 describe('components', () => {
-  describe('SpinningLoader', () => {
+  describe('spinningLoader', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<SpinningLoader>Hello World</SpinningLoader>)
     //   const expectedProps = {

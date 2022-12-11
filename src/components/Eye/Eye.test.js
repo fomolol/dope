@@ -5,7 +5,7 @@
  */
 
 describe('components', () => {
-  describe('Eye', () => {
+  describe('eye', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<Eye>Hello World</Eye>);
     //   const expectedProps = {

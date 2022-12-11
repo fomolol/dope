@@ -3,16 +3,18 @@
  *
  * @see https://evacremers.com/the-lab/
  */
-import { useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
-import s from './Eye.module.css'
+import s from './Eye.module.css';
 
-const Eye = (props) => {
-  const { tagName: Tag, className, variant } = props
-
-  let outerContainer = useRef()
-  let eye1 = useRef()
+const Eye = ({
+  tagName: Tag = 'div',
+  className = 'w-full h-full',
+  variant = 'default',
+}) => {
+  let outerContainer = useRef();
+  let eye1 = useRef();
 
   useEffect(() => {
     /**
@@ -21,20 +23,20 @@ const Eye = (props) => {
      * @param {*} eye
      */
     const rotateEye = (e, eye) => {
-      let mouseX = eye.current.getBoundingClientRect().left
-      let mouseY = eye.current.getBoundingClientRect().top
-      let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY)
-      let rotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180
-      eye.current.style.transform = `rotate(${rotationDegrees}deg)`
-    }
-    const mouseMove = (e) => {
-      rotateEye(e, eye1)
-    }
-    document.addEventListener('mousemove', mouseMove)
+      let mouseX = eye.current.getBoundingClientRect().left;
+      let mouseY = eye.current.getBoundingClientRect().top;
+      let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
+      let rotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
+      eye.current.style.transform = `rotate(${rotationDegrees}deg)`;
+    };
+    const mouseMove = e => {
+      rotateEye(e, eye1);
+    };
+    document.addEventListener('mousemove', mouseMove);
     return () => {
-      document.removeEventListener('mousemove', mouseMove)
-    }
-  }, [outerContainer])
+      document.removeEventListener('mousemove', mouseMove);
+    };
+  }, [outerContainer]);
 
   return (
     <Tag
@@ -72,7 +74,7 @@ const Eye = (props) => {
         }
 
         .eye-lid {
-          background-image: url(/png/eye-150.png);
+          background-image: url(/img/eye-150.png);
           background-size: cover;
           border-radius: 50%;
         }
@@ -91,28 +93,21 @@ const Eye = (props) => {
           border-radius: 50%;
           width: 80%;
           height: 80%;
-          background-image: url(/jpg/cremers-eye-pupil.jpg);
+          background-image: url(/img/cremers-eye-pupil.jpg);
           background-size: cover;
           background-color: black;
           border-radius: 50%;
         }
       `}</style>
     </Tag>
-  )
-}
+  );
+};
 
 Eye.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-Eye.defaultProps = {
-  tagName: 'div',
-  className: 'h-full',
-  variant: 'default',
-  children: '',
-}
-
-export default Eye
+export default Eye;

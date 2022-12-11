@@ -3,20 +3,23 @@
  *
  * @see https://evacremers.com/the-lab/
  */
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import s from './Eyeballs.module.css'
+import s from './Eyeballs.module.css';
 
-import Eye from '../Eye'
+import Eye from '../Eye';
 
-const Eyeballs = (props) => {
-  const { tagName: Tag, className, variant, children } = props
-
+const Eyeballs = ({
+  tagName: Tag = 'div',
+  className = 'w-full h-auto',
+  variant = 'default',
+  children = '',
+}) => {
   return (
     <Tag className={`${s.eyeballs} ${s[`eyeballs__${variant}`]} ${className}`}>
       <div
-        className="absolute flex flex-row items-center justify-center w-screen h-auto mx-auto pointer-events-none select-none align-center"
+        className="flex items-start justify-between w-full h-auto mx-auto pointer-events-none select-none align-center"
         style={{
           zIndex: 99,
         }}
@@ -25,21 +28,14 @@ const Eyeballs = (props) => {
         <Eye className="pl-20" />
       </div>
     </Tag>
-  )
-}
+  );
+};
 
 Eyeballs.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-Eyeballs.defaultProps = {
-  tagName: 'div',
-  className: '',
-  variant: 'default',
-  children: '',
-}
-
-export default Eyeballs
+export default Eyeballs;

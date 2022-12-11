@@ -1,10 +1,10 @@
 /**
  * Eyeballballs.jsx
  */
-import React from 'react'
+import React from 'react';
 
 // Component(s)
-import Eyeballs from './Eyeballs'
+import Eyeballs from './Eyeballs';
 
 export default {
   title: 'Eyeballs',
@@ -13,8 +13,8 @@ export default {
   parameters: {
     layout: 'centered',
   },
-}
+};
 
-export const Default = () => <Eyeballs />
+export const Default = () => <Eyeballs />;
 
-Default.storyName = 'default'
+Default.storyName = 'default';

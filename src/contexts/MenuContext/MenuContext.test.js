@@ -7,7 +7,7 @@
 // import MenuContext from './MenuContext.jsx'
 
 describe('components', () => {
-  describe('Menu', () => {
+  describe('menu', () => {
     // it('should mount with props', function () {
     //   const wrap = mount(<MenuContext>Hello World</MenuContext>)
     //   const expectedProps = {

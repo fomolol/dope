@@ -1,9 +1,11 @@
-const { resolve } = require('path')
-const { defineConfig } = require('vite')
+import react from '@vitejs/plugin-react'
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
-module.exports = defineConfig({
-  root: resolve(__dirname, 'docs/'),
+export default defineConfig({
+  root: resolve(__dirname, 'src/'),
   base: '/storybook',
+  plugins: [react()],
   // rollupOptions: {
   //   external: [/^node:.*/],
   // },

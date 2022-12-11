@@ -1,19 +1,29 @@
 // .storybook/main.js|cjs|ts
-const path = require('path');
-const {
-  mergeConfig
-} = require('vite');
+const path = require('path')
+const { mergeConfig } = require('vite')
+
 module.exports = {
-  staticDirs: ['../public'],
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    'storybook-addon-designs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-storysource',
+    'storybook-css-modules-preset',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
+  ],
+  staticDirs: ['../public'],
   core: {
-    builder: '@storybook/builder-vite'
+    builder: '@storybook/builder-vite',
   },
-  features: {
-    storyStoreV7: true
-  },
-  // presets: [path.resolve(__dirname, './next-preset.js')],
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
@@ -21,12 +31,15 @@ module.exports = {
       resolve: (await import('../vite.config.js')).default.resolve,
       // Add dependencies to pre-optimization
       optimizeDeps: {
-        include: ['storybook-dark-mode']
-      }
-    });
+        include: ['storybook-dark-mode'],
+      },
+    })
   },
   framework: '@storybook/react-vite',
+  features: {
+    storyStoreV7: true,
+  },
   docs: {
-    docsPage: 'automatic'
-  }
-};
+    docsPage: 'automatic',
+  },
+}

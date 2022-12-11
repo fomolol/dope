@@ -15,19 +15,22 @@
     "default": "./dist/index.modern.mjs"
   },
   "scripts": {
-    "dev": "vite docs",
+    "dev": "vite",
+    "preview": "vite preview",
     "size": "size-limit",
     "clean": "rimraf dist && rimraf bundled",
-    "build": "npm run clean && npm run build:light && npm run build:bundle",
+    "build": "vite build",
+    "build:module": "npm run clean && npm run build:light && npm run build:bundle",
     "build:light": "microbundle",
     "build:bundle": "microbundle --external none --output './bundled'",
     "build:docs": "vite build",
     "prebuild": "npm run clean",
     "preversion": "npm run build",
     "postversion": "git push --follow-tags",
-    "storybook": "storybook dev -p 6006 --no-manager-cache",
-    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider STORYBOOK_BASE_HREF=/storybook/ build-storybook -o ./src/storybook",
-    "serve-storybook": "serve storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook",
+    "chromatic": "npx chromatic --project-token=d31c2b0b40ec --exit-zero-on-changes"
   },
   "repository": {
     "type": "git",
@@ -46,31 +49,21 @@
     "@react-three/drei": "^9.46.0",
     "@react-three/fiber": "^8.9.1",
     "@size-limit/preset-small-lib": "^8.0.1",
-    "@storybook/addon-a11y": "^6.5.13",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-backgrounds": "^6.5.13",
+    "@storybook/addon-a11y": "^7.0.0-alpha.58",
+    "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-console": "^1.2.3",
-    "@storybook/addon-docs": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-interactions": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/addon-measure": "^6.5.13",
-    "@storybook/addon-outline": "^6.5.13",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addon-storysource": "^6.5.13",
-    "@storybook/addons": "^6.5.13",
-    "@storybook/builder-vite": "^0.2.5",
-    "@storybook/channel-postmessage": "^6.5.13",
-    "@storybook/channel-websocket": "^6.5.13",
-    "@storybook/client-api": "^6.5.13",
-    "@storybook/design-system": "^7.9.2",
-    "@storybook/preview-web": "^6.5.13",
-    "@storybook/react": "^6.5.13",
+    "@storybook/addon-essentials": "^7.0.0-alpha.58",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/addon-postcss": "^3.0.0-alpha.1",
+    "@storybook/addon-storysource": "^7.0.0-alpha.58",
+    "@storybook/builder-vite": "7.0.0-beta.3",
+    "@storybook/react": "^6.5.14",
     "@storybook/react-vite": "7.0.0-alpha.25",
     "@storybook/storybook-deployer": "^2.8.16",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/theming": "^6.5.13",
+    "@storybook/theming": "^7.0.0-alpha.58",
     "@svgr/webpack": "^6.5.1",
+    "@vitejs/plugin-react": "^3.0.0",
+    "chromatic": "^6.11.4",
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "eslint-config-prettier": "^8.5.0",
@@ -103,14 +96,22 @@
     "sass": "^1.56.1",
     "scaffolding-nextjs": "^2.1.14",
     "size-limit": "^8.0.1",
-    "storybook-addon-designs": "^6.3.1",
+    "storybook": "^7.0.0-alpha.58",
+    "storybook-addon-designs": "^7.0.0-beta.2",
+    "storybook-builder-vite": "^0.1.23",
     "storybook-css-modules-preset": "^1.1.1",
-    "storybook-dark-mode": "^1.1.2",
+    "storybook-dark-mode": "^2.0.4",
     "three": "^0.147.0",
     "three-custom-shader-material": "^5.0.0",
     "use-fit-text": "^2.4.0",
     "use-sound": "^4.0.1",
-    "vite": "^3.0.9"
+    "vite": "^4.0.0"
+  },
+  "architect": {
+    "src": "."
+  },
+  "resolutions": {
+    "react-is": "18.2.0"
   },
   "size-limit": [
     {
@@ -149,6 +150,16 @@
     "three-custom-shader-material": "^5.0.0",
     "use-fit-text": "^2.4.0",
     "use-sound": "^4.0.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,scss,md}": "prettier --write"
+  },
+  "pnpm": {
+    "overrides": {
+      "throttle-debounce": "5.0.0",
+      "react-is": "18.2.0"
+    }
   },
   "directories": {
     "doc": "docs"

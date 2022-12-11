@@ -13,9 +13,7 @@ import '../src/styles/tailwind.css'
 
 import '../src/styles/globals.css'
 
-import '@storybook/addon-console' // @see https://github.com/storybookjs/storybook-addon-console/issues/41
-
-console.log('')
+// import '@storybook/addon-console' // @see https://github.com/storybookjs/storybook-addon-console/issues/41
 
 // @see https://www.npmjs.com/package/@storybook/addon-viewport
 // import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';

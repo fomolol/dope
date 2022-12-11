@@ -9,8 +9,6 @@ import { useLayoutEffect } from '@fomolol/tacklebox'
 
 import s from './Scroller.module.css'
 
-import { useStore } from '@/store'
-
 const Scroller = ({
   tagName: Tag = motion.div,
   className = '',

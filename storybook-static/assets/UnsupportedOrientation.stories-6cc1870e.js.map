@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "file": "UnsupportedOrientation.stories-6cc1870e.js",
+  "sources": [
+    "../../src/components/UnsupportedOrientation/UnsupportedOrientation.jsx",
+    "../../src/components/UnsupportedOrientation/UnsupportedOrientation.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file UnsupportedOrientation.js\n */\nimport { useState } from 'react'\nimport PropTypes from 'prop-types'\nimport {\n  osName,\n  isTablet,\n  isMobileOnly,\n  useMobileOrientation,\n} from 'react-device-detect'\nimport { useWindowSize } from '@fomolol/tacklebox'\n\nimport styles from './UnsupportedOrientation.module.css'\n\nconst UnsupportedOrientation = ({\n  tagName: Tag = 'div',\n  className = 'fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center w-screen min-h-screen',\n  variant = 'default',\n}) => {\n  const { height, width } = useWindowSize()\n  const [supportedDevice, setSupportedDevice] = useState(true)\n  const { isLandscape } = useMobileOrientation()\n\n  useEffect(() => {\n    // Window pixel ratio\n    const dpr = window.devicePixelRatio\n    // to be safe we default to true\n    // so we only show unsupported screen if fails specific tests\n    let supported = true\n    // if (osName === 'iOS' && !isDesktop && !isTablet) {\n    //   if (parseFloat(osVersion) < 12) {\n    //     supported = false;\n    //   }\n    // }\n\n    if (osName === 'iOS') {\n      if (isMobileOnly && isLandscape) {\n        supported = false\n      }\n      // // iPhone 7 viewport area.\n      // if (height && height < 667 && dpr < 3) {\n      //   supported = false;\n      // }\n    }\n\n    if (isTablet && isLandscape) {\n      supported = false\n    }\n\n    // set body style to lock mobile down\n    if (!supported) {\n      document.body.style.overflow = 'hidden'\n      document.body.style.pointerEvents = 'none'\n    } else {\n      document.body.style.overflow = 'auto'\n      document.body.style.pointerEvents = 'auto'\n    }\n\n    // set state for UnsupportedOrientation component visibility\n    setSupportedDevice(supported)\n  }, [height, width, isLandscape])\n\n  return !supportedDevice && (isMobileOnly || isTablet) ? (\n    <Tag\n      className={`${styles.unsupported_orientation} ${\n        styles[`unsupported_orientation__${variant}`]\n      } ${className}`}\n      style={{\n        height: `${height}px`,\n        minHeight: `${height}px`,\n        zIndex: 10000,\n      }}\n    >\n      <div className=\"relative flex flex-col items-center justify-center flex-grow w-screen h-screen text-center bg-black\">\n        <div className=\"flex flex-col items-center justify-center w-full h-full leading-none tracking-wide\">\n          <div className=\"mb-8 h-[71px] w-[119px] lg:mb-40 lg:h-[71px] lg:w-[119px]\">\n            <svg\n              width=\"119\"\n              height=\"71\"\n              viewBox=\"0 0 119 71\"\n              fill=\"none\"\n              xmlns=\"http://www.w3.org/2000/svg\"\n            >\n              <g opacity=\"0.2\">\n                <rect\n                  x=\"118.5\"\n                  y=\"30.502\"\n                  width=\"39\"\n                  height=\"69\"\n                  rx=\"5.5\"\n                  transform=\"rotate(90 118.5 30.502)\"\n                  stroke=\"white\"\n                />\n                <ellipse\n                  cx=\"61.25\"\n                  cy=\"50.0018\"\n                  rx=\"3.2\"\n                  ry=\"3.5\"\n                  transform=\"rotate(90 61.25 50.0018)\"\n                  fill=\"white\"\n                />\n              </g>\n              <rect\n                x=\"0.5\"\n                y=\"0.506836\"\n                width=\"39\"\n                height=\"69\"\n                rx=\"5.5\"\n                stroke=\"white\"\n              />\n              <ellipse cx=\"20\" cy=\"57.7568\" rx=\"3.2\" ry=\"3.5\" fill=\"white\" />\n            </svg>\n          </div>\n          <p className=\"text-center font-sora text-[12px] normal-case text-white lg:text-[23px]\">\n            Site is best viewed in portrait mode\n          </p>\n        </div>\n      </div>\n    </Tag>\n  ) : (\n    <></>\n  )\n}\n\nUnsupportedOrientation.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default UnsupportedOrientation\n",
+    "/**\n * UnsupportedOrientation.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport UnsupportedOrientation from './UnsupportedOrientation';\nexport default {\n  title: 'UnsupportedOrientation',\n  component: UnsupportedOrientation,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <UnsupportedOrientation />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <UnsupportedOrientation />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "UnsupportedOrientation",
+    "Tag",
+    "className",
+    "variant",
+    "height",
+    "width",
+    "useWindowSize",
+    "supportedDevice",
+    "setSupportedDevice",
+    "useState",
+    "isLandscape",
+    "useMobileOrientation",
+    "supported",
+    "osName",
+    "isMobileOnly",
+    "isTablet",
+    "jsx",
+    "styles",
+    "jsxs",
+    "Fragment",
+    "PropTypes",
+    "UnsupportedOrientation$1",
+    "UnsupportedOrientation_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "ijBAeAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,6FACA,QAAAC,EAAA,SACA,IAAA,CACA,KAAA,CAAA,OAAAC,EAAA,MAAAC,CAAA,EAAAC,EAAA,EACA,CAAAC,EAAAC,CAAA,EAAAC,mBAAA,EAAA,EACA,CAAA,YAAAC,GAAAC,IAEA,iBAAA,IAAA,CAKA,IAAAC,EAAA,GAOAC,IAAA,OACAC,GAAAJ,IACAE,EAAA,IAQAG,GAAAL,IACAE,EAAA,IAIAA,GAIA,SAAA,KAAA,MAAA,SAAA,OACA,SAAA,KAAA,MAAA,cAAA,SAJA,SAAA,KAAA,MAAA,SAAA,SACA,SAAA,KAAA,MAAA,cAAA,QAOAJ,EAAAI,CAAA,CACA,EAAA,CAAAR,EAAAC,EAAAK,CAAA,CAAA,EAEA,CAAAH,IAAAO,GAAAC,GACAC,EAAAf,EAAA,CACA,UAAA,GAAAgB,EAAA,2BACAA,EAAA,4BAAAd,QACAD,IACA,MAAA,CACA,OAAA,GAAAE,MACA,UAAA,GAAAA,MACA,OAAA,GACA,EAEA,WAAA,MAAA,CAAA,UAAA,sGACA,SAAAc,EAAA,MAAA,CAAA,UAAA,qFACA,SAAA,CAAAF,EAAA,MAAA,CAAA,UAAA,4DACA,SAAAE,EAAA,MAAA,CACA,MAAA,MACA,OAAA,KACA,QAAA,aACA,KAAA,OACA,MAAA,6BAEA,SAAA,CAAAA,EAAA,IAAA,CAAA,QAAA,MACA,SAAA,CAAAF,EAAA,OAAA,CACA,EAAA,QACA,EAAA,SACA,MAAA,KACA,OAAA,KACA,GAAA,MACA,UAAA,0BACA,OAAA,OAAA,CACA,EACAA,EAAA,UAAA,CACA,GAAA,QACA,GAAA,UACA,GAAA,MACA,GAAA,MACA,UAAA,2BACA,KAAA,OAAA,CACA,CAAA,EACA,EACAA,EAAA,OAAA,CACA,EAAA,MACA,EAAA,WACA,MAAA,KACA,OAAA,KACA,GAAA,MACA,OAAA,OAAA,CACA,EACAA,EAAA,UAAA,CAAA,GAAA,KAAA,GAAA,UAAA,GAAA,MAAA,GAAA,MAAA,KAAA,OAAA,CAAA,CAAA,CAAA,CAAA,EAEA,EACAA,EAAA,IAAA,CAAA,UAAA,0EAAA,SAEA,uCAAA,CAAA,CAAA,CACA,CACA,CAAA,CAAA,CAAA,EAGAA,EAAAG,EAAA,CAAA,CAAA,CAEA,EAEAnB,EAAA,UAAA,CACA,QAAAoB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAArB,+jBC7HA,MAAAsB,EAAA,CACA,MAAA,yBACA,UAAAtB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAuB,EAAA,IAAAP,EAAAhB,EAAA,EAAA,EACAuB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,mCACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

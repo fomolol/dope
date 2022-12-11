@@ -1,20 +1,20 @@
 /**
  * ScrollerSnapper.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import ScrollerSnapper from './ScrollerSnapper';
+// Component(s)
+import ScrollerSnapper from './ScrollerSnapper';
 
- export default {
-   title: 'ScrollerSnapper',
-   component: ScrollerSnapper,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'ScrollerSnapper',
+  component: ScrollerSnapper,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <ScrollerSnapper />;
+export const Default = () => <ScrollerSnapper />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

@@ -1,20 +1,20 @@
 /**
  * DotGrid.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import DotGrid from './DotGrid';
+// Component(s)
+import DotGrid from './DotGrid';
 
- export default {
-   title: 'DotGrid',
-   component: DotGrid,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'DotGrid',
+  component: DotGrid,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <DotGrid />;
+export const Default = () => <DotGrid />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

@@ -1,20 +1,20 @@
 /**
  * Scroller.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import Scroller from './Scroller';
+// Component(s)
+import Scroller from './Scroller';
 
- export default {
-   title: 'Scroller',
-   component: Scroller,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'Scroller',
+  component: Scroller,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <Scroller />;
+export const Default = () => <Scroller />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

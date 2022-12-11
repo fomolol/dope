@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "file": "CookieBanner.stories-ecbe2dbb.js",
+  "sources": [
+    "../../src/components/CookieBanner/CookieBanner.jsx",
+    "../../src/components/CookieBanner/CookieBanner.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file CookieBanner.js\n */\nimport { useState, useRef } from 'react';\nimport PropTypes from 'prop-types';\nimport { AnimatePresence, motion } from 'framer-motion';\nimport { useLayoutEffect, useCookieBanner } from '@fomolol/tacklebox';\n\nimport s from './CookieBanner.module.css';\n\nconst CookieBanner = ({\n  tagName: Tag = motion.div,\n  className = '',\n  visible = true,\n  variant = 'default',\n  onClick = () => console.log('clicked'),\n  themeColor = 'light',\n  cookieAcceptKey = 'fomolol-cookie-accepted',\n  onDeclined = () => console.log('User declined the cookies'),\n  onAccepted = () => console.log('User accepted the cookies'),\n  children = 'Do fugiat enim dolore culpa ea excepteur ut esse dolor laborum deserunt amet sint pariatur. Ex minim eiusmod ad esse veniam magna labore deserunt Lorem. Excepteur cupidatat et consequat sint ipsum pariatur duis.',\n}) => {\n  const cookieConfig = {\n    cookieAcceptKey,\n    onDeclined,\n    onAccepted,\n  };\n  const accepted = useCookieBanner(cookieConfig);\n  // const prevThemeColor = useRef(themeColor)\n\n  const baseClassName =\n    'fixed flex items-center justify-center w-full transition duration-500 ease-in-out z-hud bottom-12 hover:drop-shadow-md';\n\n  return (\n    <AnimatePresence>\n      {visible && !accepted ? (\n        <Tag\n          className={`${s.cookie_banner} ${\n            s[`cookie_banner__${variant}`]\n          } ${baseClassName} ${className}`}\n          initial={{\n            opacity: 0,\n          }}\n          animate={{\n            opacity: 1,\n          }}\n          exit={{\n            opacity: 0,\n          }}\n          // onPointerOver={() => {\n          //   setCursorStyle('hover')\n          //   setCursorColor('light')\n          // }}\n          // onPointerOut={() => {\n          //   setCursorStyle('default')\n          //   setCursorColor(prevThemeColor.current)\n          // }}\n        >\n          <div className=\"flex h-auto w-[90%] items-center rounded-bl-2xl rounded-tr-2xl bg-white p-4 leading-snug md:w-1/2 md:p-8\">\n            <p className=\"max-w-[70%] text-[9px] md:max-w-[85%] md:text-[13px]\">\n              {children}\n            </p>\n            <button\n              onClick={onAccepted}\n              // onPointerOver={() => {\n              //   setCursorColor('dark')\n              // }}\n              // onPointerOut={() => {\n              //   setCursorColor(prevThemeColor.current)\n              // }}\n              className=\"bg-purple-brand-light hover:bg-purple-brand-dark ml-auto h-[50px] rounded-full px-8 text-[12px] uppercase text-white transition duration-500 ease-in-out hover:text-white\"\n            >\n              Ok\n            </button>\n          </div>\n        </Tag>\n      ) : null}\n    </AnimatePresence>\n  );\n};\n\nCookieBanner.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n};\n\nexport default CookieBanner;\n",
+    "/**\n * CookieBanner.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport CookieBanner from './CookieBanner';\nexport default {\n  title: 'CookieBanner',\n  component: CookieBanner,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <CookieBanner />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <CookieBanner />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "CookieBanner",
+    "Tag",
+    "motion",
+    "className",
+    "visible",
+    "variant",
+    "onClick",
+    "themeColor",
+    "cookieAcceptKey",
+    "onDeclined",
+    "onAccepted",
+    "children",
+    "accepted",
+    "useCookieBanner",
+    "baseClassName",
+    "jsx",
+    "AnimatePresence",
+    "s",
+    "jsxs",
+    "PropTypes",
+    "CookieBanner$1",
+    "CookieBanner_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "4gBAUAA,EAAA,CAAA,CACA,QAAAC,EAAAC,EAAA,IACA,UAAAC,EAAA,GACA,QAAAC,EAAA,GACA,QAAAC,EAAA,UACA,QAAAC,EAAA,IAAA,QAAA,IAAA,SAAA,EACA,WAAAC,EAAA,QACA,gBAAAC,EAAA,0BACA,WAAAC,EAAA,IAAA,QAAA,IAAA,2BAAA,EACA,WAAAC,EAAA,IAAA,QAAA,IAAA,2BAAA,EACA,SAAAC,EAAA,qNACA,IAAA,CAMA,MAAAC,EAAAC,EALA,CACA,gBAAAL,EACA,WAAAC,EACA,WAAAC,CAAA,CAEA,EAGAI,EACA,yHAEA,OACAC,EAAAC,EAAA,CACA,SAAAZ,GAAA,CAAAQ,EACAG,EAAAd,EAAA,CACA,UAAA,GAAAgB,EAAA,iBACAA,EAAA,kBAAAZ,QACAS,KAAAX,IACA,QAAA,CACA,QAAA,CACA,EACA,QAAA,CACA,QAAA,CACA,EACA,KAAA,CACA,QAAA,CACA,EAUA,SAAAe,EAAA,MAAA,CAAA,UAAA,2GACA,SAAA,CAAAH,EAAA,IAAA,CAAA,UAAA,uDACA,SAAAJ,CACA,CAAA,EACAI,EAAA,SAAA,CACA,QAAAL,EAOA,UAAA,4KACA,SAAA,IAAA,CAEA,CAAA,EACA,CAAA,CAAA,EAEA,IACA,CAAA,CAEA,EAEAV,EAAA,UAAA,CACA,QAAAmB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAApB,kuCCjFA,MAAAqB,EAAA,CACA,MAAA,eACA,UAAArB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAsB,EAAA,IAAAP,EAAAf,EAAA,EAAA,EACAsB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,yBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

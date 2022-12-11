@@ -1,20 +1,20 @@
 /**
  * NoiseGrain.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import NoiseGrain from './NoiseGrain';
+// Component(s)
+import NoiseGrain from './NoiseGrain';
 
- export default {
-   title: 'NoiseGrain',
-   component: NoiseGrain,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'NoiseGrain',
+  component: NoiseGrain,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <NoiseGrain />;
+export const Default = () => <NoiseGrain />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

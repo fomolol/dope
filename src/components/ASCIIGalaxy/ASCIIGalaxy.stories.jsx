@@ -1,20 +1,20 @@
 /**
  * ASCIIGalaxy.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import ASCIIGalaxy from './ASCIIGalaxy';
+// Component(s)
+import ASCIIGalaxy from './ASCIIGalaxy';
 
- export default {
-   title: 'ASCIIGalaxy',
-   component: ASCIIGalaxy,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'ASCIIGalaxy',
+  component: ASCIIGalaxy,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <ASCIIGalaxy />;
+export const Default = () => <ASCIIGalaxy />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

@@ -1,20 +1,20 @@
 /**
  * BackgroundCanvas.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import BackgroundCanvas from './BackgroundCanvas';
+// Component(s)
+import BackgroundCanvas from './BackgroundCanvas';
 
- export default {
-   title: 'BackgroundCanvas',
-   component: BackgroundCanvas,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'BackgroundCanvas',
+  component: BackgroundCanvas,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <BackgroundCanvas />;
+export const Default = () => <BackgroundCanvas />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

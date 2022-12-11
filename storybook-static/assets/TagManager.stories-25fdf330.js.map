@@ -1,0 +1,24 @@
+{
+  "version": 3,
+  "file": "TagManager.stories-25fdf330.js",
+  "sources": [
+    "../../src/components/TagManager/TagManager.jsx",
+    "../../src/components/TagManager/TagManager.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file TagManager.js\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\nimport Script from 'next/script'\n\nconst TagManager = ({ id = 'GTM-XXXXXX' }) => {\n  return (\n    <Script\n      id=\"tag-manager\"\n      strategy=\"afterInteractive\"\n      dangerouslySetInnerHTML={{\n        __html: `\n          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n          })(window,document,'script','dataLayer','${id}');\n      `,\n      }}\n      Script\n    />\n  )\n}\n\nTagManager.propTypes = {\n  id: PropTypes.string,\n}\n\nexport default TagManager\n",
+    "/**\n * TagManager.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport TagManager from './TagManager';\nexport default {\n  title: 'TagManager',\n  component: TagManager,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <TagManager />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <TagManager />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "TagManager",
+    "id",
+    "jsx",
+    "Script",
+    "PropTypes",
+    "TagManager$1",
+    "TagManager_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "8NAOA,MAAAA,EAAA,CAAA,CAAA,GAAAC,EAAA,gBAEAC,EAAAC,EAAA,CACA,GAAA,cACA,SAAA,mBACA,wBAAA,CACA,OAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qDAKAF;AAAA,OAEA,EACA,OAAA,EAAA,CAAA,EAKAD,EAAA,UAAA,CACA,GAAAI,EAAA,QAAA,MACA,EAEA,MAAAC,EAAAL,mLCvBA,MAAAM,EAAA,CACA,MAAA,aACA,UAAAN,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAO,EAAA,IAAAL,EAAAF,EAAA,EAAA,EACAO,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,uBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

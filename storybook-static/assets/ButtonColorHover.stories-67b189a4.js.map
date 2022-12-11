@@ -1,0 +1,28 @@
+{
+  "version": 3,
+  "file": "ButtonColorHover.stories-67b189a4.js",
+  "sources": [
+    "../../src/components/ButtonColorHover/ButtonColorHover.jsx",
+    "../../src/components/ButtonColorHover/ButtonColorHover.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file ButtonColorHover.js\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\n\nimport s from './ButtonColorHover.module.css'\n\nconst ButtonColorHover = ({\n  tagName: Tag = 'div',\n  className = '',\n  variant = 'default',\n  children = 'Lorem Ipsum',\n}) => {\n  return (\n    <Tag\n      className={`${s.btn_color_hover} ${\n        s[`btn_color_hover__${variant}`]\n      } ${className}`}\n    >\n      <button\n        class=\"btnCircle btn-Circle--gallery\"\n        visible=\"\"\n        style=\"--btnBgColor:#ffffff; --btnColor:#000000;\"\n      >\n        <canvas\n          data-ui=\"canvas\"\n          width=\"103\"\n          height=\"103\"\n          style=\"position: absolute; top: 50%; left: 50%; width: 51.6953px; height: 51.6953px; margin-top: -26px; margin-left: -26px;\"\n        ></canvas>\n        <div data-ui=\"icon\" style=\"opacity: 1;\">\n          <svg data-ui=\"grid\" class=\"btnCircle__icon\">\n            <use xlinkHref=\"#grid\"></use>\n          </svg>\n        </div>\n        <div\n          class=\"btnCircle__text\"\n          data-ui=\"text\"\n          style=\"opacity: 1; transform: translate(0px, 0px);\"\n        >\n          {children}\n        </div>\n      </button>\n    </Tag>\n  )\n}\n\nButtonColorHover.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default ButtonColorHover\n",
+    "/**\n * ButtonColorHover.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport ButtonColorHover from './ButtonColorHover';\nexport default {\n  title: 'ButtonColorHover',\n  component: ButtonColorHover,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <ButtonColorHover />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <ButtonColorHover />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "ButtonColorHover",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "jsx",
+    "s",
+    "jsxs",
+    "PropTypes",
+    "ButtonColorHover$1",
+    "ButtonColorHover_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "0RAQAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,GACA,QAAAC,EAAA,UACA,SAAAC,EAAA,aACA,IAEAC,EAAAJ,EAAA,CACA,UAAA,GAAAK,EAAA,mBACAA,EAAA,oBAAAH,QACAD,IAEA,SAAAK,EAAA,SAAA,CACA,MAAA,gCACA,QAAA,GACA,MAAA,4CAEA,SAAA,CAAAF,EAAA,SAAA,CACA,UAAA,SACA,MAAA,MACA,OAAA,MACA,MAAA,sHAAA,CACA,IACA,MAAA,CAAA,UAAA,OAAA,MAAA,cACA,SAAAA,EAAA,MAAA,CAAA,UAAA,OAAA,MAAA,kBACA,SAAAA,EAAA,OAAA,UAAA,OAAA,CAAA,CACA,CAAA,EACA,EACAA,EAAA,MAAA,CACA,MAAA,kBACA,UAAA,OACA,MAAA,8CAEA,SAAAD,CAAA,CACA,CAAA,CAAA,CACA,CAAA,CAAA,EAKAJ,EAAA,UAAA,CACA,QAAAQ,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAT,ghBChDA,MAAAU,EAAA,CACA,MAAA,mBACA,UAAAV,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAW,EAAA,IAAAN,EAAAL,EAAA,EAAA,EACAW,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,6BACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

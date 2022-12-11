@@ -1,20 +1,20 @@
 /**
  * BlasterImage.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import BlasterImage from './BlasterImage';
+// Component(s)
+import BlasterImage from './BlasterImage';
 
- export default {
-   title: 'BlasterImage',
-   component: BlasterImage,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'BlasterImage',
+  component: BlasterImage,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <BlasterImage />;
+export const Default = () => <BlasterImage />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

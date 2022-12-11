@@ -1,20 +1,20 @@
 /**
  * VideoBackground.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import VideoBackground from './VideoBackground';
+// Component(s)
+import VideoBackground from './VideoBackground';
 
- export default {
-   title: 'VideoBackground',
-   component: VideoBackground,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'VideoBackground',
+  component: VideoBackground,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <VideoBackground />;
+export const Default = () => <VideoBackground />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

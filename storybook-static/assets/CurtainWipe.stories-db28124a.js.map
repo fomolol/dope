@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "file": "CurtainWipe.stories-db28124a.js",
+  "sources": [
+    "../../src/components/CurtainWipe/CurtainWipe.jsx",
+    "../../src/components/CurtainWipe/CurtainWipe.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file CurtainWipe.js\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\nimport { motion } from 'framer-motion'\n\nimport styles from './CurtainWipe.module.css'\n\nconst CurtainWipe = ({\n  tagName: Tag = motion.div,\n  className = 'fixed inset-0 w-screen h-screen origin-top transform bg-black pointer-events-none min-h-screen-ios h-screen-ios',\n  variant = 'default',\n}) => {\n  return (\n    <Tag\n      initial={{\n        scaleY: 1,\n        rotate: 0,\n      }}\n      animate={{\n        scaleY: 0,\n        rotate: 0.4,\n      }}\n      transition={{\n        duration: 1.15,\n        delay: 1.5, // Wait for textures to load.\n        ease: [0.6, 0.05, -0.01, 0.9],\n      }}\n      className={`${styles.curtain_wipe} ${\n        styles[`curtain_wipe__${variant}`]\n      } ${className}`}\n    ></Tag>\n  )\n}\n\nCurtainWipe.propTypes = {\n  tagName: PropTypes.object,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default CurtainWipe\n",
+    "/**\n * CurtainWipe.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport CurtainWipe from './CurtainWipe';\nexport default {\n  title: 'CurtainWipe',\n  component: CurtainWipe,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <CurtainWipe />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <CurtainWipe />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "CurtainWipe",
+    "Tag",
+    "motion",
+    "className",
+    "variant",
+    "jsx",
+    "styles",
+    "PropTypes",
+    "CurtainWipe$1",
+    "CurtainWipe_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "8UASAA,EAAA,CAAA,CACA,QAAAC,EAAAC,EAAA,IACA,UAAAC,EAAA,kHACA,QAAAC,EAAA,SACA,IAEAC,EAAAJ,EAAA,CACA,QAAA,CACA,OAAA,EACA,OAAA,CACA,EACA,QAAA,CACA,OAAA,EACA,OAAA,EACA,EACA,WAAA,CACA,SAAA,KACA,MAAA,IACA,KAAA,CAAA,GAAA,IAAA,KAAA,EAAA,CACA,EACA,UAAA,GAAAK,EAAA,gBACAA,EAAA,iBAAAF,QACAD,GAAA,CAAA,EAKAH,EAAA,UAAA,CACA,QAAAO,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAR,8kBCpCA,MAAAS,EAAA,CACA,MAAA,cACA,UAAAT,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAU,EAAA,IAAAL,EAAAL,EAAA,EAAA,EACAU,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,wBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

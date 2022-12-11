@@ -1,20 +1,20 @@
 /**
  * CurtainWipe.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import CurtainWipe from './CurtainWipe';
+// Component(s)
+import CurtainWipe from './CurtainWipe';
 
- export default {
-   title: 'CurtainWipe',
-   component: CurtainWipe,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'CurtainWipe',
+  component: CurtainWipe,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <CurtainWipe />;
+export const Default = () => <CurtainWipe />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

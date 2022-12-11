@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "file": "Static.stories-0d7efb69.js",
+  "sources": [
+    "../../src/components/Static/Static.jsx",
+    "../../src/components/Static/Static.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file Static.js\n */\nimport React, { useRef } from 'react'\nimport PropTypes from 'prop-types'\nimport { motion } from 'framer-motion'\nimport { useLayoutEffect } from '@fomolol/tacklebox'\n\nimport s from './Static.module.css'\n\nclass Canvas {\n  constructor(context) {\n    this.canvas = context.canvas\n    this.context = context\n    this.pixelSize = 4\n    this.pixels = []\n    this.onResize()\n    this.tick = 0\n    this.lines = [\n      { pos: 50, height: 28, speed: 0.281 },\n      { pos: 80, height: 16, speed: 1.129 },\n    ]\n  }\n\n  onResize() {\n    this.width = window.innerWidth\n    this.height = window.innerHeight\n    this.canvas.width = this.width\n    this.canvas.height = this.height\n    this.pixels.length = 0\n  }\n\n  start() {}\n\n  update() {\n    let pixelWidth = Math.ceil(this.width / this.pixelSize)\n    let pixelHeight = Math.ceil(this.height / this.pixelSize)\n    let adjacent = 0\n    for (let y = 0; y < pixelHeight; y++) {\n      let inLine = this.isInLine(y, pixelHeight)\n      for (let x = 0; x < pixelWidth; x++) {\n        let index = x + y * pixelWidth\n        let col\n        if (adjacent <= 0) {\n          adjacent = 1 + Math.floor(Math.random() * 3)\n          col = Utils.randomSaturatedColor()\n          col = inLine ? Utils.mulColor(col, 0.55) : Utils.mulColor(col, 0.4)\n        } else {\n          col = this.pixels[index - 1]\n          col = Utils.mulColor(col, 0.8)\n        }\n        this.pixels[index] = col\n\n        adjacent--\n      }\n    }\n    this.updateLines(pixelHeight)\n    this.linePos %= pixelHeight\n    this.renderPixels()\n  }\n\n  updateLines(pixelHeight) {\n    this.lines.forEach(\n      (line) => (line.pos = (line.pos + line.speed) % pixelHeight)\n    )\n  }\n\n  isInLine(y, pixelHeight) {\n    return this.lines.some(\n      (line) =>\n        (y >= line.pos && y < line.pos + line.height) ||\n        (line.pos + line.height > pixelHeight &&\n          y < line.pos - pixelHeight + line.height)\n    )\n  }\n\n  renderPixels() {\n    let pixelWidth = Math.ceil(this.width / this.pixelSize)\n    for (let i = 0; i < this.pixels.length; i++) {\n      let x = i % pixelWidth\n      let y = Math.floor(i / pixelWidth)\n      this.context.fillStyle = '#' + this.pixels[i].toString(16)\n      this.context.fillRect(\n        x * this.pixelSize,\n        y * this.pixelSize,\n        this.pixelSize,\n        this.pixelSize\n      )\n    }\n  }\n}\n\nclass Utils {\n  static randomColor() {\n    return Math.round(Math.random() * 0xffffff)\n  }\n\n  static randomSaturatedColor() {\n    let col = Math.round(Math.random() * 0xff)\n    return (col << 16) | (col << 8) | col\n  }\n\n  static mulColor(color, factor) {\n    let r = (color & 0xff0000) >> 16\n    let g = (color & 0xff00) >> 8\n    let b = color & 0xff\n    r = Math.min(Math.round(r * factor), 0xff)\n    g = Math.min(Math.round(g * factor), 0xff)\n    b = Math.min(Math.round(b * factor), 0xff)\n    return (r << 16) | (g << 8) | b\n  }\n}\n\nconst Static = ({\n  tagName: Tag = motion.canvas,\n  className = 'absolute inset-0 w-screen h-screen',\n  variant = 'default',\n  children = '',\n  loop = true,\n}) => {\n  const cRef = useRef()\n\n  function init() {\n    const context = cRef.current.getContext('2d')\n    const canvas = new Canvas(context)\n    canvas.start()\n    const tick = function () {\n      // Helps memory?\n      context.clearRect(0, 0, canvas.width, canvas.height)\n      canvas.update()\n      if (loop) {\n        requestAnimationFrame(tick)\n      }\n    }\n    tick()\n\n    window.addEventListener('resize', tick)\n  }\n\n  useLayoutEffect(() => {\n    init()\n  }, [])\n\n  return (\n    <Tag\n      className={`${s.static} ${s[`static__${variant}`]} ${className}`}\n      initial={{\n        opacity: 0,\n      }}\n      animate={{\n        opacity: 1,\n      }}\n      exit={{\n        opacity: 0,\n      }}\n      transition={{\n        duration: 1,\n        ease: [0.6, 0.05, -0.01, 0.9],\n      }}\n      ref={cRef}\n    >\n      {children}\n    </Tag>\n  )\n}\n\nStatic.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default Static\n",
+    "/**\n * Static.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport Static from './Static';\nexport default {\n  title: 'Static',\n  component: Static,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <Static />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <Static />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "Canvas",
+    "context",
+    "pixelWidth",
+    "pixelHeight",
+    "adjacent",
+    "y",
+    "inLine",
+    "x",
+    "index",
+    "col",
+    "Utils",
+    "line",
+    "i",
+    "color",
+    "factor",
+    "r",
+    "g",
+    "b",
+    "Static",
+    "Tag",
+    "motion",
+    "className",
+    "variant",
+    "children",
+    "loop",
+    "cRef",
+    "useRef",
+    "init",
+    "canvas",
+    "tick",
+    "useLayoutEffect",
+    "jsx",
+    "s",
+    "PropTypes",
+    "Static$1",
+    "Static_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "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"
+}

@@ -1,20 +1,20 @@
 /**
  * Text.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import Text from './Text';
+// Component(s)
+import Text from './Text';
 
- export default {
-   title: 'Text',
-   component: Text,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'Text',
+  component: Text,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <Text />;
+export const Default = () => <Text />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

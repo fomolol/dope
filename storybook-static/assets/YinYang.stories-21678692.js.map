@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "file": "YinYang.stories-21678692.js",
+  "sources": [
+    "../../src/components/YinYang/YinYang.jsx",
+    "../../src/components/YinYang/YinYang.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file YinYang.js\n * @see https://codepen.io/moritao/pen/BaBwwaz\n */\nimport { useRef, useState } from 'react'\nimport PropTypes from 'prop-types'\nimport { useMousePosition, useLayoutEffect } from '@fomolol/tacklebox'\n\nimport styles from './YinYang.module.css'\n\nconst YinYang = ({\n  tagName: Tag = 'div',\n  className = 'absolute pointer-events-none z-1 animate-spin',\n  variant = 'default',\n}) => {\n  const ref = useRef()\n  const { x, y } = useMousePosition()\n  const [size, setSize] = useState()\n\n  useLayoutEffect(() => {\n    if (!size && ref?.current) {\n      setSize({\n        width: ref.current.clientWidth,\n        height: ref.current.clientHeight,\n      })\n    }\n  }, [ref, size])\n\n  return (\n    <Tag\n      className={`${styles.yin_yang} ${\n        styles[`yin_yang__${variant}`]\n      } yinyang ${className}`}\n      ref={ref}\n      style={{\n        top: `calc(${y}px - ${size?.height ? size.height / 2 : 0}px)`,\n        left: `calc(${x}px - ${size?.width ? size.width / 2 : 0}px)`,\n      }}\n    >\n      <style jsx>{`\n        .yinyang {\n          width: calc(10rem / 3);\n          height: calc(10rem / 3);\n          background: radial-gradient(\n                #000 calc(0.5em / 3),\n                #fff calc(0.5em / 3),\n                #fff calc(2.5em / 3),\n                transparent calc(2.5em / 3)\n              )\n              center top / 50% 50% no-repeat,\n            radial-gradient(\n                #fff calc(0.5em / 3),\n                #000 calc(0.5em / 3),\n                #000 calc(2.5em / 3),\n                transparent calc(2.5em / 3)\n              )\n              center bottom / 50% 50% no-repeat,\n            linear-gradient(90deg, #fff 50%, #000 50%);\n          border-radius: 50%;\n          box-shadow: 0 0 0 0.1em #000;\n        }\n      `}</style>\n      <style jsx global>{`\n        html,\n        body {\n          cursor: none;\n        }\n\n        html *,\n        body * {\n          cursor: none;\n        }\n      `}</style>\n    </Tag>\n  )\n}\n\nYinYang.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n}\n\nexport default YinYang\n",
+    "/**\n * YinYang.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport YinYang from './YinYang';\nexport default {\n  title: 'YinYang',\n  component: YinYang,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <YinYang />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <YinYang />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "YinYang",
+    "Tag",
+    "className",
+    "variant",
+    "ref",
+    "useRef",
+    "x",
+    "y",
+    "useMousePosition",
+    "size",
+    "setSize",
+    "useState",
+    "useLayoutEffect",
+    "jsxs",
+    "styles",
+    "jsx",
+    "PropTypes",
+    "YinYang$1",
+    "YinYang_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "0bAUAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,gDACA,QAAAC,EAAA,SACA,IAAA,CACA,MAAAC,EAAAC,EAAAA,QAAAA,SACA,CAAA,EAAAC,EAAA,EAAAC,CAAA,EAAAC,EAAA,EACA,CAAAC,EAAAC,CAAA,EAAAC,EAAA,QAAA,SAAA,EAEAC,OAAAA,EAAA,IAAA,CACA,CAAAH,IAAAL,GAAA,YAAAA,EAAA,UACAM,EAAA,CACA,MAAAN,EAAA,QAAA,YACA,OAAAA,EAAA,QAAA,YAAA,CACA,CACA,EACA,CAAAA,EAAAK,CAAA,CAAA,EAGAI,EAAAZ,EAAA,CACA,UAAA,GAAAa,EAAA,YACAA,EAAA,aAAAX,gBACAD,IACA,IAAAE,EACA,MAAA,CACA,IAAA,QAAAG,SAAAE,GAAA,MAAAA,EAAA,OAAAA,EAAA,OAAA,EAAA,OACA,KAAA,QAAAH,SAAAG,GAAA,MAAAA,EAAA,MAAAA,EAAA,MAAA,EAAA,MACA,EAEA,SAAA,CAAAM,EAAA,QAAA,CAAA,IAAA,GAAA,SAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,QAsBA,EACAA,EAAA,QAAA,CAAA,IAAA,GAAA,OAAA,GAAA,SAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,QAUA,CAAA,CAAA,CAAA,CAGA,EAEAf,EAAA,UAAA,CACA,QAAAgB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,CACA,EAEA,MAAAC,EAAAjB,0cC5EA,MAAAkB,EAAA,CACA,MAAA,UACA,UAAAlB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAmB,EAAA,IAAAJ,EAAAf,EAAA,EAAA,EACAmB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,oBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "file": "DotGrid.stories-61d75241.js",
+  "sources": [
+    "../../src/components/DotGrid/DotGrid.jsx",
+    "../../src/components/DotGrid/DotGrid.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file DotGrid.js\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\n\nimport s from './DotGrid.module.css'\n\nconst DotGrid = ({\n  tagName: Tag = 'div',\n  className = 'fixed bottom-0 left-0 right-0 flex justify-start items-center p-20 h-[200px] w-full backdrop-blur-sm',\n  variant = 'default',\n  children = '',\n  color1 = 'rgba(0, 0, 0, 0)',\n  color2 = '#ffffff',\n  color3 = 'rgba(255, 255, 255, 1)',\n  size: backgroundSize = '20px 20px',\n  dotSize = '2.5px',\n}) => {\n  return (\n    <Tag\n      className={`${s.dot_grid} ${\n        s[`dot_grid__${variant}`]\n      } dot-grid ${className}`}\n      style={{\n        backgroundImage: `radial-gradient( ${color1} ${dotSize}, ${color2} ${dotSize})`,\n        backgroundSize,\n      }}\n    >\n      {children}\n      <style jsx>{`\n        .dot-grid::before {\n          display: block;\n          content: '';\n          position: absolute;\n          top: -1px;\n          left: 0;\n          right: 0;\n          height: 1px;\n          background: ${color3};\n          opacity: 0.2;\n        }\n      `}</style>\n    </Tag>\n  )\n}\n\nDotGrid.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default DotGrid\n",
+    "/**\n * DotGrid.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport DotGrid from './DotGrid';\nexport default {\n  title: 'DotGrid',\n  component: DotGrid,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <DotGrid />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <DotGrid />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "DotGrid",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "color1",
+    "color2",
+    "color3",
+    "backgroundSize",
+    "dotSize",
+    "jsxs",
+    "s",
+    "jsx",
+    "PropTypes",
+    "DotGrid$1",
+    "DotGrid_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "8PAQAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,uGACA,QAAAC,EAAA,UACA,SAAAC,EAAA,GACA,OAAAC,EAAA,mBACA,OAAAC,EAAA,UACA,OAAAC,EAAA,yBACA,KAAAC,EAAA,YACA,QAAAC,EAAA,OACA,IAEAC,EAAAT,EAAA,CACA,UAAA,GAAAU,EAAA,YACAA,EAAA,aAAAR,iBACAD,IACA,MAAA,CACA,gBAAA,oBAAAG,KAAAI,MAAAH,KAAAG,KACA,eAAAD,CACA,EAEA,SAAA,CAAAJ,EACAQ,EAAA,QAAA,CAAA,IAAA,GAAA,SAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,wBASAL;AAAA;AAAA;AAAA,QAGA,CAAA,CAAA,CAAA,EAKAP,EAAA,UAAA,CACA,QAAAa,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAd,i8BC/CA,MAAAe,EAAA,CACA,MAAA,UACA,UAAAf,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAgB,EAAA,IAAAJ,EAAAZ,EAAA,EAAA,EACAgB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,oBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

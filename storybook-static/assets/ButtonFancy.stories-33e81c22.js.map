@@ -1,0 +1,38 @@
+{
+  "version": 3,
+  "file": "ButtonFancy.stories-33e81c22.js",
+  "sources": [
+    "../../src/components/ButtonFancy/ButtonFancy.jsx",
+    "../../src/components/ButtonFancy/ButtonFancy.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file ButtonFancy.js\n * @see https://codepen.io/wheatup/pen/wbQjRL\n */\nimport React, { useRef, useCallback, useEffect } from 'react';\nimport PropTypes from 'prop-types';\n\nimport styles from './ButtonFancy.module.css';\n\nconst ButtonFancy = ({\n  tagName: Tag = 'div',\n  className = 'text-2xl',\n  buttonClassName = '',\n  variant = 'default',\n  children = '',\n}) => {\n  const btn = useRef();\n\n  const handleMouseMove = useCallback(({ offsetX, offsetY }) => {\n    let x = 1 - (btn.current.offsetWidth - offsetX) / btn.current.offsetWidth;\n    let y = 1 - (btn.current.offsetHeight - offsetY) / btn.current.offsetHeight;\n    btn.current.style.setProperty('--perX', (x * 100).toFixed(2) + '%');\n    btn.current.style.setProperty('--perY', (y * 100).toFixed(2) + '%');\n  }, []);\n\n  useEffect(() => {\n    const _btn = btn.current;\n    _btn.addEventListener('mousemove', handleMouseMove);\n    return () => _btn.removeEventListener('mousemove', handleMouseMove);\n  }, [btn, handleMouseMove]);\n\n  return (\n    <Tag className={`${className}`}>\n      <a\n        ref={btn}\n        href=\"#!\"\n        className={`${styles.button_fancy} ${buttonClassName}`}\n      >\n        {children}\n      </a>\n    </Tag>\n  );\n};\n\nButtonFancy.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n};\n\nexport default ButtonFancy;\n",
+    "/**\n * ButtonFancy.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport ButtonFancy from './ButtonFancy';\nexport default {\n  title: 'ButtonFancy',\n  component: ButtonFancy,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <ButtonFancy />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <ButtonFancy />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "ButtonFancy",
+    "Tag",
+    "className",
+    "buttonClassName",
+    "variant",
+    "children",
+    "btn",
+    "useRef",
+    "handleMouseMove",
+    "useCallback",
+    "offsetX",
+    "offsetY",
+    "x",
+    "y",
+    "useEffect",
+    "_btn",
+    "jsx",
+    "styles",
+    "PropTypes",
+    "ButtonFancy$1",
+    "ButtonFancy_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "oRASAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,WACA,gBAAAC,EAAA,GACA,QAAAC,EAAA,UACA,SAAAC,EAAA,EACA,IAAA,CACA,MAAAC,EAAAC,EAAAA,QAAAA,SAEAC,EAAAC,EAAA,QAAA,YAAA,CAAA,CAAA,QAAAC,EAAA,QAAAC,KAAA,CACA,IAAAC,EAAA,GAAAN,EAAA,QAAA,YAAAI,GAAAJ,EAAA,QAAA,YACAO,EAAA,GAAAP,EAAA,QAAA,aAAAK,GAAAL,EAAA,QAAA,aACAA,EAAA,QAAA,MAAA,YAAA,UAAAM,EAAA,KAAA,QAAA,CAAA,EAAA,GAAA,EACAN,EAAA,QAAA,MAAA,YAAA,UAAAO,EAAA,KAAA,QAAA,CAAA,EAAA,GAAA,CACA,EAAA,CAAA,CAAA,EAEAC,OAAAA,EAAAA,QAAAA,UAAA,IAAA,CACA,MAAAC,EAAAT,EAAA,QACA,OAAAS,EAAA,iBAAA,YAAAP,CAAA,EACA,IAAAO,EAAA,oBAAA,YAAAP,CAAA,CAAA,EACA,CAAAF,EAAAE,CAAA,CAAA,EAGAQ,EAAAf,EAAA,CAAA,UAAA,GAAAC,IACA,SAAAc,EAAA,IAAA,CACA,IAAAV,EACA,KAAA,KACA,UAAA,GAAAW,EAAA,gBAAAd,IAEA,SAAAE,CAAA,CAEA,CAAA,CAAA,CAEA,EAEAL,EAAA,UAAA,CACA,QAAAkB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAnB,4kBC5CA,MAAAoB,EAAA,CACA,MAAA,cACA,UAAApB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAqB,EAAA,IAAAL,EAAAhB,EAAA,EAAA,EACAqB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,wBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

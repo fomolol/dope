@@ -1,11 +1,11 @@
 /**
  * @file ASCIIGalaxy.js
  */
-import { useState, useRef, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { useWindowSize, useLayoutEffect } from '@fomolol/tacklebox'
+import { useState, useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { useWindowSize, useLayoutEffect } from '@fomolol/tacklebox';
 
-import s from './ASCIIGalaxy.module.css'
+import s from './ASCIIGalaxy.module.css';
 
 /* Scale a value from one range to another
  * Example of use:
@@ -22,10 +22,10 @@ import s from './ASCIIGalaxy.module.css'
  *
  */
 const scaleValue = (value, from, to) => {
-  var scale = (to[1] - to[0]) / (from[1] - from[0])
-  var capped = Math.min(from[1], Math.max(from[0], value)) - from[0]
-  return ~~(capped * scale + to[0])
-}
+  var scale = (to[1] - to[0]) / (from[1] - from[0]);
+  var capped = Math.min(from[1], Math.max(from[0], value)) - from[0];
+  return ~~(capped * scale + to[0]);
+};
 
 const ASCIIGalaxy = ({
   tagName: Tag = 'pre',
@@ -37,10 +37,10 @@ const ASCIIGalaxy = ({
   trails = 20,
   ds = ' ',
 }) => {
-  const { height: _height, width: _width } = useWindowSize()
-  const [galaxy, setGalaxy] = useState('')
+  const { height: _height, width: _width } = useWindowSize();
+  const [galaxy, setGalaxy] = useState('');
 
-  const field = useRef([])
+  const field = useRef([]);
 
   /**
    * createField
@@ -48,14 +48,14 @@ const ASCIIGalaxy = ({
   const createField = useCallback(
     ({ width, height }) => {
       for (var y = 0; y < height; y++) {
-        field.current[y] = []
+        field.current[y] = [];
         for (var x = 0; x < width; x++) {
-          field.current[y][x] = ds
+          field.current[y][x] = ds;
         }
       }
     },
-    [field, ds]
-  )
+    [field, ds],
+  );
 
   /**
    * buildTrail
@@ -65,35 +65,35 @@ const ASCIIGalaxy = ({
   const buildTrail = useCallback(
     ({ width, height, symbols = ['.', '_', '-', '~', '°', '+'] }) => {
       try {
-        var ys = Math.floor(Math.random() * height)
-        var xs = Math.floor(Math.random() * width)
-        var len = Math.floor(Math.random() * (width - xs - 1) + 1)
-        var yc = 0
+        var ys = Math.floor(Math.random() * height);
+        var xs = Math.floor(Math.random() * width);
+        var len = Math.floor(Math.random() * (width - xs - 1) + 1);
+        var yc = 0;
 
         for (var i = 0; i < len; i++) {
-          var rndSym = Math.floor(Math.random() * symbols.length)
-          var rndY = Math.floor(Math.random() * (3 - 1 + 1)) + 1
+          var rndSym = Math.floor(Math.random() * symbols.length);
+          var rndY = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
           if (rndY == 1) {
-            yc += 1
+            yc += 1;
           } else if (rndY == 2) {
-            yc -= 1
+            yc -= 1;
           } else {
-            yc = yc
+            yc = yc;
           }
 
-          if (ys + yc > height || ys - yc < 0) return
+          if (ys + yc > height || ys - yc < 0) return;
           try {
-            field.current[ys + yc][xs + i] = symbols[rndSym]
+            field.current[ys + yc][xs + i] = symbols[rndSym];
           } catch (e) {
-            console.log(e)
+            console.log(e);
           }
         }
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     },
-    [field]
-  )
+    [field],
+  );
 
   /**
    * buildStar
@@ -102,55 +102,55 @@ const ASCIIGalaxy = ({
   const buildStar = useCallback(
     ({ width, height }) => {
       try {
-        var rndStar = Math.floor(Math.random() * 6)
-        var ys = Math.floor(Math.random() * height)
-        var xs = Math.floor(Math.random() * width)
+        var rndStar = Math.floor(Math.random() * 6);
+        var ys = Math.floor(Math.random() * height);
+        var xs = Math.floor(Math.random() * width);
         if (
           ys + 1 > height - 1 ||
           ys - 1 < 0 ||
           xs + 1 > width - 1 ||
           xs - 1 < 0
         ) {
-          field.current[ys][xs] = ds
+          field.current[ys][xs] = ds;
         } else {
           switch (rndStar) {
             case 0:
               //  |
               // -o-
               //  |
-              field.current[ys][xs] = 'o'
-              field.current[ys + 1][xs] = '|'
-              field.current[ys - 1][xs] = '|'
-              field.current[ys][xs + 1] = '-'
-              field.current[ys][xs - 1] = '-'
-              break
+              field.current[ys][xs] = 'o';
+              field.current[ys + 1][xs] = '|';
+              field.current[ys - 1][xs] = '|';
+              field.current[ys][xs + 1] = '-';
+              field.current[ys][xs - 1] = '-';
+              break;
             case 1:
-              field.current[ys][xs] = '.'
-              break
+              field.current[ys][xs] = '.';
+              break;
             case 2:
-              field.current[ys][xs] = `'`
-              break
+              field.current[ys][xs] = `'`;
+              break;
             case 3:
-              field.current[ys][xs] = '~'
-              field.current[ys][xs + 1] = '°'
-              break
+              field.current[ys][xs] = '~';
+              field.current[ys][xs + 1] = '°';
+              break;
             case 4:
-              field.current[ys][xs] = ','
-              break
+              field.current[ys][xs] = ',';
+              break;
             case 5:
-              field.current[ys][xs] = '+'
-              break
+              field.current[ys][xs] = '+';
+              break;
             default:
-              field.current[ys][xs] = '*'
-              break
+              field.current[ys][xs] = '*';
+              break;
           }
         }
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     },
-    [field, ds]
-  )
+    [field, ds],
+  );
 
   /**
    * render
@@ -158,41 +158,45 @@ const ASCIIGalaxy = ({
    */
   const render = useCallback(
     ({ width, height }) => {
-      let _galaxy = ''
+      let _galaxy = '';
       for (var y = 0; y < height; y++) {
-        if (!y == 0) _galaxy += '\n'
+        if (!y == 0) _galaxy += '\n';
         for (var x = 0; x < width; x++) {
-          _galaxy += field.current[y][x]
+          _galaxy += field.current[y][x];
         }
       }
-      return _galaxy
+      return _galaxy;
     },
-    [field]
-  )
+    [field],
+  );
 
   useLayoutEffect(() => {
     if (!galaxy && _width && _height) {
       // let width = tWidth || _width;
       // let height = tHeight || _height;
-      let width = scaleValue(tWidth || _width, [0, tWidth || _width], [30, 200])
+      let width = scaleValue(
+        tWidth || _width,
+        [0, tWidth || _width],
+        [30, 200],
+      );
       let height = scaleValue(
         tHeight || _height,
         [0, tHeight || _height],
-        [10, 50]
-      )
+        [10, 50],
+      );
 
-      createField({ width, height })
+      createField({ width, height });
 
       for (var i = 0; i < trails; i++) {
-        buildTrail({ width, height })
+        buildTrail({ width, height });
       }
 
       for (var i = 0; i < stars; i++) {
-        buildStar({ width, height })
+        buildStar({ width, height });
       }
 
-      const data = render({ width, height })
-      setGalaxy(data)
+      const data = render({ width, height });
+      setGalaxy(data);
     }
   }, [
     galaxy,
@@ -208,7 +212,7 @@ const ASCIIGalaxy = ({
     _width,
     stars,
     trails,
-  ])
+  ]);
 
   // useEffect(() => {
   //   const int = setInterval(() => setGalaxy(null), 2000);
@@ -224,14 +228,14 @@ const ASCIIGalaxy = ({
     >
       <code>{`${galaxy}`}</code>
     </Tag>
-  )
-}
+  );
+};
 
 ASCIIGalaxy.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default ASCIIGalaxy
+export default ASCIIGalaxy;

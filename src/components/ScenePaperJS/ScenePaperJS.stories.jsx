@@ -1,20 +1,20 @@
 /**
  * ScenePaperJS.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import ScenePaperJS from './ScenePaperJS';
+// Component(s)
+import ScenePaperJS from './ScenePaperJS';
 
- export default {
-   title: 'ScenePaperJS',
-   component: ScenePaperJS,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'ScenePaperJS',
+  component: ScenePaperJS,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <ScenePaperJS />;
+export const Default = () => <ScenePaperJS />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

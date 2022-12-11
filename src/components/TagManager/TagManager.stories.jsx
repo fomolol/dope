@@ -1,20 +1,20 @@
 /**
  * TagManager.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import TagManager from './TagManager';
+// Component(s)
+import TagManager from './TagManager';
 
- export default {
-   title: 'TagManager',
-   component: TagManager,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'TagManager',
+  component: TagManager,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <TagManager />;
+export const Default = () => <TagManager />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

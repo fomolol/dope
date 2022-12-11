@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "file": "DebugScreen.stories-39de974c.js",
+  "sources": [
+    "../../src/components/DebugScreen/DebugScreen.jsx",
+    "../../src/components/DebugScreen/DebugScreen.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file DebugScreen.js\n */\nimport React from 'react'\nimport PropTypes from 'prop-types'\n\nimport styles from './DebugScreen.module.css'\n\nconst DebugScreen = ({\n  tagName: Tag = 'div',\n  className = 'fixed px-4 py-2 font-mono text-sm tracking-wide text-black backdrop-blur-lg bg-white/70 rounded-2xl top-2 right-2',\n  variant = 'default',\n}) => {\n  return (\n    <Tag\n      className={`${styles.debug_screen} ${\n        styles[`debug_screen__${variant}`]\n      } ${className}`}\n    >\n      <p className=\"block md:hidden\">sm</p>\n      <p className=\"hidden md:block\">md</p>\n      <p className=\"hidden lg:block\">lg</p>\n      <p className=\"hidden xl:block\">xl</p>\n    </Tag>\n  )\n}\n\nDebugScreen.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default DebugScreen\n",
+    "/**\n * DebugScreen.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport DebugScreen from './DebugScreen';\nexport default {\n  title: 'DebugScreen',\n  component: DebugScreen,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <DebugScreen />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <DebugScreen />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "DebugScreen",
+    "Tag",
+    "className",
+    "variant",
+    "jsxs",
+    "styles",
+    "jsx",
+    "PropTypes",
+    "DebugScreen$1",
+    "DebugScreen_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "8QAQAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,oHACA,QAAAC,EAAA,SACA,IAEAC,EAAAH,EAAA,CACA,UAAA,GAAAI,EAAA,gBACAA,EAAA,iBAAAF,QACAD,IAEA,SAAA,CAAAI,EAAA,IAAA,CAAA,UAAA,kBAAA,SAAA,KAAA,EACAA,EAAA,IAAA,CAAA,UAAA,kBAAA,SAAA,KAAA,EACAA,EAAA,IAAA,CAAA,UAAA,kBAAA,SAAA,KAAA,EACAA,EAAA,IAAA,CAAA,UAAA,kBAAA,SAAA,KAAA,CAAA,CAAA,CAAA,EAKAN,EAAA,UAAA,CACA,QAAAO,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAR,2kBC3BA,MAAAS,EAAA,CACA,MAAA,cACA,UAAAT,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAU,EAAA,IAAAJ,EAAAN,EAAA,EAAA,EACAU,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,wBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

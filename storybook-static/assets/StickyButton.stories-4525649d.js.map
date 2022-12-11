@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "file": "StickyButton.stories-4525649d.js",
+  "sources": [
+    "../../src/contexts/MenuContext/MenuContext.jsx",
+    "../../src/contexts/MenuContext/useMenuContext.js",
+    "../../src/components/StickyButton/StickyButton.jsx",
+    "../../src/components/StickyButton/StickyButton.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file /contexts/MenuContext.js\n */\nimport { useMemo, useReducer, createContext } from 'react';\nimport PropTypes from 'prop-types';\n\nexport const INITIAL_STATE = {\n  isMenuOpen: false,\n};\n\nconst rootReducer = (state, action) => {\n  switch (action.type) {\n    case 'TOGGLE_MENU': {\n      return {\n        ...state,\n        isMenuOpen: !state.isMenuOpen,\n      };\n    }\n    default: {\n      return state;\n    }\n  }\n};\n\nexport const MenuContext = createContext();\n\n// Create the provider\nexport const MenuProvider = ({ children }) => {\n  const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE);\n  const store = useMemo(() => ({ state, dispatch }), [state]);\n  return <MenuContext.Provider value={store}>{children}</MenuContext.Provider>;\n};\n\nMenuProvider.propTypes = {\n  children: PropTypes.node,\n};\n\nexport default { MenuContext, MenuProvider };\n",
+    "/**\n * @file contexts/MenuContext/useMenu.js\n */\nimport {useContext} from 'react';\nimport { MenuContext } from './MenuContext';\n\nexport const useMenu = () => {\n  const { state, dispatch } = useContext(MenuContext);\n  return [state, dispatch];\n};\n",
+    "/**\n * @file StickyButton.js\n */\nimport { memo, forwardRef, useCallback } from 'react'\nimport { useCursorStyle } from '@fomolol/tacklebox'\n\nimport { useMenu } from '../../contexts/MenuContext/useMenuContext'\n\nimport StickyCursor from '../StickyCursor'\n\nimport s from './StickyButton.module.css'\n\nexport const MenuButton = (\n  { sticky = true, title = 'Lorem Ipsum', ...props },\n  ref\n) => {\n  const [, dispatch] = useMenu()\n  const { addCursorBorder, removeCursorBorder } = useCursorStyle()\n\n  const handleOnToggle = useCallback(() => {\n    dispatch({ type: 'TOGGLE_MENU' })\n  }, [dispatch])\n\n  return (\n    <StickyCursor sticky={sticky}>\n      <button\n        className=\"text-white dark:text-black\"\n        onMouseEnter={addCursorBorder}\n        onMouseLeave={removeCursorBorder}\n        onClick={() => {\n          handleOnToggle()\n          onClick()\n        }}\n        ref={ref}\n        {...props}\n      >\n        <span className=\"px-4 py-2 font-mono text-sm tracking-widest transition duration-500 ease-out bg-black hover:bg-accent2 active:bg-accent3 dark:bg-white\">\n          {title}\n        </span>\n      </button>\n    </StickyCursor>\n  )\n}\n\nexport default memo(forwardRef(MenuButton))\n",
+    "/**\n * StickyButton.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport StickyButton from './StickyButton';\nexport default {\n  title: 'StickyButton',\n  component: StickyButton,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <StickyButton />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <StickyButton />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "MenuContext",
+    "createContext",
+    "PropTypes",
+    "useMenu",
+    "state",
+    "dispatch",
+    "useContext",
+    "MenuButton",
+    "sticky",
+    "title",
+    "props",
+    "ref",
+    "addCursorBorder",
+    "removeCursorBorder",
+    "useCursorStyle",
+    "handleOnToggle",
+    "useCallback",
+    "jsx",
+    "StickyCursor",
+    "StickyButton",
+    "memo",
+    "forwardRef",
+    "StickyButton_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "6XAwBA,MAAAA,EAAAC,EAAA,QAAA,cAAA,EAUAC,EAAA,QAAA,KC5BO,MAAMC,EAAU,IAAM,CAC3B,KAAM,CAAE,MAAAC,EAAO,SAAAC,CAAU,EAAGC,EAAU,QAAA,WAACN,CAAW,EAClD,MAAO,CAACI,EAAOC,CAAQ,CACzB,ECGA,MAAAE,EAAA,CACA,CAAA,OAAAC,EAAA,GAAA,MAAAC,EAAA,iBAAAC,CAAA,EACAC,IACA,CACA,KAAA,CAAA,CAAAN,CAAA,EAAAF,IACA,CAAA,gBAAAS,EAAA,mBAAAC,CAAA,EAAAC,EAAA,EAEAC,EAAAC,EAAAA,QAAAA,YAAA,IAAA,CACAX,EAAA,CAAA,KAAA,aAAA,CAAA,CAAA,EACA,CAAAA,CAAA,CAAA,EAGA,OAAAY,EAAAC,GAAA,OAAAV,EACA,SAAAS,EAAA,SAAA,CACA,UAAA,6BACA,aAAAL,EACA,aAAAC,EACA,QAAA,IAAA,CACAE,IACA,SACA,EACA,IAAAJ,EACA,GAAAD,EAEA,SAAAO,EAAA,OAAA,CAAA,UAAA,yIACA,SACAR,EAAA,CAAA,CAEA,CAAA,CAAA,CAEA,EAEAU,EAAAC,eAAAC,EAAAA,QAAAA,WAAAd,CAAA,CAAA,gNCrCA,MAAAe,EAAA,CACA,MAAA,eACA,UAAAH,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAI,EAAA,IAAAN,EAAAE,EAAA,EAAA,EACAI,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,yBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

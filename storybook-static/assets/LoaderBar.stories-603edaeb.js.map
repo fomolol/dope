@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "file": "LoaderBar.stories-603edaeb.js",
+  "sources": [
+    "../../src/components/LoaderBar/LoaderBar.jsx",
+    "../../src/components/LoaderBar/LoaderBar.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file LoaderBar.js\n */\nimport { useState } from 'react'\nimport PropTypes from 'prop-types'\nimport { motion } from 'framer-motion'\nimport { useLayoutEffect } from '@fomolol/tacklebox'\n\nimport styles from './LoaderBar.module.css'\n\nconst LoaderBar = ({\n  tagName: Tag = 'div',\n  className = '',\n  variant = 'default',\n  children = '',\n  loadingPercentage = 0,\n  onLoadProgress = (percentage) => {},\n  onLoaderHideCallback = () => {},\n  infinite = false,\n  time = 25,\n}) => {\n  // const [reverseAnimation, setReverseAnimation] = useState(0);\n  const startingPercentage = loadingPercentage\n  const [percentage, setPercentage] = useState(startingPercentage)\n\n  useLayoutEffect(() => {\n    let timer\n    if (!timer) {\n      timer = setTimeout(() => {\n        const tP = percentage + 0.5\n        setPercentage(tP)\n        onLoadProgress(tP)\n      }, time)\n    }\n\n    if (infinite && percentage >= 100) {\n      setPercentage(0)\n      return\n    } else if (percentage >= 100) {\n      onLoaderHideCallback()\n      clearTimeout(timer)\n      return\n    }\n\n    return () => clearTimeout(timer)\n  }, [infinite, percentage])\n\n  // const hideLoader = () => {\n  //   setReverseAnimation(1);\n  // };\n\n  return (\n    <Tag\n      className={`${styles.loader_bar} ${\n        styles[`loader_bar__${variant}`]\n      } z-infinity ${className}`}\n    >\n      <div className=\"flex flex-col items-center loader-modal--container\">\n        <motion.div className=\"h-[8px] w-[200px] overflow-hidden bg-black\">\n          <div\n            className=\"h-full bg-gray-600 loading-status-bar\"\n            style={{\n              // this is tied to the of the orange bar so width should be a loading percent variable\n              width: `${infinite ? percentage : percentage}%`,\n            }}\n          ></div>\n        </motion.div>\n\n        {children}\n      </div>\n    </Tag>\n  )\n}\n\nLoaderBar.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default LoaderBar\n",
+    "/**\n * LoaderBar.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport LoaderBar from './LoaderBar';\nexport default {\n  title: 'LoaderBar',\n  component: LoaderBar,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <LoaderBar />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <LoaderBar />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "LoaderBar",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "loadingPercentage",
+    "onLoadProgress",
+    "percentage",
+    "onLoaderHideCallback",
+    "infinite",
+    "time",
+    "startingPercentage",
+    "setPercentage",
+    "useState",
+    "useLayoutEffect",
+    "timer",
+    "tP",
+    "jsx",
+    "styles",
+    "jsxs",
+    "motion",
+    "PropTypes",
+    "LoaderBar$1",
+    "LoaderBar_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "oeAUAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,GACA,QAAAC,EAAA,UACA,SAAAC,EAAA,GACA,kBAAAC,EAAA,EACA,eAAAC,EAAAC,GAAA,CAAA,EACA,qBAAAC,EAAA,IAAA,CAAA,EACA,SAAAC,EAAA,GACA,KAAAC,EAAA,EACA,IAAA,CAEA,MAAAC,EAAAN,EACA,CAAAE,EAAAK,CAAA,EAAAC,mBAAAF,CAAA,EAEAG,OAAAA,EAAA,IAAA,CACA,IAAAC,EASA,GARAA,IACAA,EAAA,WAAA,IAAA,CACA,MAAAC,EAAAT,EAAA,GACAK,EAAAI,CAAA,EACAV,EAAAU,CAAA,GACAN,CAAA,GAGAD,GAAAF,GAAA,IAAA,CACAK,EAAA,CAAA,EACA,MAAA,SACAL,GAAA,IAAA,CACAC,IACA,aAAAO,CAAA,EACA,MACA,CAEA,MAAA,IAAA,aAAAA,CAAA,CAAA,EACA,CAAAN,EAAAF,CAAA,CAAA,EAOAU,EAAAhB,EAAA,CACA,UAAA,GAAAiB,EAAA,cACAA,EAAA,eAAAf,mBACAD,IAEA,SAAAiB,EAAA,MAAA,CAAA,UAAA,qDACA,SAAA,CAAAF,EAAAG,EAAA,IAAA,CAAA,UAAA,6CACA,SAAAH,EAAA,MAAA,CACA,UAAA,wCACA,MAAA,CAEA,MAAA,GAAAV,IACA,CAAA,CAAA,EAEA,EAEAH,CAAA,EACA,CAAA,CAAA,CAGA,EAEAJ,EAAA,UAAA,CACA,QAAAqB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAtB,81BC1EA,MAAAuB,EAAA,CACA,MAAA,YACA,UAAAvB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAwB,EAAA,IAAAP,EAAAjB,EAAA,EAAA,EACAwB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,sBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

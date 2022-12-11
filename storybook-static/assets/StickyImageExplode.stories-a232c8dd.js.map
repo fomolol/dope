@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "file": "StickyImageExplode.stories-a232c8dd.js",
+  "sources": [
+    "../../src/components/StickyImageExplode/StickyImageExplode.jsx",
+    "../../src/components/StickyImageExplode/StickyImageExplode.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file StickyImageExplode.js\n */\nimport { useRef } from 'react'\nimport PropTypes from 'prop-types'\nimport {\n  useScroll,\n  useTransform,\n  motion,\n  useMotionTemplate,\n} from 'framer-motion'\n\nimport s from './StickyImageExplode.module.css'\n\nconst Placeholder = () => {\n  return (\n    <div\n      className=\"absolute bottom-0 left-0 w-full pointer-events-none\"\n      style={{\n        height: `calc(100% - 100vh)`,\n      }}\n    />\n  )\n}\n\nconst ImageContainer = ({\n  className = 'bg-[#4E6868] bg-[url(\"/img/fpo-bg1.jpeg\")]',\n  borderRadius = '20vw',\n  transform = 'translate(0px, 244.543px) scale(0.26, 0.26)',\n  children = '',\n}) => {\n  return (\n    <motion.div\n      className={`sticky left-[5px] top-[5px] bg-cover bg-center bg-no-repeat duration-200 ease-[cubic-bezier(0,1,0,1)] will-change-transform ${className}`}\n      style={{\n        borderRadius,\n        transform,\n        transformOrigin: 'top center',\n        width: `calc(100% - 10px)`,\n        height: `calc(150rem - 10px)`,\n      }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nconst ImageContainerInner = ({\n  borderRadius = '20vw',\n  transform = 'rotate(25deg) scale(0.63, 0.63)',\n  className = 'bg-[#4E6868] bg-[url(\"/img/fpo-bg1.jpeg\")]',\n}) => {\n  return (\n    <motion.div\n      className={`absolute left-0 top-0 h-full w-full origin-center bg-cover bg-center bg-no-repeat duration-200 ease-[cubic-bezier(0,1,0,1)] will-change-transform ${className}`}\n      style={{\n        borderRadius,\n        transform,\n      }}\n    />\n  )\n}\n\nconst StickyImageExplode = ({\n  tagName: Tag = 'div',\n  className = 'absolute flex flex-col items-center justify-center w-full h-screen overflow-hidden',\n  variant = 'default',\n}) => {\n  const ref = useRef()\n  const { scrollYProgress } = useScroll({\n    container: ref,\n  })\n  const borderRadiusT = useTransform(scrollYProgress, [0, 0.35], [20, 2])\n  const borderRadius = useMotionTemplate`${borderRadiusT}vw`\n\n  const scaleContainerT = useTransform(scrollYProgress, [0, 0.35], [0.26, 1])\n  const translateContainerT = useTransform(\n    scrollYProgress,\n    [0, 0.35],\n    [244.543, 0]\n  )\n  const scaleInner0T = useTransform(\n    scrollYProgress,\n    [0, 0.35, 0.55],\n    [0.63, 1, 0.85]\n  )\n  const scaleInner1T = useTransform(\n    scrollYProgress,\n    [0, 0.35, 0.55],\n    [0.37, 1, 0.75]\n  )\n  const scaleInner2T = useTransform(\n    scrollYProgress,\n    [0, 0.35, 0.55],\n    [0, 1, 0.65]\n  )\n\n  const rotateInner0T = useTransform(\n    scrollYProgress,\n    [0, 0.5],\n    ['25deg', '0deg']\n  )\n  const rotateInner1T = useTransform(\n    scrollYProgress,\n    [0, 0.5],\n    ['50deg', '0deg']\n  )\n  const rotateInner2T = useTransform(\n    scrollYProgress,\n    [0, 0.5],\n    ['75deg', '0deg']\n  )\n\n  const transformContainer = useMotionTemplate`translate(0px, ${translateContainerT}px) scale(${scaleContainerT}, ${scaleContainerT})`\n  const transformInner0 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner0T}) scale(${scaleInner0T}, ${scaleInner0T})`\n  const transformInner1 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner1T}) scale(${scaleInner1T}, ${scaleInner1T})`\n  const transformInner2 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner2T}) scale(${scaleInner2T}, ${scaleInner2T})`\n\n  return (\n    <Tag\n      className={`${s.sticky_image_explode} ${\n        s[`sticky_image_explode__${variant}`]\n      } ${className}`}\n    >\n      <div className=\"relative w-full h-full\">\n        <div\n          className=\"absolute top-0 left-0 w-full h-screen overflow-scroll overflow-touch snap-y snap-proximity\"\n          ref={ref}\n        >\n          {/* Handles adjusting the height for scroll */}\n          <Placeholder />\n          <ImageContainer\n            borderRadius={borderRadius}\n            transform={transformContainer}\n          >\n            <ImageContainerInner\n              borderRadius={borderRadius}\n              transform={transformInner0}\n            />\n            <ImageContainerInner\n              borderRadius={borderRadius}\n              transform={transformInner1}\n            />\n            <ImageContainerInner\n              borderRadius={borderRadius}\n              transform={transformInner2}\n            />\n          </ImageContainer>\n        </div>\n      </div>\n      <style jsx>{`\n        .overflow-touch {\n          -webkit-overflow-scrolling: touch;\n        }\n      `}</style>\n    </Tag>\n  )\n}\n\nStickyImageExplode.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default StickyImageExplode\n",
+    "/**\n * StickyImageExplode.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport StickyImageExplode from './StickyImageExplode';\nexport default {\n  title: 'StickyImageExplode',\n  component: StickyImageExplode,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <StickyImageExplode />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <StickyImageExplode />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "Placeholder",
+    "jsx",
+    "ImageContainer",
+    "className",
+    "borderRadius",
+    "transform",
+    "children",
+    "motion",
+    "ImageContainerInner",
+    "StickyImageExplode",
+    "Tag",
+    "variant",
+    "ref",
+    "useRef",
+    "scrollYProgress",
+    "useScroll",
+    "borderRadiusT",
+    "useTransform",
+    "useMotionTemplate",
+    "scaleContainerT",
+    "translateContainerT",
+    "scaleInner0T",
+    "scaleInner1T",
+    "scaleInner2T",
+    "rotateInner0T",
+    "rotateInner1T",
+    "rotateInner2T",
+    "transformContainer",
+    "transformInner0",
+    "transformInner1",
+    "transformInner2",
+    "jsxs",
+    "s",
+    "PropTypes",
+    "StickyImageExplode$1",
+    "StickyImageExplode_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "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"
+}

@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "file": "NoiseGrain.stories-674deed4.js",
+  "sources": [
+    "../../src/components/NoiseGrain/NoiseGrain.jsx",
+    "../../src/components/NoiseGrain/NoiseGrain.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file NoiseGrain.js\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\n\nimport s from './NoiseGrain.module.css'\n\nconst NoiseGrain = ({\n  tagName: Tag = 'div',\n  className = 'fixed inset-0 w-full h-full pointer-events-none',\n  variant = 'grain', // noise, both\n  noiseSrc = '../../public/noise.png',\n  scratchesSrc = '../../public/scratches.webp',\n}) => {\n  return (\n    <Tag\n      className={`${s.noise_grain} ${\n        s[`noise_grain__${variant}`]\n      } ${className}`}\n    >\n      {(variant === 'noise' || variant === 'both') && (\n        <div className={`h-full ${s['c-noise']}`}></div>\n      )}\n      {(variant === 'grain' || variant === 'both') && (\n        <div className={`h-full w-full ${s['c-old']} mix-blend-multiply`}></div>\n      )}\n      <style jsx>{`\n        .c-noise {\n          /* animation: grain 6s steps(10) infinite; */\n          background-image: url(${noiseSrc});\n          background-repeat: repeat;\n          height: 100%;\n          left: -50%;\n          opacity: 0.035;\n          position: absolute;\n          top: -100%;\n          width: 300%;\n          z-index: 100;\n          pointer-events: none;\n        }\n\n        .c-old {\n          position: absolute;\n          top: 0;\n          left: 0;\n          right: 0;\n          bottom: 0;\n          background-image: url(${scratchesSrc});\n          opacity: 0.05;\n          background-repeat: no-repeat;\n          background-size: cover;\n          background-position: center center;\n          z-index: 150;\n          pointer-events: none;\n        }\n      `}</style>\n    </Tag>\n  )\n}\n\nNoiseGrain.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['grain', 'noise', 'both']),\n  children: PropTypes.node,\n}\n\nexport default NoiseGrain\n",
+    "/**\n * NoiseGrain.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport NoiseGrain from './NoiseGrain';\nexport default {\n  title: 'NoiseGrain',\n  component: NoiseGrain,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <NoiseGrain />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <NoiseGrain />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "NoiseGrain",
+    "Tag",
+    "className",
+    "variant",
+    "noiseSrc",
+    "scratchesSrc",
+    "jsxs",
+    "s",
+    "jsx",
+    "PropTypes",
+    "NoiseGrain$1",
+    "NoiseGrain_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "0QAQAA,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,kDACA,QAAAC,EAAA,QACA,SAAAC,EAAA,yBACA,aAAAC,EAAA,6BACA,IAEAC,EAAAL,EAAA,CACA,UAAA,GAAAM,EAAA,eACAA,EAAA,gBAAAJ,QACAD,IAEA,SAAA,EAAAC,IAAA,SAAAA,IAAA,SACAK,EAAA,OAAA,UAAA,UAAAD,EAAA,YAAA,CAAA,GAEAJ,IAAA,SAAAA,IAAA,WACA,MAAA,CAAA,UAAA,iBAAAI,EAAA,6BAAA,CAAA,EAEAC,EAAA,QAAA,CAAA,IAAA,GAAA,SAAA;AAAA;AAAA;AAAA,kCAGAJ;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,kCAkBAC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,QAQA,CAAA,CAAA,CAAA,EAKAL,EAAA,UAAA,CACA,QAAAS,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,QAAA,QAAA,MAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAV,8uBC7DA,MAAAW,EAAA,CACA,MAAA,aACA,UAAAX,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAY,EAAA,IAAAJ,EAAAR,EAAA,EAAA,EACAY,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,uBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

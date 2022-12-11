@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "file": "RandomGrid.stories-3578990a.js",
+  "sources": [
+    "../../src/components/RandomGrid/RandomGrid.jsx",
+    "../../src/components/RandomGrid/RandomGrid.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file RandomGrid.js\n */\nimport { useState, useEffect } from 'react'\nimport PropTypes from 'prop-types'\n\nimport styles from './RandomGrid.module.css'\n\nconst RandomCorners = ({ left = 73, top = 45 }) => {\n  return (\n    <div\n      className=\"absolute z-10 text-black\"\n      style={{\n        left: `${left}%`,\n        top: `${top}%`,\n      }}\n    >\n      <svg\n        xmlns=\"http://www.w3.org/2000/svg\"\n        width=\"30\"\n        height=\"30\"\n        viewBox=\"0 0 100 100\"\n        stroke=\"current\"\n        fill=\"none\"\n        strokeWidth=\"8\"\n        className=\"text-current stroke-current\"\n      >\n        <path d=\"M0 0 L0 16 M0 0 L16 0\" transform=\"rotate(0, 50, 50)\"></path>\n        <path d=\"M0 0 L0 16 M0 0 L16 0\" transform=\"rotate(90, 50, 50)\"></path>\n        <path d=\"M0 0 L0 16 M0 0 L16 0\" transform=\"rotate(180, 50, 50)\"></path>\n        <path d=\"M0 0 L0 16 M0 0 L16 0\" transform=\"rotate(270, 50, 50)\"></path>\n      </svg>\n    </div>\n  )\n}\nconst RandomGrid = ({\n  tagName: Tag = 'div',\n  className = 'absolute top-0 left-0 w-full h-full',\n  variant = 'default',\n  children = '',\n  count = 6,\n}) => {\n  const [refresh, setRefresh] = useState(false)\n\n  useEffect(() => {\n    var int\n    const refreshGrid = () => {\n      int = setTimeout(() => setRefresh(!refresh), 2000)\n    }\n    refreshGrid()\n    return () => clearTimeout(int)\n  }, [refresh])\n\n  return (\n    <Tag\n      className={`${styles.random_grid} ${\n        styles[`random_grid__${variant}`]\n      } ${className}`}\n    >\n      {[...Array(count).keys()].map((_, i) => {\n        const rLeft = Math.floor(Math.random() * 100)\n        const rTop = Math.floor(Math.random() * 100)\n        return <RandomCorners key={`r-grid-${i}`} left={rLeft} top={rTop} />\n      })}\n    </Tag>\n  )\n}\n\nRandomGrid.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default RandomGrid\n",
+    "/**\n * RandomGrid.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport RandomGrid from './RandomGrid';\nexport default {\n  title: 'RandomGrid',\n  component: RandomGrid,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <RandomGrid />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <RandomGrid />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "RandomCorners",
+    "left",
+    "top",
+    "jsx",
+    "jsxs",
+    "RandomGrid",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "count",
+    "refresh",
+    "setRefresh",
+    "useState",
+    "useEffect",
+    "int",
+    "styles",
+    "_",
+    "i",
+    "rLeft",
+    "rTop",
+    "PropTypes",
+    "RandomGrid$1",
+    "RandomGrid_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "sRAQAA,EAAA,CAAA,CAAA,KAAAC,EAAA,GAAA,IAAAC,EAAA,MAEAC,EAAA,MAAA,CACA,UAAA,2BACA,MAAA,CACA,KAAA,GAAAF,KACA,IAAA,GAAAC,IACA,EAEA,SAAAE,EAAA,MAAA,CACA,MAAA,6BACA,MAAA,KACA,OAAA,KACA,QAAA,cACA,OAAA,UACA,KAAA,OACA,YAAA,IACA,UAAA,8BAEA,SAAA,CAAAD,EAAA,OAAA,CAAA,EAAA,wBAAA,UAAA,oBAAA,EACAA,EAAA,OAAA,CAAA,EAAA,wBAAA,UAAA,qBAAA,EACAA,EAAA,OAAA,CAAA,EAAA,wBAAA,UAAA,sBAAA,EACAA,EAAA,OAAA,CAAA,EAAA,wBAAA,UAAA,sBAAA,CAAA,CAAA,CACA,CAAA,CAAA,EAIAE,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,sCACA,QAAAC,EAAA,UACA,SAAAC,EAAA,GACA,MAAAC,EAAA,CACA,IAAA,CACA,KAAA,CAAAC,EAAAC,CAAA,EAAAC,mBAAA,EAAA,EAEAC,OAAAA,EAAAA,QAAAA,UAAA,IAAA,CACA,IAAAC,EAIA,OAHA,IAAA,CACAA,EAAA,WAAA,IAAAH,EAAA,CAAAD,CAAA,EAAA,GAAA,CAAA,KAGA,IAAA,aAAAI,CAAA,CAAA,EACA,CAAAJ,CAAA,CAAA,EAGAR,EAAAG,EAAA,CACA,UAAA,GAAAU,EAAA,eACAA,EAAA,gBAAAR,QACAD,IAEA,SAAA,CAAA,GAAA,MAAAG,CAAA,EAAA,KAAA,CAAA,EAAA,IAAA,CAAAO,EAAAC,IAAA,CACA,MAAAC,EAAA,KAAA,MAAA,KAAA,OAAA,EAAA,GAAA,EACAC,EAAA,KAAA,MAAA,KAAA,OAAA,EAAA,GAAA,EACA,SAAApB,EAAA,CAAA,KAAAmB,EAAA,IAAAC,CAAA,EAAA,UAAAF,GAAA,CAAA,CACA,CAAA,CAAA,CAGA,EAEAb,EAAA,UAAA,CACA,QAAAgB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAjB,2lBCpEA,MAAAkB,EAAA,CACA,MAAA,aACA,UAAAlB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAmB,EAAA,IAAArB,EAAAE,EAAA,EAAA,EACAmB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,uBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "file": "MenuImageHover.stories-5e0849fc.js",
+  "sources": [
+    "../../src/components/MenuImageHover/MenuImageHover.jsx",
+    "../../src/components/MenuImageHover/MenuImageHover.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file MenuImageHover.js\n */\nimport { useState, useRef, useEffect } from 'react'\nimport { animate, motion, useMotionValue, AnimatePresence } from 'framer-motion'\nimport PropTypes from 'prop-types'\nimport cn from 'clsx'\nimport { useHoverImage } from '@fomolol/tacklebox'\n\nimport s from './MenuImageHover.module.css'\n\nimport { easeInOutSine, easeInOutCirc } from '../../services/easing'\n\nconst HoverImageContainer = ({ children }) => {\n  return (\n    <motion.div\n      className=\"relative w-full h-full overflow-hidden\"\n      initial=\"open\"\n      animate=\"show\"\n      exit=\"hide\"\n      variants={{\n        open: {\n          translateX: '100%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n        hide: {\n          translateX: '-100%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n        show: {\n          translateX: '0%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n      }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nconst HoverImage = ({ src }) => {\n  return (\n    <motion.div\n      className={`h-full w-full bg-cover bg-center`}\n      initial=\"open\"\n      animate=\"show\"\n      exit=\"hide\"\n      variants={{\n        open: {\n          translateX: '-100%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n        hide: {\n          translateX: '100%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n        show: {\n          translateX: '0%',\n          transition: {\n            duration: 0.5,\n            ease: easeInOutSine,\n          },\n        },\n      }}\n      style={{\n        backgroundImage: `url(${src})`,\n      }}\n    />\n  )\n}\n\nconst MenuImageHover = ({\n  tagName: Tag = 'div',\n  className = 'relative flex items-center justify-center transition duration-500 ease-in-out-expo',\n  variant = 'default',\n  children = '',\n  src = '/img/pizza.gif',\n  alt = 'lorem ipsum',\n}) => {\n  const ref = useRef()\n  const reveal = useRef()\n  const [active, setActive] = useState(false)\n\n  const opacity = useMotionValue(0)\n\n  // returns all of the motion values for the container\n  const { transform, filter } = useHoverImage(ref, reveal)\n\n  useEffect(() => {\n    if (active) {\n      animate(opacity, 1, {\n        duration: 1,\n        ease: easeInOutCirc,\n      })\n    } else {\n      animate(opacity, 0, {\n        duration: 1,\n        ease: easeInOutCirc,\n      })\n    }\n  }, [active])\n\n  return (\n    <Tag\n      className={cn(\n        s.menu_image_hover,\n        s[`menu_image_hover__${variant}`],\n        className,\n        active ? 'z-20' : 'z-1'\n      )}\n      onMouseOver={() => setActive(true)}\n      onMouseOut={() => setActive(false)}\n      ref={reveal}\n    >\n      <motion.div\n        className={`pointer-events-none absolute z-0 h-[calc(692px/1.5)] w-[calc(563px/1.5)] origin-center overflow-hidden`}\n        style={{\n          transform,\n          filter,\n          opacity,\n        }}\n      >\n        <AnimatePresence>\n          {active && (\n            <HoverImageContainer>\n              <HoverImage src={src} />\n            </HoverImageContainer>\n          )}\n        </AnimatePresence>\n      </motion.div>\n      <p ref={ref} className=\"relative z-1\">\n        {children}\n      </p>\n    </Tag>\n  )\n}\n\nMenuImageHover.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default MenuImageHover\n",
+    "/**\n * MenuImageHover.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport MenuImageHover from './MenuImageHover';\nexport default {\n  title: 'MenuImageHover',\n  component: MenuImageHover,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <MenuImageHover />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <MenuImageHover />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "HoverImageContainer",
+    "children",
+    "jsx",
+    "motion",
+    "easeInOutSine",
+    "HoverImage",
+    "src",
+    "MenuImageHover",
+    "Tag",
+    "className",
+    "variant",
+    "alt",
+    "ref",
+    "useRef",
+    "reveal",
+    "active",
+    "setActive",
+    "useState",
+    "opacity",
+    "useMotionValue",
+    "transform",
+    "filter",
+    "useHoverImage",
+    "useEffect",
+    "animate",
+    "easeInOutCirc",
+    "jsxs",
+    "cn",
+    "s",
+    "AnimatePresence",
+    "PropTypes",
+    "MenuImageHover$1",
+    "MenuImageHover_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "qpBAaAA,EAAA,CAAA,CAAA,SAAAC,KAEAC,EAAAC,EAAA,IAAA,CACA,UAAA,yCACA,QAAA,OACA,QAAA,OACA,KAAA,OACA,SAAA,CACA,KAAA,CACA,WAAA,OACA,WAAA,CACA,SAAA,GACA,KAAAC,CACA,CACA,EACA,KAAA,CACA,WAAA,QACA,WAAA,CACA,SAAA,GACA,KAAAA,CACA,CACA,EACA,KAAA,CACA,WAAA,KACA,WAAA,CACA,SAAA,GACA,KAAAA,CACA,CACA,CACA,EAEA,SAAAH,CAAA,CAAA,EAKAI,EAAA,CAAA,CAAA,IAAAC,KAEAJ,EAAAC,EAAA,IAAA,CACA,UAAA,mCACA,QAAA,OACA,QAAA,OACA,KAAA,OACA,SAAA,CACA,KAAA,CACA,WAAA,QACA,WAAA,CACA,SAAA,GACA,KAAAC,CACA,CACA,EACA,KAAA,CACA,WAAA,OACA,WAAA,CACA,SAAA,GACA,KAAAA,CACA,CACA,EACA,KAAA,CACA,WAAA,KACA,WAAA,CACA,SAAA,GACA,KAAAA,CACA,CACA,CACA,EACA,MAAA,CACA,gBAAA,OAAAE,IACA,CAAA,CAAA,EAKAC,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,qFACA,QAAAC,EAAA,UACA,SAAAT,EAAA,GACA,IAAAK,EAAA,iBACA,IAAAK,EAAA,aACA,IAAA,CACA,MAAAC,EAAAC,EAAAA,QAAAA,SACAC,EAAAD,EAAAA,QAAAA,SACA,CAAAE,EAAAC,CAAA,EAAAC,mBAAA,EAAA,EAEAC,EAAAC,EAAA,CAAA,EAGA,CAAA,UAAAC,EAAA,OAAAC,CAAA,EAAAC,EAAAV,EAAAE,CAAA,EAEAS,OAAAA,EAAAA,QAAAA,UAAA,IAAA,CACAR,EACAS,EAAAN,EAAA,EAAA,CACA,SAAA,EACA,KAAAO,CAAA,CACA,EAEAD,EAAAN,EAAA,EAAA,CACA,SAAA,EACA,KAAAO,CAAA,CACA,CACA,EACA,CAAAV,CAAA,CAAA,EAGAW,EAAAlB,EAAA,CACA,UAAAmB,EACAC,EAAA,iBACAA,EAAA,qBAAAlB,KACAD,EACAM,EAAA,OAAA,KACA,EACA,YAAA,IAAAC,EAAA,EAAA,EACA,WAAA,IAAAA,EAAA,EAAA,EACA,IAAAF,EAEA,SAAA,CAAAZ,EAAAC,EAAA,IAAA,CACA,UAAA,yGACA,MAAA,CACA,UAAAiB,EACA,OAAAC,EACA,QAAAH,CACA,EAEA,SAAAhB,EAAA2B,GACA,SACAd,GAAAb,EAAAF,GACA,SAAAE,EAAAG,EAAA,CAAA,IAAAC,CAAA,CAAA,CACA,CAAA,EAEA,CAAA,CACA,EACAJ,EAAA,IAAA,CAAA,IAAAU,EAAA,UAAA,eACA,SAAAX,EACA,CAAA,CAAA,CAAA,CAGA,EAEAM,EAAA,UAAA,CACA,QAAAuB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAxB,8tBCxJA,MAAAyB,EAAA,CACA,MAAA,iBACA,UAAAzB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACA0B,EAAA,IAAA/B,EAAAK,EAAA,EAAA,EACA0B,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,2BACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

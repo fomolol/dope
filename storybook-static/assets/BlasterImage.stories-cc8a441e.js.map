@@ -1,0 +1,38 @@
+{
+  "version": 3,
+  "file": "BlasterImage.stories-cc8a441e.js",
+  "sources": [
+    "../../src/components/BlasterImage/BlasterImage.jsx",
+    "../../src/components/BlasterImage/BlasterImage.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file BlasterImage.js\n * Handles flashing multiple images based on a time interval\n */\nimport React, { useState, useEffect} from 'react'\nimport PropTypes from 'prop-types'\n\nimport s from './BlasterImage.module.css'\n\n/**\n * sleep\n * @param {*} milliseconds\n * @returns\n */\nconst sleep = (milliseconds) => {\n  return new Promise((resolve) => setTimeout(resolve, milliseconds))\n}\n\nconst BlasterImage = ({\n  tagName: Tag = 'div',\n  className = 'absolute inset-0 object-cover w-full h-screen',\n  variant = 'default',\n  children = '',\n  items = [\n    '/img/blaster/0.jpeg',\n    '/img/blaster/1.jpeg',\n    '/img/blaster/0.jpeg',\n    '/img/blaster/1.jpeg',\n    '/img/blaster/2.jpeg',\n    '/img/blaster/0.jpeg',\n    '/img/blaster/1.jpeg',\n    '/img/blaster/2.jpeg',\n  ],\n  seconds = 0.44,\n}) => {\n  const millis = seconds * 1000\n  const [counter, setCounter] = useState(0)\n\n  useEffect(() => {\n    const update = async () => {\n      await sleep(millis)\n      let tCounter = counter + 1\n      if (tCounter >= items.length - 1) {\n        tCounter = 0\n      }\n      setCounter(tCounter)\n    }\n    update()\n  }, [counter])\n\n  return (\n    <Tag\n      className={`${s.blaster_image} ${\n        s[`blaster_image__${variant}`]\n      } ${className}`}\n    >\n      <img\n        src={items[counter]}\n        key={`blast-img-${counter}`}\n        alt=\"\"\n        className=\"object-cover w-full min-h-screen min-\"\n      />\n    </Tag>\n  )\n}\n\nBlasterImage.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default BlasterImage\n",
+    "/**\n * BlasterImage.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport BlasterImage from './BlasterImage';\nexport default {\n  title: 'BlasterImage',\n  component: BlasterImage,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <BlasterImage />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <BlasterImage />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "sleep",
+    "milliseconds",
+    "resolve",
+    "BlasterImage",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "items",
+    "seconds",
+    "millis",
+    "counter",
+    "setCounter",
+    "useState",
+    "useEffect",
+    "tCounter",
+    "jsx",
+    "s",
+    "PropTypes",
+    "BlasterImage$1",
+    "BlasterImage_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "uRAcAA,EAAAC,GACA,IAAA,QAAAC,GAAA,WAAAA,EAAAD,CAAA,CAAA,EAGAE,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,gDACA,QAAAC,EAAA,UACA,SAAAC,EAAA,GACA,MAAAC,EAAA,CACA,sBACA,sBACA,sBACA,sBACA,sBACA,sBACA,sBACA,qBACA,EACA,QAAAC,EAAA,GACA,IAAA,CACA,MAAAC,EAAAD,EAAA,IACA,CAAAE,EAAAC,CAAA,EAAAC,mBAAA,CAAA,EAEAC,OAAAA,EAAAA,QAAAA,UAAA,IAAA,EACA,SAAA,CACA,MAAAd,EAAAU,CAAA,EACA,IAAAK,EAAAJ,EAAA,EACAI,GAAAP,EAAA,OAAA,IACAO,EAAA,GAEAH,EAAAG,CAAA,CAAA,IAEA,EACA,CAAAJ,CAAA,CAAA,EAGAK,EAAAZ,EAAA,CACA,UAAA,GAAAa,EAAA,iBACAA,EAAA,kBAAAX,QACAD,IAEA,SAAAW,EAAA,MAAA,CACA,IAAAR,EAAAG,GAEA,IAAA,GACA,UAAA,uCAAA,EAFA,aAAAA,GAGA,CAAA,CAAA,CAGA,EAEAR,EAAA,UAAA,CACA,QAAAe,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAhB;;;;;;;;;6FClEA,MAAAiB,EAAA,CACA,MAAA,eACA,UAAAjB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAkB,EAAA,IAAAL,EAAAb,EAAA,EAAA,EACAkB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,yBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

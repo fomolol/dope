@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "file": "ButtonSpeak.stories-92223a30.js",
+  "sources": [
+    "../../src/components/Icons/Edit.jsx",
+    "../../src/components/ButtonSpeak/ButtonSpeak.jsx",
+    "../../src/components/ButtonSpeak/ButtonSpeak.stories.jsx"
+  ],
+  "sourcesContent": [
+    "import React from 'react';\nimport { motion } from 'framer-motion';\n\nconst Edit = props => (\n  <motion.svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" {...props}>\n    {' '}\n    <path d=\"M 18 2 L 15.585938 4.4140625 L 19.585938 8.4140625 L 22 6 L 18 2 z M 14.076172 5.9238281 L 3 17 L 3 21 L 7 21 L 18.076172 9.9238281 L 14.076172 5.9238281 z\" />\n  </motion.svg>\n);\n\nexport default Edit;\n",
+    "/**\n * @file ButtonSpeak.js\n */\nimport React, { memo , forwardRef } from 'react'\nimport { motion } from 'framer-motion'\n\nimport s from './ButtonSpeak.module.css'\n\nimport Edit from '../Icons/Edit'\n\nconst ButtonSpeak = (\n  {\n    tagName: Tag = 'button',\n    className = 'fixed flex items-center justify-center rounded-full outline-none dark:focus:outline-white focus:outline-black focus:outline-4 outline-dashed right-12 bottom-12 duration-400',\n    variant = 'default',\n    onMouseEnter = () => {},\n    onMouseLeave = () => {},\n    onClick = () => {},\n    motionVariants = {\n      initial: {\n        opacity: 0,\n      },\n      animate: {\n        opacity: 1,\n      },\n      exit: {\n        opacity: 0,\n      },\n      tap: { scale: 0.75, duration: 0.45, ease: [0.4, 0, 0.2, 1] },\n      hover: { scale: 1.25, duration: 0.45, ease: [0.4, 0, 0.2, 1] },\n      focus: { scale: 1.25, duration: 0.45, ease: [0.4, 0, 0.2, 1] },\n    },\n  },\n  ref\n) => {\n  return (\n    <Tag\n      className={`${s.button_speak} ${\n        s[`button_speak__${variant}`]\n      } ${className} h-[84px] w-[84px]`}\n      onMouseEnter={onMouseEnter}\n      onMouseLeave={onMouseLeave}\n      onClick={onClick}\n      ref={ref}\n    >\n      <motion.div\n        whileTap=\"tap\"\n        whileHover=\"hover\"\n        whileFocus=\"focus\"\n        animate=\"animate\"\n        exit=\"exit\"\n        initial=\"initial\"\n        variants={motionVariants}\n        className=\"absolute top-0 left-0 w-full h-full transition ease-out bg-black rounded-full dark:bg-white active:bg-red-800 hover:bg-red-ff duration-400\"\n      />\n      <Edit className=\"pointer-events-none absolute fill-white dark:fill-black w-[24px] h-[24px]\" />\n    </Tag>\n  )\n}\n\nexport default memo(forwardRef(ButtonSpeak))\n",
+    "/**\n * ButtonSpeak.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport ButtonSpeak from './ButtonSpeak';\nexport default {\n  title: 'ButtonSpeak',\n  component: ButtonSpeak,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <ButtonSpeak />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <ButtonSpeak />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "Edit",
+    "props",
+    "jsxs",
+    "motion",
+    "jsx",
+    "ButtonSpeak",
+    "Tag",
+    "className",
+    "variant",
+    "onMouseEnter",
+    "onMouseLeave",
+    "onClick",
+    "motionVariants",
+    "ref",
+    "ButtonSpeak$1",
+    "memo",
+    "forwardRef",
+    "ButtonSpeak_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "yTAGAA,EACAC,GAAAC,EAAAC,EAAA,IAAA,CAAA,MAAA,6BAAA,QAAA,YAAA,GAAAF,EACA,SAAA,CAAA,IACAG,EAAA,OAAA,CAAA,EAAA,6JAAA,CAAA,CAAA,CACA,CAAA,gECGA,MAAAC,EAAA,CACA,CACA,QAAAC,EAAA,SACA,UAAAC,EAAA,+KACA,QAAAC,EAAA,UACA,aAAAC,EAAA,IAAA,CAAA,EACA,aAAAC,EAAA,IAAA,CAAA,EACA,QAAAC,EAAA,IAAA,CAAA,EACA,eAAAC,EAAA,CACA,QAAA,CACA,QAAA,CACA,EACA,QAAA,CACA,QAAA,CACA,EACA,KAAA,CACA,QAAA,CACA,EACA,IAAA,CAAA,MAAA,IAAA,SAAA,IAAA,KAAA,CAAA,GAAA,EAAA,GAAA,CAAA,CAAA,EACA,MAAA,CAAA,MAAA,KAAA,SAAA,IAAA,KAAA,CAAA,GAAA,EAAA,GAAA,CAAA,CAAA,EACA,MAAA,CAAA,MAAA,KAAA,SAAA,IAAA,KAAA,CAAA,GAAA,EAAA,GAAA,CAAA,CAAA,CACA,CACA,EACAC,IAGAX,EAAAI,EAAA,CACA,UAAA,GAAA,EAAA,gBACA,EAAA,iBAAAE,QACAD,sBACA,aAAAE,EACA,aAAAC,EACA,QAAAC,EACA,IAAAE,EAEA,SAAA,CAAAT,EAAAD,EAAA,IAAA,CACA,SAAA,MACA,WAAA,QACA,WAAA,QACA,QAAA,UACA,KAAA,OACA,QAAA,UACA,SAAAS,EACA,UAAA,4IAAA,CACA,EACAR,EAAAJ,EAAA,CAAA,UAAA,2EAAA,CAAA,CAAA,CAAA,CAAA,EAKAc,EAAAC,eAAAC,EAAAA,QAAAA,WAAAX,CAAA,CAAA,ECrDAY,EAAA,CACA,MAAA,cACA,UAAAZ,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAa,EAAA,IAAAd,EAAAC,EAAA,EAAA,EACAa,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,wBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

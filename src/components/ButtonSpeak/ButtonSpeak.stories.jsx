@@ -1,20 +1,20 @@
 /**
  * ButtonSpeak.jsx
  */
- import * as React from 'react';
+import React from 'react';
 
- // Component(s)
- import ButtonSpeak from './ButtonSpeak';
+// Component(s)
+import ButtonSpeak from './ButtonSpeak';
 
- export default {
-   title: 'ButtonSpeak',
-   component: ButtonSpeak,
-   // Sets the layout parameter component wide.
-   parameters: {
-     layout: 'centered',
-   },
- };
+export default {
+  title: 'ButtonSpeak',
+  component: ButtonSpeak,
+  // Sets the layout parameter component wide.
+  parameters: {
+    layout: 'centered',
+  },
+};
 
- export const Default = () => <ButtonSpeak />;
+export const Default = () => <ButtonSpeak />;
 
- Default.storyName = 'default';
+Default.storyName = 'default';

@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "file": "NoSignal.stories-bf462dbd.js",
+  "sources": [
+    "../../src/components/NoSignal/NoSignal.jsx",
+    "../../src/components/NoSignal/NoSignal.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file NoSignal.js\n * @see https://codepen.io/wheatup/pen/PgqwPy\n */\nimport * as React from 'react'\nimport PropTypes from 'prop-types'\nimport { useLayoutEffect } from '@fomolol/tacklebox'\n\nimport s from './NoSignal.module.css'\n\nclass Utils {\n  static randomColor() {\n    return Math.round(Math.random() * 0xffffff)\n  }\n\n  static randomSaturatedColor() {\n    let col = Math.round(Math.random() * 0xff)\n    return (col << 16) | (col << 8) | col\n  }\n\n  static mulColor(color, factor) {\n    let r = (color & 0xff0000) >> 16\n    let g = (color & 0xff00) >> 8\n    let b = color & 0xff\n    r = Math.min(Math.round(r * factor), 0xff)\n    g = Math.min(Math.round(g * factor), 0xff)\n    b = Math.min(Math.round(b * factor), 0xff)\n    return (r << 16) | (g << 8) | b\n  }\n}\n\nclass Canvas {\n  constructor(context) {\n    this.canvas = context.canvas\n    this.context = context\n    this.pixelSize = 4\n    this.pixels = []\n    this.onResize()\n    this.tick = 0\n    this.lines = [\n      { pos: 50, height: 28, speed: 0.281 },\n      { pos: 80, height: 16, speed: 1.129 },\n    ]\n  }\n\n  onResize() {\n    this.width = window.innerWidth\n    this.height = window.innerHeight\n    this.canvas.width = this.width\n    this.canvas.height = this.height\n    this.pixels.length = 0\n  }\n\n  start() {}\n\n  update() {\n    let pixelWidth = Math.ceil(this.width / this.pixelSize)\n    let pixelHeight = Math.ceil(this.height / this.pixelSize)\n    let adjacent = 0\n    for (let y = 0; y < pixelHeight; y++) {\n      let inLine = this.isInLine(y, pixelHeight)\n      for (let x = 0; x < pixelWidth; x++) {\n        let index = x + y * pixelWidth\n        let col\n        if (adjacent <= 0) {\n          adjacent = 1 + Math.floor(Math.random() * 3)\n          col = Utils.randomSaturatedColor()\n          col = inLine ? Utils.mulColor(col, 0.55) : Utils.mulColor(col, 0.4)\n        } else {\n          col = this.pixels[index - 1]\n          col = Utils.mulColor(col, 0.8)\n        }\n        this.pixels[index] = col\n\n        adjacent--\n      }\n    }\n    this.updateLines(pixelHeight)\n    this.linePos %= pixelHeight\n    this.renderPixels()\n  }\n\n  updateLines(pixelHeight) {\n    this.lines.forEach(\n      (line) => (line.pos = (line.pos + line.speed) % pixelHeight)\n    )\n  }\n\n  isInLine(y, pixelHeight) {\n    return this.lines.some(\n      (line) =>\n        (y >= line.pos && y < line.pos + line.height) ||\n        (line.pos + line.height > pixelHeight &&\n          y < line.pos - pixelHeight + line.height)\n    )\n  }\n\n  renderPixels() {\n    let pixelWidth = Math.ceil(this.width / this.pixelSize)\n    for (let i = 0; i < this.pixels.length; i++) {\n      let x = i % pixelWidth\n      let y = Math.floor(i / pixelWidth)\n      this.context.fillStyle = '#' + this.pixels[i].toString(16)\n      this.context.fillRect(\n        x * this.pixelSize,\n        y * this.pixelSize,\n        this.pixelSize,\n        this.pixelSize\n      )\n    }\n  }\n}\n\nconst NoSignal = ({\n  tagName: Tag = 'div',\n  className = 'absolute top-0 left-0 z-0 w-screen h-screen',\n  variant = 'default',\n  children = '',\n}) => {\n  useLayoutEffect(() => {\n    const canvas = new Canvas(\n      document.getElementsByTagName('canvas')[0].getContext('2d')\n    )\n\n    canvas.start()\n\n    const tick = () => {\n      canvas.update()\n      requestAnimationFrame(tick)\n    }\n    requestAnimationFrame(tick)\n\n    window.addEventListener('resize', canvas.onResize.bind(canvas))\n    return () =>\n      window.removeEventListener('resize', canvas.onResize.bind(canvas))\n  }, [])\n\n  return (\n    <Tag\n      className={`${s.no_signal} ${s[`no_signal__${variant}`]} ${className}`}\n    >\n      <canvas />\n    </Tag>\n  )\n}\n\nNoSignal.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n  children: PropTypes.node,\n}\n\nexport default NoSignal\n",
+    "/**\n * NoSignal.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport NoSignal from './NoSignal';\nexport default {\n  title: 'NoSignal',\n  component: NoSignal,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <NoSignal />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <NoSignal />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "Utils",
+    "col",
+    "color",
+    "factor",
+    "r",
+    "g",
+    "b",
+    "Canvas",
+    "context",
+    "pixelWidth",
+    "pixelHeight",
+    "adjacent",
+    "y",
+    "inLine",
+    "x",
+    "index",
+    "line",
+    "i",
+    "NoSignal",
+    "Tag",
+    "className",
+    "variant",
+    "children",
+    "useLayoutEffect",
+    "canvas",
+    "tick",
+    "jsx",
+    "s",
+    "PropTypes",
+    "NoSignal$1",
+    "NoSignal_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "oaAUA,MAAAA,CAAA,CACA,OAAA,aAAA,CACA,OAAA,KAAA,MAAA,KAAA,SAAA,QAAA,CACA,CAEA,OAAA,sBAAA,CACA,IAAAC,EAAA,KAAA,MAAA,KAAA,OAAA,EAAA,GAAA,EACA,OAAAA,GAAA,GAAAA,GAAA,EAAAA,CACA,CAEA,OAAA,SAAAC,EAAAC,EAAA,CACA,IAAAC,GAAAF,EAAA,WAAA,GACAG,GAAAH,EAAA,QAAA,EACAI,EAAAJ,EAAA,IACA,OAAAE,EAAA,KAAA,IAAA,KAAA,MAAAA,EAAAD,CAAA,EAAA,GAAA,EACAE,EAAA,KAAA,IAAA,KAAA,MAAAA,EAAAF,CAAA,EAAA,GAAA,EACAG,EAAA,KAAA,IAAA,KAAA,MAAAA,EAAAH,CAAA,EAAA,GAAA,EACAC,GAAA,GAAAC,GAAA,EAAAC,CACA,CACA,CAEA,MAAAC,CAAA,CACA,YAAAC,EAAA,CACA,KAAA,OAAAA,EAAA,OACA,KAAA,QAAAA,EACA,KAAA,UAAA,EACA,KAAA,OAAA,GACA,KAAA,SAAA,EACA,KAAA,KAAA,EACA,KAAA,MAAA,CACA,CAAA,IAAA,GAAA,OAAA,GAAA,MAAA,IAAA,EACA,CAAA,IAAA,GAAA,OAAA,GAAA,MAAA,KAAA,CAAA,CAEA,CAEA,UAAA,CACA,KAAA,MAAA,OAAA,WACA,KAAA,OAAA,OAAA,YACA,KAAA,OAAA,MAAA,KAAA,MACA,KAAA,OAAA,OAAA,KAAA,OACA,KAAA,OAAA,OAAA,CACA,CAEA,OAAA,CAAA,CAEA,QAAA,CACA,IAAAC,EAAA,KAAA,KAAA,KAAA,MAAA,KAAA,SAAA,EACAC,EAAA,KAAA,KAAA,KAAA,OAAA,KAAA,SAAA,EACAC,EAAA,EACA,QAAAC,EAAA,EAAAA,EAAAF,EAAAE,IAAA,CACA,IAAAC,EAAA,KAAA,SAAAD,EAAAF,CAAA,EACA,QAAAI,EAAA,EAAAA,EAAAL,EAAAK,IAAA,CACA,IAAAC,EAAAD,EAAAF,EAAAH,EACAR,EACAU,GAAA,GACAA,EAAA,EAAA,KAAA,MAAA,KAAA,OAAA,EAAA,CAAA,EACAV,EAAAD,EAAA,uBACAC,EAAAY,EAAAb,EAAA,SAAAC,EAAA,GAAA,EAAAD,EAAA,SAAAC,EAAA,EAAA,IAEAA,EAAA,KAAA,OAAAc,EAAA,GACAd,EAAAD,EAAA,SAAAC,EAAA,EAAA,GAEA,KAAA,OAAAc,GAAAd,EAEAU,GACA,CACA,CACA,KAAA,YAAAD,CAAA,EACA,KAAA,SAAAA,EACA,KAAA,aAAA,CACA,CAEA,YAAAA,EAAA,CACA,KAAA,MAAA,QACAM,GAAAA,EAAA,KAAAA,EAAA,IAAAA,EAAA,OAAAN,CAAA,CAEA,CAEA,SAAAE,EAAAF,EAAA,CACA,OAAA,KAAA,MAAA,KACAM,GACAJ,GAAAI,EAAA,KAAAJ,EAAAI,EAAA,IAAAA,EAAA,QACAA,EAAA,IAAAA,EAAA,OAAAN,GACAE,EAAAI,EAAA,IAAAN,EAAAM,EAAA,MAAA,CAEA,CAEA,cAAA,CACA,IAAAP,EAAA,KAAA,KAAA,KAAA,MAAA,KAAA,SAAA,EACA,QAAAQ,EAAA,EAAAA,EAAA,KAAA,OAAA,OAAAA,IAAA,CACA,IAAAH,EAAAG,EAAAR,EACAG,EAAA,KAAA,MAAAK,EAAAR,CAAA,EACA,KAAA,QAAA,UAAA,IAAA,KAAA,OAAAQ,GAAA,SAAA,EAAA,EACA,KAAA,QAAA,SACAH,EAAA,KAAA,UACAF,EAAA,KAAA,UACA,KAAA,UACA,KAAA,SAAA,CAEA,CACA,CACA,CAEA,MAAAM,EAAA,CAAA,CACA,QAAAC,EAAA,MACA,UAAAC,EAAA,8CACA,QAAAC,EAAA,UACA,SAAAC,EAAA,EACA,KACAC,EAAA,IAAA,CACA,MAAAC,EAAA,IAAAjB,EACA,SAAA,qBAAA,QAAA,EAAA,GAAA,WAAA,IAAA,CAAA,EAGAiB,EAAA,MAAA,EAEA,MAAAC,EAAA,IAAA,CACAD,EAAA,OAAA,EACA,sBAAAC,CAAA,CAAA,EAEA,6BAAAA,CAAA,EAEA,OAAA,iBAAA,SAAAD,EAAA,SAAA,KAAAA,CAAA,CAAA,EACA,IACA,OAAA,oBAAA,SAAAA,EAAA,SAAA,KAAAA,CAAA,CAAA,CACA,EAAA,CAAA,CAAA,EAGAE,EAAAP,EAAA,CACA,UAAA,GAAAQ,EAAA,aAAAA,EAAA,cAAAN,QAAAD,IAEA,WAAA,SAAA,EAAA,CAAA,CAAA,GAKAF,EAAA,UAAA,CACA,QAAAU,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,EACA,SAAAA,EAAA,QAAA,IACA,EAEA,MAAAC,EAAAX,wiBClJA,MAAAY,EAAA,CACA,MAAA,WACA,UAAAZ,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAa,EAAA,IAAAL,EAAAR,EAAA,EAAA,EACAa,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,qBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

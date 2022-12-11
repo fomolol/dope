@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "file": "ScenePaperJS.stories-d091cae5.js",
+  "sources": [
+    "../../src/components/ScenePaperJS/ScenePaperJS.jsx",
+    "../../src/components/ScenePaperJS/ScenePaperJS.stories.jsx"
+  ],
+  "sourcesContent": [
+    "/**\n * @file ScenePaperJS.js\n */\nimport React, { useRef } from 'react'\nimport PropTypes from 'prop-types'\n\nimport s from './ScenePaperJS.module.css'\n\nimport { usePaperJS, useLayoutEffect } from '@fomolol/tacklebox'\n\nconst ScenePaperJS = ({\n  tagName: Tag = 'canvas',\n  className = 'absolute top-0 left-0 w-screen h-screen bg-black opacity-100',\n  variant = 'default',\n}) => {\n  const ref = useRef()\n  const project = usePaperJS({ ref })\n\n  // Setup PaperJS\n  useLayoutEffect(() => {\n    if (project) {\n      console.log('project', project)\n      const { view } = project\n      console.log('view', view)\n\n      view.onFrame = ({ delta, time, count }) => {\n        console.log('tick', count)\n      }\n\n      view.onResize = (event) => {\n        console.log('event', event)\n      }\n    }\n  }, [project])\n\n  return (\n    <Tag\n      className={`${s.scene_paper_j_s} ${\n        s[`scene_paper_j_s__${variant}`]\n      } ${className}`}\n      ref={ref}\n    />\n  )\n}\n\nScenePaperJS.propTypes = {\n  tagName: PropTypes.string,\n  className: PropTypes.string,\n  variant: PropTypes.oneOf(['default']),\n}\n\nexport default ScenePaperJS\n",
+    "/**\n * ScenePaperJS.jsx\n */\nimport React from 'react';\n\n// Component(s)\nimport ScenePaperJS from './ScenePaperJS';\nexport default {\n  title: 'ScenePaperJS',\n  component: ScenePaperJS,\n  // Sets the layout parameter component wide.\n  parameters: {\n    layout: 'centered'\n  }\n};\nexport const Default = () => <ScenePaperJS />;\nDefault.storyName = 'default';\nDefault.parameters = {\n  ...Default.parameters,\n  storySource: {\n    source: \"() => <ScenePaperJS />\",\n    ...Default.parameters?.storySource\n  }\n};"
+  ],
+  "names": [
+    "ScenePaperJS",
+    "Tag",
+    "className",
+    "variant",
+    "ref",
+    "useRef",
+    "project",
+    "usePaperJS",
+    "useLayoutEffect",
+    "view",
+    "delta",
+    "time",
+    "count",
+    "event",
+    "jsx",
+    "s",
+    "PropTypes",
+    "ScenePaperJS$1",
+    "ScenePaperJS_stories",
+    "Default",
+    "_a"
+  ],
+  "mappings": "+cAUAA,EAAA,CAAA,CACA,QAAAC,EAAA,SACA,UAAAC,EAAA,+DACA,QAAAC,EAAA,SACA,IAAA,CACA,MAAAC,EAAAC,EAAAA,QAAAA,SACAC,EAAAC,EAAA,CAAA,IAAAH,CAAA,CAAA,EAGAI,OAAAA,EAAA,IAAA,CACA,GAAAF,EAAA,CACA,QAAA,IAAA,UAAAA,CAAA,EACA,KAAA,CAAA,KAAAG,CAAA,EAAAH,EACA,QAAA,IAAA,OAAAG,CAAA,EAEAA,EAAA,QAAA,CAAA,CAAA,MAAAC,EAAA,KAAAC,EAAA,MAAAC,KAAA,CACA,QAAA,IAAA,OAAAA,CAAA,CAAA,EAGAH,EAAA,SAAAI,GAAA,CACA,QAAA,IAAA,QAAAA,CAAA,CAAA,CAEA,CAAA,EACA,CAAAP,CAAA,CAAA,EAGAQ,EAAAb,EAAA,CACA,UAAA,GAAAc,EAAA,mBACAA,EAAA,oBAAAZ,QACAD,IACA,IAAAE,CAAA,CAAA,CAGA,EAEAJ,EAAA,UAAA,CACA,QAAAgB,EAAA,QAAA,OACA,UAAAA,EAAA,QAAA,OACA,QAAAA,EAAA,QAAA,MAAA,CAAA,SAAA,CAAA,CACA,EAEA,MAAAC,EAAAjB,ieC5CA,MAAAkB,EAAA,CACA,MAAA,eACA,UAAAlB,EAEA,WAAA,CACA,OAAA,UACA,CACA,EACAmB,EAAA,IAAAL,EAAAd,EAAA,EAAA,EACAmB,EAAA,UAAA,gBACAA,EAAA,WAAA,CACA,GAAAA,EAAA,WACA,YAAA,CACA,OAAA,yBACA,IAAAC,EAAAD,EAAA,aAAA,YAAAC,EAAA,WACA,CACA,EAAAD,EAAA,aAAA,CAAA,YAAA,GAAA,QAAA,GAAA,YAAA"
+}

@@ -1,33 +1,33 @@
 /**
  * @file Text.js
  */
-import React, { useState, useRef} from 'react'
-import PropTypes from 'prop-types'
-import { useLayoutEffect } from '@fomolol/tacklebox'
+import React, { useState, useRef, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { useLayoutEffect } from '@fomolol/tacklebox';
 
-import styles from './Text.module.css'
+import styles from './Text.module.css';
 
-import SplitFade from './SplitFade'
-import SplitOverflow from './SplitOverflow'
+import SplitFade from './SplitFade';
+import SplitOverflow from './SplitOverflow';
 
 const Text = ({
   tagName: Tag = 'h2',
   className = '',
   variant = 'default',
-  children = '',
-  type,
+  children = 'Lorem ipsum',
+  type = 'fade-letter',
 }) => {
-  const text = useRef()
-  const [newText, setNewText] = useState(null)
-  const hasTextSpans = useRef(false)
+  const text = useRef();
+  const [newText, setNewText] = useState(null);
+  const hasTextSpans = useRef(false);
 
-  const innerHtml = useRef()
+  const innerHtml = useRef();
 
   useLayoutEffect(() => {
     if (text.current) {
-      innerHtml.current = text.current?.innerHTML.replaceAll('<br>', ' _ ')
+      innerHtml.current = text.current?.innerHTML.replaceAll('<br>', ' _ ');
     }
-  }, [text])
+  }, [text]);
 
   useLayoutEffect(() => {
     if (
@@ -37,26 +37,30 @@ const Text = ({
       !hasTextSpans.current
     ) {
       if (type === 'fade-letter') {
-        const letters = innerHtml.current.split('')
-        setNewText(letters)
+        const letters = innerHtml.current.split('');
+        setNewText(letters);
       } else if (type === 'fade-word') {
-        const words = innerHtml.current.split(' ')
-        setNewText(words)
+        const words = innerHtml.current.split(' ');
+        setNewText(words);
       } else if (type === 'fade-block') {
-        setNewText('hide children')
+        setNewText('hide children');
       } else if (type === 'overflow-word') {
-        const words = innerHtml.current.split(' ')
-        setNewText(words)
+        const words = innerHtml.current.split(' ');
+        setNewText(words);
       }
     }
-  }, [text, innerHtml, type])
+  }, [text, innerHtml, type]);
 
   const renderText = useMemo(
     () =>
       newText && type === 'fade-letter' ? (
-        newText?.map((letter, index) => (
-          letter === '_' ? <br /> : <SplitFade key={`fade-letter-${index}`}>{letter || ' '}</SplitFade>
-        ))
+        newText?.map((letter, index) =>
+          letter === '_' ? (
+            <br />
+          ) : (
+            <SplitFade key={`fade-letter-${index}`}>{letter || ' '}</SplitFade>
+          ),
+        )
       ) : type === 'fade-word' ? (
         newText?.map((word, index) => (
           <>
@@ -73,19 +77,19 @@ const Text = ({
       ) : type === 'fade-block' ? (
         <SplitFade>{children}</SplitFade>
       ) : type === 'overflow-word' ? (
-        newText?.map((word, index) => (
-         word === '_' ? (
-              <br />
-            ) : (
-              <span key={`overflow-word-${index}`}>
-                <SplitOverflow>{word}</SplitOverflow>
-                <SplitOverflow> </SplitOverflow>
-              </span>
-            )
-        ))
+        newText?.map((word, index) =>
+          word === '_' ? (
+            <br />
+          ) : (
+            <span key={`overflow-word-${index}`}>
+              <SplitOverflow>{word}</SplitOverflow>
+              <SplitOverflow> </SplitOverflow>
+            </span>
+          ),
+        )
       ) : null,
-    [newText, type, children]
-  )
+    [newText, type, children],
+  );
 
   return (
     <Tag
@@ -94,14 +98,14 @@ const Text = ({
     >
       {!renderText ? children : renderText}
     </Tag>
-  )
-}
+  );
+};
 
 Text.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default Text
+export default Text;

@@ -1,17 +1,17 @@
 /**
  * @file NoiseGrain.js
  */
-import * as React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react';
+import PropTypes from 'prop-types';
 
-import s from './NoiseGrain.module.css'
+import s from './NoiseGrain.module.css';
 
 const NoiseGrain = ({
   tagName: Tag = 'div',
   className = 'fixed inset-0 w-full h-full pointer-events-none',
   variant = 'grain', // noise, both
-  noiseSrc = '../../public/noise.png',
-  scratchesSrc = '../../public/scratches.webp',
+  noiseSrc = '/img/noise.png',
+  scratchesSrc = '/img/scratches.webp',
 }) => {
   return (
     <Tag
@@ -56,14 +56,14 @@ const NoiseGrain = ({
         }
       `}</style>
     </Tag>
-  )
-}
+  );
+};
 
 NoiseGrain.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['grain', 'noise', 'both']),
   children: PropTypes.node,
-}
+};
 
-export default NoiseGrain
+export default NoiseGrain;

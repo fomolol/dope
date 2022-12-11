@@ -24,7 +24,7 @@ specifiers:
   '@babel/plugin-transform-spread': ^7.19.0
   '@babel/preset-env': ^7.20.2
   '@babel/preset-react': ^7.18.6
-  '@fomolol/tacklebox': ^0.1.7
+  '@fomolol/tacklebox': ^0.1.8
   '@mdx-js/react': ^2.1.5
   '@react-three/drei': ^9.46.0
   '@react-three/fiber': ^8.9.1
@@ -132,7 +132,7 @@ devDependencies:
   '@babel/plugin-transform-spread': 7.19.0
   '@babel/preset-env': 7.20.2
   '@babel/preset-react': 7.18.6
-  '@fomolol/tacklebox': 0.1.7_qcjbehonoz5ngqatrvivsh3mu4
+  '@fomolol/tacklebox': 0.1.8_qcjbehonoz5ngqatrvivsh3mu4
   '@mdx-js/react': 2.1.5_react@18.2.0
   '@react-three/drei': 9.46.4_xa6xk36nauwxkzngvitxgjpnr4
   '@react-three/fiber': 8.9.1_pvdsq7s4d5knbxbfttptgjiz3a
@@ -3183,8 +3183,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /@fomolol/tacklebox/0.1.7_qcjbehonoz5ngqatrvivsh3mu4:
-    resolution: {integrity: sha512-6BQVJ4glyFYQZlhyK3E3z+EwZd0ao69fd+8r6dEGHGZuWiCepxpvP3yC1WNL8ayjo/ikELRExpzwXIbtEUgo3A==}
+  /@fomolol/tacklebox/0.1.8_qcjbehonoz5ngqatrvivsh3mu4:
+    resolution: {integrity: sha512-oKNzxbs7crMOFnhzEAZCyC2CPMnXvAQx8cpD/zTak5ANmgp4I+dyIcs5Oc06alc6/FQ1Hukc/LmhTXoBWAP16w==}
     peerDependencies:
       giphy-api: ^2.0.2
       matter-js: ^0.18.0

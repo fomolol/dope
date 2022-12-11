@@ -9,10 +9,10 @@ import styles from './ButtonFancy.module.css';
 
 const ButtonFancy = ({
   tagName: Tag = 'div',
-  className = 'text-2xl',
-  buttonClassName = '',
+  className = 'text-sm',
+  buttonClassName = 'h-4',
   variant = 'default',
-  children = '',
+  children = 'Lorem ipsum',
 }) => {
   const btn = useRef();
 

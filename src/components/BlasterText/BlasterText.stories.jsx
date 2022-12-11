@@ -1,10 +1,10 @@
 /**
  * BlasterText.jsx
  */
-import * as React from 'react'
+import * as React from 'react';
 
 // Component(s)
-import BlasterText from './BlasterText'
+import BlasterText from './BlasterText';
 
 export default {
   title: 'BlasterText',
@@ -13,8 +13,9 @@ export default {
   parameters: {
     layout: 'centered',
   },
-}
+};
 
-export const Default = () => <BlasterText />
+export const Default = () => <BlasterText />;
+export const Started = () => <BlasterText start />;
 
-Default.storyName = 'default'
+Default.storyName = 'default';

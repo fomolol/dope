@@ -7,7 +7,9 @@ export default defineConfig({
   root: resolve(__dirname, 'src/'),
   base: '/storybook',
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'classic',
+    }),
     //eslint() // WARNING: This breaks storybook at the moment
   ],
   // rollupOptions: {

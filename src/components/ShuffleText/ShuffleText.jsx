@@ -1,41 +1,41 @@
 /**
  * @file ShuffleText.js
  */
-import { useState, useRef, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { useLayoutEffect } from '@fomolol/tacklebox'
+import { useState, useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { useLayoutEffect } from '@fomolol/tacklebox';
 
-import s from './ShuffleText.module.css'
+import s from './ShuffleText.module.css';
 
 const ShuffleText = ({
   tagName: Tag = 'h2',
   className = 'text-white transition-all duration-1000 ease-out font-stolzl hover:text-purple-400',
   variant = 'default',
-  defaultText,
-  hoverText,
+  defaultText = 'Lorem ipsum',
+  hoverText = 'Hello World',
   characters: _characters = '█▅▉▄▋▃▋▓▔▛▟▞▝▜▕▒▐',
 }) => {
-  const [targetText, setTargetText] = useState(defaultText)
-  const [randomString, setRandomString] = useState(defaultText)
+  const [targetText, setTargetText] = useState(defaultText);
+  const [randomString, setRandomString] = useState(defaultText);
 
-  const characters = useRef(_characters)
-  const currentLength = useRef(0)
-  const infoArray = useRef([])
+  const characters = useRef(_characters);
+  const currentLength = useRef(0);
+  const infoArray = useRef([]);
 
   /**
    * generateRandomString
    * Generates an initial random string to be used as the target text.
    */
   const generateRandomString = useCallback(() => {
-    let string = ''
+    let string = '';
     while (string.length < currentLength.current) {
       string += characters.current.charAt(
-        Math.floor(Math.random() * characters.current.length)
-      )
+        Math.floor(Math.random() * characters.current.length),
+      );
     }
-    setRandomString(string)
-  }, [])
+    setRandomString(string);
+  }, []);
 
   /**
    * animateFadeBuffer
@@ -43,44 +43,44 @@ const ShuffleText = ({
    */
   const animateFadeBuffer = useCallback(() => {
     if (!infoArray.current.length) {
-      infoArray.current = []
+      infoArray.current = [];
 
       for (let i = 0; i < targetText.length; i++) {
         infoArray.current.push({
           countdown: Math.floor(Math.random() * 12) + 1,
           correctLetter: targetText.charAt(i),
-        })
+        });
       }
     }
 
-    let useRandomCharacter = false
-    let string = ''
+    let useRandomCharacter = false;
+    let string = '';
 
     for (let i = 0; i < infoArray.current.length; i++) {
-      let fader = infoArray.current[i]
+      let fader = infoArray.current[i];
 
       if (fader.countdown > 0) {
-        useRandomCharacter = true
+        useRandomCharacter = true;
 
-        fader.countdown--
+        fader.countdown--;
 
         string += characters.current.charAt(
-          Math.floor(Math.random() * characters.current.length)
-        )
+          Math.floor(Math.random() * characters.current.length),
+        );
       } else {
-        string += fader.correctLetter
+        string += fader.correctLetter;
       }
     }
 
-    setRandomString(string)
+    setRandomString(string);
 
     if (useRandomCharacter === true) {
-      setTimeout(animateFadeBuffer, 50)
+      setTimeout(animateFadeBuffer, 50);
     } else {
-      currentLength.current = 0
-      infoArray.current = []
+      currentLength.current = 0;
+      infoArray.current = [];
     }
-  }, [targetText])
+  }, [targetText]);
 
   /**
    * animateIn
@@ -88,23 +88,23 @@ const ShuffleText = ({
    */
   const animateIn = useCallback(() => {
     if (currentLength.current < targetText.length) {
-      currentLength.current += 2
+      currentLength.current += 2;
 
       if (currentLength.current > targetText.length) {
-        currentLength.current = targetText.length
+        currentLength.current = targetText.length;
       }
 
-      generateRandomString()
+      generateRandomString();
 
-      setTimeout(animateIn, 20)
+      setTimeout(animateIn, 20);
     } else {
-      setTimeout(animateFadeBuffer, 20)
+      setTimeout(animateFadeBuffer, 20);
     }
-  }, [animateFadeBuffer, generateRandomString, targetText])
+  }, [animateFadeBuffer, generateRandomString, targetText]);
 
   useLayoutEffect(() => {
-    animateIn()
-  }, [animateIn])
+    animateIn();
+  }, [animateIn]);
 
   return (
     <Tag
@@ -114,14 +114,14 @@ const ShuffleText = ({
     >
       {randomString}
     </Tag>
-  )
-}
+  );
+};
 
 ShuffleText.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default ShuffleText
+export default ShuffleText;

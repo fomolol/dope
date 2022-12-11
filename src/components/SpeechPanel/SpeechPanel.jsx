@@ -1,11 +1,11 @@
 /**
  * @file SpeechPanel.js
  */
-import { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import s from './SpeechPanel.module.css'
+import s from './SpeechPanel.module.css';
 
 const ButtonSpeakBackground = ({ onAnimationComplete }) => {
   return (
@@ -24,18 +24,18 @@ const ButtonSpeakBackground = ({ onAnimationComplete }) => {
         ease: [0.4, 0.0, 0.2, 1.0],
       }}
       onAnimationComplete={onAnimationComplete}
-      className={`fixed origin-center transition-all ease-out h-[84px] w-[84px] right-12 bottom-12 rounded-full`}
+      className={`fixed right-12 bottom-12 h-[84px] w-[84px] origin-center rounded-full transition-all ease-out`}
     >
       <div
-        className={`absolute bottom-0 right-0 w-full h-full transition ease-out bg-red-ff dark:bg-blue-500 rounded-full duration-500`}
+        className={`absolute bottom-0 right-0 h-full w-full rounded-full bg-red-ff transition duration-500 ease-out dark:bg-blue-500`}
       />
     </motion.div>
-  )
-}
+  );
+};
 
 const SpeechPanel = ({
   tagName: Tag = 'div',
-  className = 'fixed top-0 left-0 flex items-center justify-center w-screen h-screen overflow-hidden',
+  className = 'absolute top-0 left-0 flex w-full h-full overflow-hidden',
   variant = 'default',
   active = false,
   questions = [
@@ -45,16 +45,16 @@ const SpeechPanel = ({
     'What do you think of NFTs?',
   ],
 }) => {
-  const [isReady, setIsReady] = useState(false)
+  const [isReady, setIsReady] = useState(false);
   const onAnimationComplete = useCallback(() => {
     if (!isReady) {
-      console.log('Animation Start Complete')
-      setIsReady(true)
+      console.log('Animation Start Complete');
+      setIsReady(true);
     } else {
-      console.log('Animation End Complete')
-      setIsReady(false)
+      console.log('Animation End Complete');
+      setIsReady(false);
     }
-  }, [isReady])
+  }, [isReady]);
 
   const variants = {
     hide: { opacity: 0 },
@@ -64,7 +64,7 @@ const SpeechPanel = ({
       ease: 'easeOut',
       staggerChildren: 1.5,
     },
-  }
+  };
 
   var listVariants = {
     hide: { opacity: 0 },
@@ -73,7 +73,7 @@ const SpeechPanel = ({
       duration: 1,
       ease: 'easeOut',
     },
-  }
+  };
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -103,7 +103,7 @@ const SpeechPanel = ({
                     exit="hide"
                     variants={listVariants}
                     key={`q-${index}`}
-                    className="flex items-center justify-center px-4 py-2 text-center text-black transition-all duration-500 ease-out drop-shadow-md hover:drop-shadow-2xl backdrop-blur-lg bg-white/90 rounded-2xl"
+                    className="flex items-center justify-center px-4 py-2 text-center text-black transition-all duration-500 ease-out rounded-2xl bg-white/90 drop-shadow-md backdrop-blur-lg hover:drop-shadow-2xl"
                   >
                     {question}
                   </motion.li>
@@ -114,14 +114,14 @@ const SpeechPanel = ({
         </Tag>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
 SpeechPanel.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default SpeechPanel
+export default SpeechPanel;

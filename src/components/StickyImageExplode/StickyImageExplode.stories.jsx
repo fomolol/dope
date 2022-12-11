@@ -11,7 +11,7 @@ export default {
   component: StickyImageExplode,
   // Sets the layout parameter component wide.
   parameters: {
-    layout: 'centered',
+    layout: 'left',
   },
 };
 

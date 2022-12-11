@@ -28,7 +28,7 @@
     "prebuild": "npm run clean",
     "preversion": "npm run build",
     "postversion": "git push --follow-tags",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-manager-cache",
     "build-storybook": "storybook build",
     "serve-storybook": "serve storybook",
     "chromatic": "npx chromatic --project-token=d31c2b0b40ec --exit-zero-on-changes"
@@ -64,7 +64,7 @@
     "@babel/plugin-transform-spread": "^7.19.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
-    "@fomolol/tacklebox": "^0.1.7",
+    "@fomolol/tacklebox": "^0.1.8",
     "@mdx-js/react": "^2.1.5",
     "@react-three/drei": "^9.46.0",
     "@react-three/fiber": "^8.9.1",

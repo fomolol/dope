@@ -1,29 +1,29 @@
 /**
  * @file Typography.js
  */
-import React from 'react'
-import { motion } from 'framer-motion'
-import { easeInOutQuad } from 'lib/easing'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { easeInOutQuad } from 'lib/easing';
 
-import s from './Typography.module.css'
+import s from './Typography.module.css';
 
 /**
  * getTheme
  * Handles returning the proper theme colors
  * @param {*} variant
  */
-const getTheme = (variant) => {
+const getTheme = variant => {
   switch (variant) {
     case 'dark':
-      variantClassName = 'text-black'
-      break
+      variantClassName = 'text-black';
+      break;
     case 'light':
-      variantClassName = 'text-white'
-      break
+      variantClassName = 'text-white';
+      break;
     default:
-      break
+      break;
   }
-}
+};
 
 const BaseType = ({
   tagName: Tag,
@@ -68,12 +68,12 @@ const BaseType = ({
     >
       {children}
     </Tag>
-  )
-}
+  );
+};
 
 export const H1 = ({
   className = '',
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1,
   html,
@@ -90,12 +90,12 @@ export const H1 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const H2 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.15,
   html,
@@ -112,12 +112,12 @@ export const H2 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const H3 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.15,
   html,
@@ -134,12 +134,12 @@ export const H3 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const H4 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.25,
   html,
@@ -156,12 +156,12 @@ export const H4 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const H5 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.35,
   html,
@@ -178,12 +178,12 @@ export const H5 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const H6 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.25,
   html,
@@ -200,12 +200,12 @@ export const H6 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const P1 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.45,
   html,
@@ -222,12 +222,12 @@ export const P1 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const P2 = ({
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.45,
   html,
@@ -244,13 +244,13 @@ export const P2 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const P3 = ({
   html,
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.45,
 }) => {
@@ -266,13 +266,13 @@ export const P3 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};
 
 export const P4 = ({
   html,
   className,
-  children,
+  children = 'Lorem ipsum',
   duration = 1,
   delay = 1.45,
 }) => {
@@ -288,5 +288,5 @@ export const P4 = ({
     >
       {children}
     </BaseType>
-  )
-}
+  );
+};

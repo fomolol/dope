@@ -31,14 +31,17 @@ const ASCIIGalaxy = ({
   tagName: Tag = 'pre',
   className = 'absolute top-0 left-0 flex items-center justify-center w-screen h-screen overflow-hidden font-mono text-white opacity-50',
   variant = 'default',
-  width: tWidth,
-  height: tHeight,
+  width: tWidth = 100,
+  height: tHeight = 100,
   stars = 10,
   trails = 20,
   ds = ' ',
 }) => {
   const { height: _height, width: _width } = useWindowSize();
-  const [galaxy, setGalaxy] = useState('');
+  const [galaxy, setGalaxy] = useState(null);
+
+  console.log('_height', _height);
+  console.log('_width', _width);
 
   const field = useRef([]);
 

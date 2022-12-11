@@ -1,16 +1,16 @@
 /**
  * @file StickyImageExplode.js
  */
-import { useRef } from 'react'
-import PropTypes from 'prop-types'
+import { useRef } from 'react';
+import PropTypes from 'prop-types';
 import {
   useScroll,
   useTransform,
   motion,
   useMotionTemplate,
-} from 'framer-motion'
+} from 'framer-motion';
 
-import s from './StickyImageExplode.module.css'
+import s from './StickyImageExplode.module.css';
 
 const Placeholder = () => {
   return (
@@ -20,8 +20,8 @@ const Placeholder = () => {
         height: `calc(100% - 100vh)`,
       }}
     />
-  )
-}
+  );
+};
 
 const ImageContainer = ({
   className = 'bg-[#4E6868] bg-[url("/img/fpo-bg1.jpeg")]',
@@ -42,8 +42,8 @@ const ImageContainer = ({
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 const ImageContainerInner = ({
   borderRadius = '20vw',
@@ -58,63 +58,63 @@ const ImageContainerInner = ({
         transform,
       }}
     />
-  )
-}
+  );
+};
 
 const StickyImageExplode = ({
   tagName: Tag = 'div',
   className = 'absolute flex flex-col items-center justify-center w-full h-screen overflow-hidden',
   variant = 'default',
 }) => {
-  const ref = useRef()
+  const ref = useRef();
   const { scrollYProgress } = useScroll({
     container: ref,
-  })
-  const borderRadiusT = useTransform(scrollYProgress, [0, 0.35], [20, 2])
-  const borderRadius = useMotionTemplate`${borderRadiusT}vw`
+  });
+  const borderRadiusT = useTransform(scrollYProgress, [0, 0.35], [20, 2]);
+  const borderRadius = useMotionTemplate`${borderRadiusT}vw`;
 
-  const scaleContainerT = useTransform(scrollYProgress, [0, 0.35], [0.26, 1])
+  const scaleContainerT = useTransform(scrollYProgress, [0, 0.35], [0.26, 1]);
   const translateContainerT = useTransform(
     scrollYProgress,
     [0, 0.35],
-    [244.543, 0]
-  )
+    [244.543, 0],
+  );
   const scaleInner0T = useTransform(
     scrollYProgress,
     [0, 0.35, 0.55],
-    [0.63, 1, 0.85]
-  )
+    [0.63, 1, 0.85],
+  );
   const scaleInner1T = useTransform(
     scrollYProgress,
     [0, 0.35, 0.55],
-    [0.37, 1, 0.75]
-  )
+    [0.37, 1, 0.75],
+  );
   const scaleInner2T = useTransform(
     scrollYProgress,
     [0, 0.35, 0.55],
-    [0, 1, 0.65]
-  )
+    [0, 1, 0.65],
+  );
 
   const rotateInner0T = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ['25deg', '0deg']
-  )
+    ['25deg', '0deg'],
+  );
   const rotateInner1T = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ['50deg', '0deg']
-  )
+    ['50deg', '0deg'],
+  );
   const rotateInner2T = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ['75deg', '0deg']
-  )
+    ['75deg', '0deg'],
+  );
 
-  const transformContainer = useMotionTemplate`translate(0px, ${translateContainerT}px) scale(${scaleContainerT}, ${scaleContainerT})`
-  const transformInner0 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner0T}) scale(${scaleInner0T}, ${scaleInner0T})`
-  const transformInner1 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner1T}) scale(${scaleInner1T}, ${scaleInner1T})`
-  const transformInner2 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner2T}) scale(${scaleInner2T}, ${scaleInner2T})`
+  const transformContainer = useMotionTemplate`translate(0px, ${translateContainerT}px) scale(${scaleContainerT}, ${scaleContainerT})`;
+  const transformInner0 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner0T}) scale(${scaleInner0T}, ${scaleInner0T})`;
+  const transformInner1 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner1T}) scale(${scaleInner1T}, ${scaleInner1T})`;
+  const transformInner2 = useMotionTemplate`translate3d(0px, 0px, 0px) rotate(${rotateInner2T}) scale(${scaleInner2T}, ${scaleInner2T})`;
 
   return (
     <Tag
@@ -154,14 +154,14 @@ const StickyImageExplode = ({
         }
       `}</style>
     </Tag>
-  )
-}
+  );
+};
 
 StickyImageExplode.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default StickyImageExplode
+export default StickyImageExplode;

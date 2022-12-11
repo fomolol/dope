@@ -1,10 +1,10 @@
 /**
  * @file ButtonColorHover.js
  */
-import * as React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react';
+import PropTypes from 'prop-types';
 
-import s from './ButtonColorHover.module.css'
+import s from './ButtonColorHover.module.css';
 
 const ButtonColorHover = ({
   tagName: Tag = 'div',
@@ -19,38 +19,40 @@ const ButtonColorHover = ({
       } ${className}`}
     >
       <button
-        class="btnCircle btn-Circle--gallery"
+        className="btnCircle btn-Circle--gallery"
         visible=""
-        style="--btnBgColor:#ffffff; --btnColor:#000000;"
+        style={{
+          '--btnBgColor': '#ffffff',
+          '--btnColor': '#000000;',
+        }}
       >
         <canvas
           data-ui="canvas"
           width="103"
           height="103"
-          style="position: absolute; top: 50%; left: 50%; width: 51.6953px; height: 51.6953px; margin-top: -26px; margin-left: -26px;"
+          className="absolute top-[50%] left-[50%] mt-[-26px] ml-[-26px] h-[51.6953px] w-[51.6953px]"
         ></canvas>
-        <div data-ui="icon" style="opacity: 1;">
-          <svg data-ui="grid" class="btnCircle__icon">
+        <div data-ui="icon" className="opacity-100">
+          <svg data-ui="grid" className="btnCircle__icon">
             <use xlinkHref="#grid"></use>
           </svg>
         </div>
         <div
-          class="btnCircle__text"
+          className="btnCircle__text translate-[0px_0px] transform opacity-100"
           data-ui="text"
-          style="opacity: 1; transform: translate(0px, 0px);"
         >
           {children}
         </div>
       </button>
     </Tag>
-  )
-}
+  );
+};
 
 ButtonColorHover.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default ButtonColorHover
+export default ButtonColorHover;

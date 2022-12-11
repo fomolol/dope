@@ -1,12 +1,12 @@
 /**
  * @file RadialRainbows.js
  */
-import { useRef } from 'react'
-import PropTypes from 'prop-types'
-import Paper from 'paper'
-import { usePaperJS, useLayoutEffect } from '@fomolol/tacklebox'
+import { useRef } from 'react';
+import PropTypes from 'prop-types';
+import Paper from 'paper';
+import { usePaperJS, useLayoutEffect } from '@fomolol/tacklebox';
 
-import s from './RadialRainbows.module.css'
+import s from './RadialRainbows.module.css';
 
 const RadialRainbows = ({
   tagName: Tag = 'canvas',
@@ -14,32 +14,32 @@ const RadialRainbows = ({
   variant = 'default',
   children = '',
 }) => {
-  const ref = useRef()
-  const project = usePaperJS({ ref })
+  const ref = useRef();
+  const project = usePaperJS({ ref });
 
   useLayoutEffect(() => {
     if (project) {
-      const { view } = project
-      const { Point, Path } = Paper
+      const { view } = project;
+      const { Point, Path } = Paper;
 
-      var point = view.center
+      var point = view.center;
 
-      var colors = []
-      var cycles = 4
+      var colors = [];
+      var cycles = 4;
 
       // Generate some rainbow colors
       for (var i = 0, l = 60; i < l; i++) {
-        var brightness = 1 - (i / l) * 1.5
-        var hue = (i / l) * cycles * 360
+        var brightness = 1 - (i / l) * 1.5;
+        var hue = (i / l) * cycles * 360;
         var color = {
           hue: hue,
           saturation: 1,
           brightness: brightness,
-        }
-        colors.push(color)
+        };
+        colors.push(color);
       }
 
-      var radius = Math.max(view.size.width, view.size.height) * 0.75
+      var radius = Math.max(view.size.width, view.size.height) * 0.75;
 
       var path = new Path.Rectangle({
         rectangle: view.bounds,
@@ -59,66 +59,66 @@ const RadialRainbows = ({
             radial: true,
           },
         },
-      })
+      });
 
-      var color = path.fillColor
-      var gradient = color.gradient
-      var mouseDown = false
-      var mousePoint = view.center
+      var color = path.fillColor;
+      var gradient = color.gradient;
+      var mouseDown = false;
+      var mousePoint = view.center;
 
-      var grow = false
-      var vector = new Point(150, 0)
+      var grow = false;
+      var vector = new Point(150, 0);
 
-      view.onMouseDown = (event) => {
-        mouseDown = true
-        mousePoint = event.point
-      }
+      view.onMouseDown = event => {
+        mouseDown = true;
+        mousePoint = event.point;
+      };
 
-      view.onMouseDrag = (event) => {
-        mousePoint = event.point
-      }
+      view.onMouseDrag = event => {
+        mousePoint = event.point;
+      };
 
-      view.onMouseUp = (event) => {
-        vector.length = 10
-        mouseDown = false
-      }
+      view.onMouseUp = event => {
+        vector.length = 10;
+        mouseDown = false;
+      };
 
       view.onFrame = ({ delta, time, count }) => {
         for (var i = 0, l = gradient.stops.length; i < l; i++) {
-          gradient.stops[i].color.hue -= 20
+          gradient.stops[i].color.hue -= 20;
         }
 
         if (grow && vector.length > 300) {
-          grow = false
+          grow = false;
         } else if (!grow && vector.length < 75) {
-          grow = true
+          grow = true;
         }
 
         if (mouseDown) {
-          point.x = point.x + (mousePoint.x - point.x) / 10
-          point.y = point.y + (mousePoint.y - point.y) / 10
+          point.x = point.x + (mousePoint.x - point.x) / 10;
+          point.y = point.y + (mousePoint.y - point.y) / 10;
         } else {
-          vector.length += grow ? 1 : -1
-          vector.angle += 5
+          vector.length += grow ? 1 : -1;
+          vector.angle += 5;
         }
         color.highlight = mouseDown
           ? point
-          : new Point({ x: point.x + vector.x, y: point.y + vector.y })
-      }
+          : new Point({ x: point.x + vector.x, y: point.y + vector.y });
+      };
 
-      view.onResize = (event) => {
-        point = view.center
-        path.bounds = view.bounds
-        var color = path.fillColor
-        color.origin = point
-        var radius = Math.max(view.size.width, view.size.height) * 0.75
-        color.destination = new Point(point.x + radius, 0)
+      view.onResize = event => {
+        point = view.center;
+        path.bounds = view.bounds;
+        var color = path.fillColor;
+        color.origin = point;
+        var radius = Math.max(view.size.width, view.size.height) * 0.75;
+        color.destination = new Point(point.x + radius, 0);
 
         // paper.project._needsUpdate = true;
         // paper.project.view.update();
-      }
+      };
     }
-  }, [project])
+  }, [project]);
 
   return (
     <Tag
@@ -130,14 +130,14 @@ const RadialRainbows = ({
     >
       {children}
     </Tag>
-  )
-}
+  );
+};
 
 RadialRainbows.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default RadialRainbows
+export default RadialRainbows;

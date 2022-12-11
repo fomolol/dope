@@ -1,10 +1,10 @@
 /**
  * ButtonColorHover.jsx
  */
-import * as React from 'react'
+import * as React from 'react';
 
 // Component(s)
-import ButtonColorHover from './ButtonColorHover'
+import ButtonColorHover from './ButtonColorHover';
 
 export default {
   title: 'ButtonColorHover',
@@ -13,8 +13,8 @@ export default {
   parameters: {
     layout: 'centered',
   },
-}
+};
 
-export const Default = () => <ButtonColorHover />
+export const Default = () => <ButtonColorHover />;
 
-Default.storyName = 'default'
+Default.storyName = 'default';

@@ -6,14 +6,14 @@
 // Import Font Styles
 // You can find fonts at https://fonts.adobe.com/
 // @import url('https://use.typekit.net/tyl1imq.scss');
-import '../src/styles/fonts.css'
+import '../src/styles/fonts.css';
 
 // Import Tailwind Styles
-import '../src/styles/tailwind.css'
+import '../src/styles/tailwind.css';
 
-import '../src/styles/globals.css'
+import '../src/styles/globals.css';
 
-// import '@storybook/addon-console' // @see https://github.com/storybookjs/storybook-addon-console/issues/41
+import '@storybook/addon-console'; // @see https://github.com/storybookjs/storybook-addon-console/issues/41
 
 // @see https://www.npmjs.com/package/@storybook/addon-viewport
 // import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
@@ -59,7 +59,7 @@ const customViewports = {
     },
     type: 'desktop',
   },
-}
+};
 
 // @see https://www.npmjs.com/package/@storybook/addon-console
 // import { setConsoleOptions } from '@storybook/addon-console'
@@ -105,4 +105,4 @@ export const parameters = {
     viewports: customViewports, // newViewports would be an ViewportMap. (see below for examples)
   },
   layout: 'fullscreen',
-}
+};

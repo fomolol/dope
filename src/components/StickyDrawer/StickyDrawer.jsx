@@ -1,47 +1,47 @@
 /**
  * @file StickyDrawer.js
  */
-import PropTypes from 'prop-types'
-import { useInView } from 'react-intersection-observer'
-import { motion } from 'framer-motion'
-import colors from 'nice-color-palettes'
+import PropTypes from 'prop-types';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import colors from 'nice-color-palettes';
 
-import s from './StickyDrawer.module.css'
+import s from './StickyDrawer.module.css';
 
 const Container = ({
-  caption,
-  description,
+  caption = 'Hello World',
+  description = 'Do eiusmod ex dolore velit occaecat commodo magna esse.',
   itemHeight = '37.25rem',
   totalItems = 6,
   index = 0,
   backgroundColor = '#54504b',
   color = '#0a000f',
 }) => {
-  let top = 0
-  let bottom = 0
+  let top = 0;
+  let bottom = 0;
   switch (index) {
     case 0:
-      bottom = `calc((100vh - ${itemHeight}) * 5 / ${totalItems})`
-      break
+      bottom = `calc((100vh - ${itemHeight}) * 5 / ${totalItems})`;
+      break;
     case 1:
-      top = `calc((100vh - ${itemHeight}) / ${totalItems})`
-      bottom = `calc((100vh - ${itemHeight}) * 4 / ${totalItems})`
-      break
+      top = `calc((100vh - ${itemHeight}) / ${totalItems})`;
+      bottom = `calc((100vh - ${itemHeight}) * 4 / ${totalItems})`;
+      break;
     case 2:
-      top = `calc((100vh - ${itemHeight}) * 2 / ${totalItems})`
-      bottom = `calc((100vh - ${itemHeight}) / 2)`
-      break
+      top = `calc((100vh - ${itemHeight}) * 2 / ${totalItems})`;
+      bottom = `calc((100vh - ${itemHeight}) / 2)`;
+      break;
     case 3:
-      top = `calc((100vh - ${itemHeight}) / 2)`
-      bottom = `calc((100vh - ${itemHeight}) * 2 / ${totalItems})`
-      break
+      top = `calc((100vh - ${itemHeight}) / 2)`;
+      bottom = `calc((100vh - ${itemHeight}) * 2 / ${totalItems})`;
+      break;
     case 4:
-      top = `calc((100vh - ${itemHeight}) * 4 / ${totalItems})`
-      bottom = `calc((100vh - ${itemHeight}) * 1 / ${totalItems})`
-      break
+      top = `calc((100vh - ${itemHeight}) * 4 / ${totalItems})`;
+      bottom = `calc((100vh - ${itemHeight}) * 1 / ${totalItems})`;
+      break;
     case 5:
-      top = `calc((100vh - ${itemHeight}) * 5 / ${totalItems})`
-      break
+      top = `calc((100vh - ${itemHeight}) * 5 / ${totalItems})`;
+      break;
   }
   return (
     <div
@@ -83,8 +83,8 @@ const Container = ({
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
 const Placeholder = ({ totalItems = 6, itemHeight = '37.25rem' }) => {
   return (
@@ -94,8 +94,8 @@ const Placeholder = ({ totalItems = 6, itemHeight = '37.25rem' }) => {
         height: `calc(${itemHeight} - (100vh - ${itemHeight}) / ${totalItems})`,
       }}
     ></div>
-  )
-}
+  );
+};
 
 const Item = ({ items = [], caption, description, index }) => {
   return (
@@ -110,8 +110,8 @@ const Item = ({ items = [], caption, description, index }) => {
       />
       <Placeholder totalItems={items.length} />
     </>
-  )
-}
+  );
+};
 
 const StickyDrawer = ({
   tagName: Tag = motion.div,
@@ -161,7 +161,7 @@ const StickyDrawer = ({
   const { ref, inView, entry } = useInView({
     threshold: 0.15,
     triggerOnce: triggerOnce,
-  })
+  });
 
   return (
     <Tag
@@ -210,14 +210,14 @@ const StickyDrawer = ({
         }
       `}</style>
     </Tag>
-  )
-}
+  );
+};
 
 StickyDrawer.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default StickyDrawer
+export default StickyDrawer;

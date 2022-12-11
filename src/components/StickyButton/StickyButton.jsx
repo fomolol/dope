@@ -1,25 +1,25 @@
 /**
  * @file StickyButton.js
  */
-import { memo, forwardRef, useCallback } from 'react'
-import { useCursorStyle } from '@fomolol/tacklebox'
+import { memo, forwardRef, useCallback } from 'react';
+import { useCursorStyle } from '@fomolol/tacklebox';
 
-import { useMenu } from '../../contexts/MenuContext/useMenuContext'
+import { useMenu } from '../../contexts/MenuContext/useMenuContext';
 
-import StickyCursor from '../StickyCursor'
+import StickyCursor from '../StickyCursor';
 
-import s from './StickyButton.module.css'
+import s from './StickyButton.module.css';
 
 export const MenuButton = (
   { sticky = true, title = 'Lorem Ipsum', ...props },
-  ref
+  ref,
 ) => {
-  const [, dispatch] = useMenu()
-  const { addCursorBorder, removeCursorBorder } = useCursorStyle()
+  const [, dispatch] = useMenu();
+  const { addCursorBorder, removeCursorBorder } = useCursorStyle();
 
   const handleOnToggle = useCallback(() => {
-    dispatch({ type: 'TOGGLE_MENU' })
-  }, [dispatch])
+    dispatch({ type: 'TOGGLE_MENU' });
+  }, [dispatch]);
 
   return (
     <StickyCursor sticky={sticky}>
@@ -28,8 +28,8 @@ export const MenuButton = (
         onMouseEnter={addCursorBorder}
         onMouseLeave={removeCursorBorder}
         onClick={() => {
-          handleOnToggle()
-          onClick()
+          handleOnToggle();
+          onClick();
         }}
         ref={ref}
         {...props}
@@ -39,7 +39,7 @@ export const MenuButton = (
         </span>
       </button>
     </StickyCursor>
-  )
-}
+  );
+};
 
-export default memo(forwardRef(MenuButton))
+export default memo(forwardRef(MenuButton));

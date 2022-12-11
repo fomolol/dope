@@ -16,5 +16,9 @@ export default {
 };
 
 export const Default = () => <Text />;
+export const FadeLetter = () => <Text type="fade-letter" />;
+export const FadeWord = () => <Text type="fade-word" />;
+export const FadeBlock = () => <Text type="fade-block" />;
+export const OverflowWord = () => <Text type="overflow-word" />;
 
 Default.storyName = 'default';

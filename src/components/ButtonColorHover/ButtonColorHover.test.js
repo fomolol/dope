@@ -11,5 +11,5 @@
 // Component to test
 
 test('is truthy', () => {
-  expect(true).toBeTruthy()
-})
+  expect(true).toBeTruthy();
+});

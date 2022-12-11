@@ -3,12 +3,12 @@
  * A custom Storybook configuration.
  * @see https://storybook.js.org/docs/configurations/theming/
  */
-import { create } from '@storybook/theming'
+import { create } from '@storybook/theming';
 
-import brandImage from './logo.svg'
+import brandImage from './logo.svg';
 
-const brandTitle = 'FOMOLOL Dope Storybook'
-const brandUrl = 'https://github.com/fomolol/dope'
+const brandTitle = 'FOMOLOL Dope Storybook';
+const brandUrl = 'https://github.com/fomolol/dope';
 
 export default create({
   base: 'light',
@@ -44,4 +44,4 @@ export default create({
   brandTitle,
   brandUrl,
   brandImage,
-})
+});

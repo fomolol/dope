@@ -2,12 +2,12 @@
  * @file ASCIIMorph.js
  * @see https://codepen.io/tholman/pen/BQLQyo
  */
-import { useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import s from './ASCIIMorph.module.css'
+import s from './ASCIIMorph.module.css';
 
-import AsciiMorph from '../../lib/AsciiMorph'
+import AsciiMorph from '../../lib/AsciiMorph';
 
 const ASCIIMorph = ({
   tagName: Tag = 'div',
@@ -140,27 +140,27 @@ const ASCIIMorph = ({
     ],
   ],
 }) => {
-  const element = useRef()
-  let index = useRef(2)
+  const element = useRef();
+  let index = useRef(2);
 
   useEffect(() => {
     const int = setInterval(() => {
-      AsciiMorph.morph(asciis[index])
-      index.current += 1
-      index.current %= asciis.length
-      console.log('index', index.current)
-    }, 3000)
+      AsciiMorph.morph(asciis[index]);
+      index.current += 1;
+      index.current %= asciis.length;
+      console.log('index', index.current);
+    }, 3000);
 
-    AsciiMorph(element.current, { x: 51, y: 28 })
+    AsciiMorph(element.current, { x: 51, y: 28 });
 
-    AsciiMorph.render(element.current, asciis[0])
+    AsciiMorph.render(element.current, asciis[0]);
 
     setTimeout(() => {
-      AsciiMorph.morph(element.current, asciis[1])
-    }, 1000)
+      AsciiMorph.morph(element.current, asciis[1]);
+    }, 1000);
 
-    return () => clearInterval(int)
-  }, [asciis])
+    return () => clearInterval(int);
+  }, [asciis]);
 
   return (
     <Tag
@@ -170,17 +170,17 @@ const ASCIIMorph = ({
     >
       <pre
         ref={element}
-        className="morph-section absolute text-white font-mono left-[50%] top-[50%] mt-[-200px] ml-[-200px] w-[400px] h-[400px]"
+        className="morph-section absolute left-[50%] top-[50%] mt-[-200px] ml-[-200px] h-[400px] w-[400px] font-mono text-white"
       ></pre>
     </Tag>
-  )
-}
+  );
+};
 
 ASCIIMorph.propTypes = {
   tagName: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.oneOf(['default']),
   children: PropTypes.node,
-}
+};
 
-export default ASCIIMorph
+export default ASCIIMorph;

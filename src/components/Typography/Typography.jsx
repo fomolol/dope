@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { easeInOutQuad } from 'lib/easing';
+import { easeInOutQuad } from '@/lib/easing';
 
 import s from './Typography.module.css';
 

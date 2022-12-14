@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'url';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
@@ -12,6 +13,11 @@ export default defineConfig({
     }),
     //eslint() // WARNING: This breaks storybook at the moment
   ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   // rollupOptions: {
   //   external: [/^node:.*/],
   // },
